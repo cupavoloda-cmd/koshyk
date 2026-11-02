@@ -1,0 +1,1140 @@
+{
+ "updated": "2026-11-02T14:30:00+02:00",
+ "source": "live",
+ "stores": {
+  "atb": {
+   "chicken": {
+    "p": 451.35,
+    "t": "Філе Своя лінія куряче",
+    "url": "https://www.atbmarket.com/product/file-svoa-linia-kurace",
+    "kg": true
+   },
+   "pork": {
+    "p": 243.99,
+    "t": "Лопаткова частина Глобино свиняча",
+    "url": "https://www.atbmarket.com/product/lopatkova-castina-globino-svinaca-oholodzena",
+    "kg": true
+   },
+   "mince": {
+    "p": 77.0,
+    "t": "Фарш 0,5 кг Глобино Асорті",
+    "url": "https://www.atbmarket.com/product/fars-05-kg-globino-asorti-oholodzenij",
+    "pack": 500
+   },
+   "hake": {
+    "p": 320.5,
+    "t": "Хек День у День філе с/м",
+    "url": "https://www.atbmarket.com/product/hek-den-u-den-file-sm-ns-pet",
+    "kg": true
+   },
+   "tuna": {
+    "p": 65.8,
+    "t": "Тунець 185 г Своя Лінія в олії",
+    "url": "https://www.atbmarket.com/product/konservi-185-g-svoa-linia-tunec-podribnenij-v-olii-zb",
+    "pack": 185
+   },
+   "sausage": {
+    "p": 109.7,
+    "t": "Сосиски 285 г Мясна Гільдія Молочні",
+    "url": "https://www.atbmarket.com/product/sosiski-285-g-masna-gildia-molocni-vs-vakupak",
+    "pack": 285
+   },
+   "eggs": {
+    "p": 53.9,
+    "t": "Яйце куряче 10 шт Своя лінія С1",
+    "url": "https://www.atbmarket.com/product/ajce-kurace-10-st-svoa-linia-1-kategoria-fas",
+    "pack": 600
+   },
+   "milk": {
+    "p": 57.9,
+    "t": "Молоко 0,9 кг Молокія 2,5%",
+    "url": "https://www.atbmarket.com/product/moloko-09-kg-molokia-25",
+    "pack": 900
+   },
+   "tvorog": {
+    "p": 61.5,
+    "t": "Сир кисломолочний 200 г Молокія 9%",
+    "url": "https://www.atbmarket.com/product/sir-kislomolocnij-200g-molokia-90",
+    "pack": 200
+   },
+   "cheese": {
+    "p": 93.7,
+    "t": "Сир 135 г Ryki Едам 45%",
+    "url": "https://www.atbmarket.com/product/sir-napivtverdij-135g-ryki-edam-plastinkami-45",
+    "pack": 135
+   },
+   "smetana": {
+    "p": 38.8,
+    "t": "Сметана 300 г Молокія 15%",
+    "url": "https://www.atbmarket.com/product/smetana-300-g-molokia-15",
+    "pack": 300
+   },
+   "butter": {
+    "p": 101.3,
+    "t": "Масло 180 г Молокія Селянське 73%",
+    "url": "https://www.atbmarket.com/product/maslo-180-g-molokia-solodkoverskove-selanske-73-folga",
+    "pack": 180
+   },
+   "oil": {
+    "p": 83.9,
+    "t": "Олія 0,9 л Своя лінія рафінована",
+    "url": "https://www.atbmarket.com/product/olia-09l-svoa-linia-sonasnikova-rafinovana",
+    "pack": 900
+   },
+   "buckwheat": {
+    "p": 81.3,
+    "t": "Крупа гречана 1 кг Розумний вибір",
+    "url": "https://www.atbmarket.com/product/krupa-1-kg-rozumnij-vibir-grecana",
+    "pack": 1000
+   },
+   "rice": {
+    "p": 53.9,
+    "t": "Рис довгозернистий 1 кг Розумний вибір",
+    "url": "https://www.atbmarket.com/product/krupa-1-kg-rozumnij-vibir-ris-dovgozernistij-slifovanij",
+    "pack": 1000
+   },
+   "pasta": {
+    "p": 43.9,
+    "t": "Спагеті 0,5 кг De Luxe",
+    "url": "https://www.atbmarket.com/product/makvir-05kg-de-luxe-foodsgoods-selected-spageti",
+    "pack": 500
+   },
+   "oats": {
+    "p": 52.9,
+    "t": "Пластівці вівсяні 0,5 кг De Luxe",
+    "url": "https://www.atbmarket.com/product/plastivci-05-kg-de-luxe-foodsgoods-selected-vivsani-dribnozernovi",
+    "pack": 500
+   },
+   "flour": {
+    "p": 23.8,
+    "t": "Борошно 1 кг Розумний вибір",
+    "url": "https://www.atbmarket.com/product/borosno-1-kg-rozumnij-vibir-psenicne",
+    "pack": 1000
+   },
+   "beans": {
+    "p": 67.8,
+    "t": "Квасоля 460 г Своя лінія натуральна",
+    "url": "https://www.atbmarket.com/product/kvasola-460g-svoa-linia-naturalna",
+    "pack": 460
+   },
+   "tpaste": {
+    "p": 11.7,
+    "t": "Томатна паста 70 г Розумний вибір",
+    "url": "https://www.atbmarket.com/product/tomatna-pasta-70-g-rozumnij-vibir-25-soset",
+    "pack": 70
+   },
+   "tortilla": {
+    "p": 50.9,
+    "t": "Тортилья 240 г Своя Лінія",
+    "url": "https://www.atbmarket.com/product/tortila-240g-svoa-linia-psenicna-pet",
+    "pack": 240
+   },
+   "bread": {
+    "p": 26.5,
+    "t": "Батон 400 г Агробізнес нарізний",
+    "url": "https://www.atbmarket.com/product/baton-400g-agrobiznes-nariznij-narizanij",
+    "pack": 400
+   },
+   "potato": {
+    "p": 14.49,
+    "t": "Картопля",
+    "url": "https://www.atbmarket.com/product/kartopla-1-gat",
+    "kg": true
+   },
+   "onion": {
+    "p": 15.95,
+    "t": "Цибуля ріпчаста",
+    "url": "https://www.atbmarket.com/product/cibula-ripcasta-1-gat",
+    "kg": true
+   },
+   "carrot": {
+    "p": 14.85,
+    "t": "Морква",
+    "url": "https://www.atbmarket.com/product/morkva-1gat",
+    "kg": true
+   },
+   "cabbage": {
+    "p": 15.89,
+    "t": "Капуста",
+    "url": "https://www.atbmarket.com/product/kapusta-1-gat",
+    "kg": true
+   },
+   "beet": {
+    "p": 12.89,
+    "t": "Буряк",
+    "url": "https://www.atbmarket.com/product/burak-1-gat",
+    "kg": true
+   },
+   "tomato": {
+    "p": 89.89,
+    "t": "Томати тепличні",
+    "url": "https://www.atbmarket.com/product/tomati-teplicni-1-gatunok",
+    "kg": true
+   },
+   "cucumber": {
+    "p": 129.89,
+    "t": "Огірки тепличні",
+    "url": "https://www.atbmarket.com/product/ogirki-teplicni-1gat",
+    "kg": true
+   },
+   "pepper": {
+    "p": 129.89,
+    "t": "Перець солодкий червоний",
+    "url": "https://www.atbmarket.com/product/perec-solodkij-cervonij-1-gat",
+    "kg": true
+   },
+   "mush": {
+    "p": 89.5,
+    "t": "Печериці 0,5 кг",
+    "url": "https://www.atbmarket.com/product/gribi-pecerici-05-kg-1-gat",
+    "pack": 500
+   },
+   "garlic": {
+    "p": 124.89,
+    "t": "Часник",
+    "url": "https://www.atbmarket.com/product/casnik-import-1-gat",
+    "kg": true
+   },
+   "dill": {
+    "p": 28.9,
+    "t": "Кріп 70 г",
+    "url": "https://www.atbmarket.com/product/krip-70g-st-1-gat",
+    "pack": 70
+   },
+   "frozveg": {
+    "p": 60.4,
+    "t": "Суміш овочева 400 г Своя Лінія WOK",
+    "url": "https://www.atbmarket.com/product/sumis-ovoceva-400g-svoa-linia-dla-smazenna-wok-svidkozamorozena",
+    "pack": 400
+   },
+   "banana": {
+    "p": 74.9,
+    "t": "Банан",
+    "url": "https://www.atbmarket.com/product/banan-1-gat",
+    "kg": true
+   },
+   "apple": {
+    "p": 29.9,
+    "t": "Яблуко Голден",
+    "url": "https://www.atbmarket.com/product/abluko-golden-1-gat",
+    "kg": true
+   },
+   "kefir": {
+    "p": 59.8,
+    "t": "Кефір 0,9 кг Яготинський 2,5%",
+    "url": "https://www.atbmarket.com/product/kefir-09-kg-agotinskij-25",
+    "pack": 900
+   },
+   "thigh": {
+    "p": 141.69,
+    "t": "Стегна курячі Своя лінія в маринаді",
+    "url": "https://www.atbmarket.com/product/stegno-kurcat-brojleriv-svoa-linia-vognana-salsa-v-marinadi-oholodzene",
+    "kg": true
+   },
+   "chmince": {
+    "p": 108.5,
+    "t": "Фарш курячий Вінницькі курчата 500 г",
+    "url": "https://www.atbmarket.com/product/fars-05-kg-vinnicki-kurcata-kuracij-oholodzenij-gazupak",
+    "pack": 500
+   },
+   "mackerel": {
+    "p": 446.69,
+    "t": "Скумбрія День у День атлантична с/м",
+    "url": "https://www.atbmarket.com/product/skumbria-den-u-den-atlanticna-sm-zg-pet-ajsberg",
+    "kg": true
+   },
+   "herring": {
+    "p": 66.9,
+    "t": "Оселедець філе в олії 240 г Своя Лінія",
+    "url": "https://www.atbmarket.com/product/preservi-240g-svoa-linia-oseledec-file-v-olii-mate-termoforma",
+    "pack": 240
+   },
+   "corn": {
+    "p": 45.9,
+    "t": "Кукурудза 340 г Розумний вибір",
+    "url": "https://www.atbmarket.com/product/kukurudza-340g-rozumnij-vibir-cukrova-konservovana",
+    "pack": 340
+   },
+   "peas": {
+    "p": 47.3,
+    "t": "Горошок 420 г Розумний вибір",
+    "url": "https://www.atbmarket.com/product/gorosok-420g-rozumnij-vibir-zelenij",
+    "pack": 420
+   },
+   "millet": {
+    "p": 47.0,
+    "t": "Пшоно 1 кг Розумний вибір",
+    "url": "https://www.atbmarket.com/product/krupa-1-kg-rozumnij-vibir-psono",
+    "pack": 1000
+   },
+   "bulgur": {
+    "p": 56.9,
+    "t": "Булгур 1 кг Своя лінія",
+    "url": "https://www.atbmarket.com/product/krupa-1-kg-svoa-linia-bulgur",
+    "pack": 1000
+   },
+   "lentils": {
+    "p": 54.7,
+    "t": "Сочевиця червона 0,5 кг Attuale",
+    "url": "https://www.atbmarket.com/product/socevica-05-kg-attuale-cervona",
+    "pack": 500
+   },
+   "lavash": {
+    "p": 26.5,
+    "t": "Лаваш 230 г День у День",
+    "url": "https://www.atbmarket.com/product/lavas-230-g-den-u-den-virmenskij-tonkij-pet-a",
+    "pack": 230
+   },
+   "rye": {
+    "p": 36.2,
+    "t": "Хліб житній 0,5 кг Кулиничі",
+    "url": "https://www.atbmarket.com/product/hlib-05-kg-kulinici-borodinskij-formovij-narizanij",
+    "pack": 500
+   },
+   "broccoli": {
+    "p": 58.7,
+    "t": "Броколі 400 г Своя Лінія с/м",
+    "url": "https://www.atbmarket.com/product/kapusta-brokoli-400g-svoa-linia-svidkozamorozena",
+    "pack": 400
+   },
+   "greenonion": {
+    "p": 43.5,
+    "t": "Цибуля зелена 100 г",
+    "url": "https://www.atbmarket.com/product/cibula-zelena-100g-st-1-gat",
+    "pack": 100
+   },
+   "lemon": {
+    "p": 81.95,
+    "t": "Лимон",
+    "url": "https://www.atbmarket.com/product/limon-1-gat",
+    "kg": true
+   },
+   "orange": {
+    "p": 86.95,
+    "t": "Апельсин",
+    "url": "https://www.atbmarket.com/product/apelsin-vag-1-gat",
+    "kg": true
+   },
+   "pear": {
+    "p": 69.8,
+    "t": "Груша",
+    "url": "https://www.atbmarket.com/product/grusa-1-gat",
+    "kg": true
+   },
+   "honey": {
+    "p": 127.9,
+    "t": "Мед 250 г Своя лінія акацієвий",
+    "url": "https://www.atbmarket.com/product/med-250g-svoa-linia-akacievij",
+    "pack": 250
+   },
+   "mayo": {
+    "p": 27.4,
+    "t": "Майонез 180 г Розумний вибір",
+    "url": "https://www.atbmarket.com/product/majonez-180g-rozumnij-vibir-spravznij-67",
+    "pack": 180
+   },
+   "vp": {
+    "p": 88.9,
+    "pack": 900,
+    "t": "Вареники 0,9 кг Своя лінія з картоплею",
+    "url": "https://www.atbmarket.com/product/vareniki-09-kg-svoa-linia-z-kartopleu-zamorozeni"
+   },
+   "vc": {
+    "p": 73.4,
+    "pack": 400,
+    "t": "Вареники 400 г День у День з сиром",
+    "url": "https://www.atbmarket.com/product/vareniki-400-g-den-u-den-z-sirom-kislomolocnim-solodki-zamorozeni-pet"
+   },
+   "pel": {
+    "p": 188.9,
+    "pack": 900,
+    "t": "Пельмені 0,9 кг Своя лінія",
+    "url": "https://www.atbmarket.com/product/pelmeni-09-kg-svoa-linia-zi-svininou-ta-alovicinou"
+   },
+   "syr": {
+    "p": 74.9,
+    "pack": 280,
+    "t": "Сирники 280 г Valesto",
+    "url": "https://www.atbmarket.com/product/sirniki-280-g-valesto-vipeceni-zamorozeni-pllotok"
+   },
+   "kh": {
+    "p": 147.9,
+    "pack": 300,
+    "t": "Хачапурі 300 г День у День по-аджарськи",
+    "url": "https://www.atbmarket.com/product/hacapuri-300-g-den-u-den-po-adzarski-zamorozeni-pllotok"
+   },
+   "nug": {
+    "p": 97.9,
+    "pack": 500,
+    "t": "Нагетси курячі Легко! 500 г",
+    "url": "https://www.atbmarket.com/product/nagetsi-500-g-legko"
+   },
+   "cheb": {
+    "p": 82.9,
+    "pack": 500,
+    "t": "Чебуреки 0,5 кг Левада",
+    "url": "https://www.atbmarket.com/product/cebureki-05-kg-levada-pet"
+   }
+  },
+  "silpo": {
+   "chicken": {
+    "p": 309.0,
+    "t": "Філе куряче «Епікур» охолоджене",
+    "url": "https://silpo.ua/product/file-kuriache-epikur-okholodzhene-malyi-lotok-750297",
+    "kg": true
+   },
+   "pork": {
+    "p": 179.0,
+    "t": "Свиняча лопатка без кістки охолоджена",
+    "url": "https://silpo.ua/product/svyniacha-lopatka-bez-kistky-okholodzhena-32700",
+    "kg": true
+   },
+   "mince": {
+    "p": 179.0,
+    "t": "Фарш свинячий",
+    "url": "https://silpo.ua/product/farsh-svyniachyi-32789",
+    "kg": true
+   },
+   "hake": {
+    "p": 319.0,
+    "t": "Хек Norven філе 600 г",
+    "url": "https://silpo.ua/product/khek-norven-file-bez-shkiry-svizhomorozhenyi-873907",
+    "pack": 600
+   },
+   "tuna": {
+    "p": 79.99,
+    "t": "Тунець Iberica 150 г",
+    "url": "https://silpo.ua/product/tunets-iberica-tsilyi-u-vlasnomu-soku-921592",
+    "pack": 150
+   },
+   "sausage": {
+    "p": 149.0,
+    "t": "Сосиски «Ятрань» Молочні 395 г",
+    "url": "https://silpo.ua/product/sosysky-yatran-molochni-v-g-391830",
+    "pack": 395
+   },
+   "eggs": {
+    "p": 76.64,
+    "t": "Яйця курячі С1 «Квочка» 10 шт",
+    "url": "https://silpo.ua/product/yaitsia-kuriachi-s1-kvochka-452276",
+    "pack": 600
+   },
+   "milk": {
+    "p": 44.59,
+    "t": "Молоко «Угринів Молоко» 2,5% 900 г",
+    "url": "https://silpo.ua/product/moloko-pasteryzovane-ugryniv-moloko-2-5-p-e-685916",
+    "pack": 900
+   },
+   "tvorog": {
+    "p": 93.99,
+    "t": "Сир кисломолочний MiMiMilk 5% 350 г",
+    "url": "https://silpo.ua/product/syr-kyslomolochnyi-mimimilk-5-910653",
+    "pack": 350
+   },
+   "cheese": {
+    "p": 124.0,
+    "t": "Сир Пирятин Король сирів 160 г",
+    "url": "https://silpo.ua/product/syr-pyriatyn-korol-syriv-tverdyi-50-923537",
+    "pack": 160
+   },
+   "smetana": {
+    "p": 61.99,
+    "t": "Сметана «Молокія» 15% 300 г",
+    "url": "https://silpo.ua/product/smetana-molokiia-15-839325",
+    "pack": 300
+   },
+   "butter": {
+    "p": 123.0,
+    "t": "Масло «Молокія» 73% 180 г",
+    "url": "https://silpo.ua/product/maslo-solodkovershkove-molokiia-73-908058",
+    "pack": 180
+   },
+   "oil": {
+    "p": 99.0,
+    "t": "Олія «Майола» рафінована 850 мл",
+    "url": "https://silpo.ua/product/oliia-soniashnykova-maiola-rafinovana-804868",
+    "pack": 850
+   },
+   "buckwheat": {
+    "p": 134.0,
+    "t": "Гречка Селянка ядриця 900 г",
+    "url": "https://silpo.ua/product/krupa-selianka-grechka-iadrytsia-937180",
+    "pack": 900
+   },
+   "rice": {
+    "p": 129.0,
+    "t": "Рис Trapeza пропарений 1 кг",
+    "url": "https://silpo.ua/product/rys-trapeza-dovgozernystyi-proparenyi-868357",
+    "pack": 1000
+   },
+   "pasta": {
+    "p": 46.9,
+    "t": "Спагеті La Pasta 400 г",
+    "url": "https://silpo.ua/product/vyroby-makaronni-la-pasta-spageti-483549",
+    "pack": 400
+   },
+   "oats": {
+    "p": 49.49,
+    "t": "Пластівці «Сквирянка» 400 г",
+    "url": "https://silpo.ua/product/plastivtsi-skvyrianka-vivsiani-nizhni-775456",
+    "pack": 400
+   },
+   "flour": {
+    "p": 28.99,
+    "t": "Борошно EuroMill 1 кг",
+    "url": "https://silpo.ua/product/boroshno-euromill-pshenychne-v-g-780445",
+    "pack": 1000
+   },
+   "beans": {
+    "p": 61.99,
+    "t": "Квасоля фірмова консервована 480 мл",
+    "url": "https://silpo.ua/product/kvasolia-firmova-konservovana-705081",
+    "pack": 480
+   },
+   "tpaste": {
+    "p": 21.99,
+    "t": "Паста томатна «Руна» 70 г",
+    "url": "https://silpo.ua/product/pasta-tomatna-runa-25-sashet-570419",
+    "pack": 70
+   },
+   "tortilla": {
+    "p": 99.0,
+    "t": "Тортилья Zanuy 320 г",
+    "url": "https://silpo.ua/product/tortylia-zanuy-z-pshenychnogo-boroshna-668387",
+    "pack": 320
+   },
+   "bread": {
+    "p": 37.99,
+    "t": "Батон Київхліб нарізаний 500 г",
+    "url": "https://silpo.ua/product/baton-kyivkhlib-pshenychnyi-narizanyi-957220",
+    "pack": 500
+   },
+   "potato": {
+    "p": 16.0,
+    "t": "Картопля біла",
+    "url": "https://silpo.ua/product/kartoplia-bila-531296",
+    "kg": true
+   },
+   "onion": {
+    "p": 21.0,
+    "t": "Цибуля ріпчаста жовта",
+    "url": "https://silpo.ua/product/tsybulia-ripchasta-zhovta-32573",
+    "kg": true
+   },
+   "carrot": {
+    "p": 17.0,
+    "t": "Морква",
+    "url": "https://silpo.ua/product/morkva-34650",
+    "kg": true
+   },
+   "cabbage": {
+    "p": 18.0,
+    "t": "Капуста білоголова",
+    "url": "https://silpo.ua/product/kapusta-bilogolova-32572",
+    "kg": true
+   },
+   "beet": {
+    "p": 15.0,
+    "t": "Буряк",
+    "url": "https://silpo.ua/product/buriak-32570",
+    "kg": true
+   },
+   "tomato": {
+    "p": 129.0,
+    "t": "Помідор Наомі 500 г",
+    "url": "https://silpo.ua/product/pomidor-naomi-857311",
+    "pack": 500
+   },
+   "cucumber": {
+    "p": 134.0,
+    "t": "Огірок",
+    "url": "https://silpo.ua/product/ogirok-32547",
+    "kg": true
+   },
+   "pepper": {
+    "p": 99.0,
+    "t": "Перець солодкий капі",
+    "url": "https://silpo.ua/product/perets-solodkyi-kapi-415858",
+    "kg": true
+   },
+   "mush": {
+    "p": 99.0,
+    "t": "Печериці Mushboom 450 г",
+    "url": "https://silpo.ua/product/gryby-mushboom-pecherytsi-997786",
+    "pack": 450
+   },
+   "garlic": {
+    "p": 164.0,
+    "t": "Часник",
+    "url": "https://silpo.ua/product/chasnyk-32595",
+    "kg": true
+   },
+   "dill": {
+    "p": 29.99,
+    "t": "Кріп пучок 70 г",
+    "url": "https://silpo.ua/product/krip-puchok-522838",
+    "pack": 70
+   },
+   "frozveg": {
+    "p": 99.0,
+    "t": "Суміш овочева Vici Мексиканська 400 г",
+    "url": "https://silpo.ua/product/sumish-ovocheva-vici-meksykanska-717203",
+    "pack": 400
+   },
+   "banana": {
+    "p": 82.2,
+    "t": "Банан",
+    "url": "https://silpo.ua/product/banan-32485",
+    "kg": true
+   },
+   "apple": {
+    "p": 40.0,
+    "t": "Яблуко Голден",
+    "url": "https://silpo.ua/product/yabluko-golden-58480",
+    "kg": true
+   },
+   "kefir": {
+    "p": 53.99,
+    "t": "Кефір «Селянський» 2,5% 950 г",
+    "url": "https://silpo.ua/product/kefir-selianskyi-2-5-674753",
+    "pack": 950
+   },
+   "thigh": {
+    "p": 179.0,
+    "t": "Стегно куряче Епікур",
+    "url": "https://silpo.ua/product/stegno-kuriache-epikur-okholodzhene-malyi-lotok-750299",
+    "kg": true
+   },
+   "chmince": {
+    "p": 249.0,
+    "t": "Фарш курячий з філе",
+    "url": "https://silpo.ua/product/farsh-kuriachyi-z-file-podribnenyi-fasovanyi-799367",
+    "kg": true
+   },
+   "mackerel": {
+    "p": 428.7,
+    "t": "Скумбрія свіжоморожена",
+    "url": "https://silpo.ua/product/skumbriia-svizhomorozhena-36488",
+    "kg": true
+   },
+   "herring": {
+    "p": 161.5,
+    "t": "Оселедець філе в олії",
+    "url": "https://silpo.ua/product/oseledets-file-v-olii-912337",
+    "kg": true
+   },
+   "corn": {
+    "p": 39.99,
+    "t": "Кукурудза Kwidzyn 400 г",
+    "url": "https://silpo.ua/product/kukurudza-kwidzyn-tsukrova-konservovana-468763",
+    "pack": 400
+   },
+   "peas": {
+    "p": 39.99,
+    "t": "Горошок Kwidzyn 400 г",
+    "url": "https://silpo.ua/product/goroshok-kwidzyn-zelenyi-konservovanyi-468757",
+    "pack": 400
+   },
+   "millet": {
+    "p": 22.49,
+    "t": "Пшоно «Сто пудів» 400 г",
+    "url": "https://silpo.ua/product/krupa-pshono-sto-pudiv-677188",
+    "pack": 400
+   },
+   "bulgur": {
+    "p": 49.99,
+    "t": "Булгур Trapeza 500 г",
+    "url": "https://silpo.ua/product/bulgur-trapeza-serednii-797928",
+    "pack": 500
+   },
+   "lentils": {
+    "p": 58.99,
+    "t": "Сочевиця «Сто пудов» червона 350 г",
+    "url": "https://silpo.ua/product/sochevytsia-sto-pudov-chervona-liuks-557800",
+    "pack": 350
+   },
+   "lavash": {
+    "p": 25.99,
+    "t": "Лаваш «Київхліб» Вірменський 220 г",
+    "url": "https://silpo.ua/product/lavash-kyivkhlib-virmenskyi-444707",
+    "pack": 220
+   },
+   "rye": {
+    "p": 58.49,
+    "t": "Хліб 100% житній «Фінський» 300 г",
+    "url": "https://silpo.ua/product/khlib-100-zhytnii-finskyi-mini-770357",
+    "pack": 300
+   },
+   "zucchini": {
+    "p": 73.0,
+    "t": "Кабачок",
+    "url": "https://silpo.ua/product/kabachok-51600",
+    "kg": true
+   },
+   "broccoli": {
+    "p": 89.99,
+    "t": "Броколі «Премія» 400 г",
+    "url": "https://silpo.ua/product/kapusta-brokoli-premiia-zamorozhena-378704",
+    "pack": 400
+   },
+   "greenonion": {
+    "p": 16.49,
+    "t": "Цибуля зелена пучок 100 г",
+    "url": "https://silpo.ua/product/tsybulia-zelena-puchok-353351",
+    "pack": 100
+   },
+   "lemon": {
+    "p": 88.0,
+    "t": "Лимон",
+    "url": "https://silpo.ua/product/lymon-32550",
+    "kg": true
+   },
+   "orange": {
+    "p": 90.0,
+    "t": "Апельсин",
+    "url": "https://silpo.ua/product/apelsyn-32546",
+    "kg": true
+   },
+   "pear": {
+    "p": 85.1,
+    "t": "Груша Лукас",
+    "url": "https://silpo.ua/product/grusha-lukas-267135",
+    "kg": true
+   },
+   "honey": {
+    "p": 199.0,
+    "t": "Мед Лавка Традицій лісовий 250 г",
+    "url": "https://silpo.ua/product/med-lavka-tradytsii-koniushyna-tarasiv-med-lisovyi-976209",
+    "pack": 250
+   },
+   "mayo": {
+    "p": 53.99,
+    "t": "Майонез «Торчин» Європейський 300 г",
+    "url": "https://silpo.ua/product/maionez-torchyn-yevropeiskyi-72-719788",
+    "pack": 300
+   },
+   "vp": {
+    "p": 84.9,
+    "pack": 900,
+    "t": "Вареники Laska з картоплею та цибулею 900 г",
+    "url": "https://silpo.ua/product/varenyky-laska-z-kartopleiu-ta-smazhenoiu-tsybuleiu-767776"
+   },
+   "vc": {
+    "p": 109.0,
+    "pack": 800,
+    "t": "Вареники SmaCom з сиром 800 г",
+    "url": "https://silpo.ua/product/varenyky-smacom-z-syrom-903828"
+   },
+   "pel": {
+    "p": 129.0,
+    "pack": 800,
+    "t": "Пельмені Рудь Супер 800 г",
+    "url": "https://silpo.ua/product/pelmeni-rud-super-947623"
+   },
+   "syr": {
+    "p": 189.0,
+    "pack": 500,
+    "t": "Сирники Ситий Двір 500 г",
+    "url": "https://silpo.ua/product/syrnyky-sytyi-dvir-zamorozheni-1016549"
+   },
+   "kh": {
+    "p": 254.0,
+    "pack": 500,
+    "t": "Хачапурі Loven з сулугуні 500 г",
+    "url": "https://silpo.ua/product/khachapuri-loven-z-suluguni-zamorozheni-1015045"
+   },
+   "ml": {
+    "p": 144.0,
+    "pack": 475,
+    "t": "Млинці Makey з м'ясом 475 г",
+    "url": "https://silpo.ua/product/mlyntsi-makey-z-m-iasom-zamorozheni-987181"
+   },
+   "der": {
+    "p": 364.0,
+    "pack": 1500,
+    "t": "Деруни Farm Frites 1,5 кг",
+    "url": "https://silpo.ua/product/deruny-farm-frites-potato-pancaces-kartopliani-975288"
+   },
+   "nug": {
+    "p": 169.0,
+    "pack": 330,
+    "t": "Нагетси Ласунка курячі 330 г",
+    "url": "https://silpo.ua/product/nagetsy-lasunka-kuriachi-zamorozheni-1056049"
+   },
+   "gol": {
+    "p": 159.0,
+    "pack": 800,
+    "t": "Голубці Хуторок Сільські 800 г",
+    "url": "https://silpo.ua/product/golubtsi-khutorok-silski-973364"
+   }
+  },
+  "metro": {
+   "chicken": {
+    "p": 209.0,
+    "t": "Філе куряче Наша Ряба ~1 кг",
+    "url": "https://metro.zakaz.ua/uk/search/?q=%D0%A4%D1%96%D0%BB%D0%B5%20%D0%BA%D1%83%D1%80%D1%8F%D1%87%D0%B5%20%D0%9D%D0%B0%D1%88%D0%B0%20%D0%A0%D1%8F%D0%B1%D0%B0%20~1%20%D0%BA%D0%B3",
+    "kg": true
+   },
+   "pork": {
+    "p": 193.32,
+    "t": "Лопатка свиняча Глобино",
+    "url": "https://metro.zakaz.ua/uk/search/?q=%D0%9B%D0%BE%D0%BF%D0%B0%D1%82%D0%BA%D0%B0%20%D1%81%D0%B2%D0%B8%D0%BD%D1%8F%D1%87%D0%B0%20%D0%93%D0%BB%D0%BE%D0%B1%D0%B8%D0%BD%D0%BE",
+    "kg": true
+   },
+   "mince": {
+    "p": 199.0,
+    "t": "Фарш свинячий Metro Chef",
+    "url": "https://metro.zakaz.ua/uk/search/?q=%D0%A4%D0%B0%D1%80%D1%88%20%D1%81%D0%B2%D0%B8%D0%BD%D1%8F%D1%87%D0%B8%D0%B9%20Metro%20Chef",
+    "kg": true
+   },
+   "hake": {
+    "p": 429.0,
+    "t": "Хек Metro Chef філе 800 г",
+    "url": "https://metro.zakaz.ua/uk/search/?q=%D0%A5%D0%B5%D0%BA%20Metro%20Chef%20%D1%84%D1%96%D0%BB%D0%B5%20800%20%D0%B3",
+    "pack": 800
+   },
+   "tuna": {
+    "p": 85.0,
+    "t": "Тунець Metro Chef у розсолі 185 г",
+    "url": "https://metro.zakaz.ua/uk/search/?q=%D0%A2%D1%83%D0%BD%D0%B5%D1%86%D1%8C%20Metro%20Chef%20%D1%83%20%D1%80%D0%BE%D0%B7%D1%81%D0%BE%D0%BB%D1%96%20185%20%D0%B3",
+    "pack": 185
+   },
+   "sausage": {
+    "p": 174.9,
+    "t": "Сосиски Ятранчик Молочні 395 г",
+    "url": "https://metro.zakaz.ua/uk/search/?q=%D0%A1%D0%BE%D1%81%D0%B8%D1%81%D0%BA%D0%B8%20%D0%AF%D1%82%D1%80%D0%B0%D0%BD%D1%87%D0%B8%D0%BA%20%D0%9C%D0%BE%D0%BB%D0%BE%D1%87%D0%BD%D1%96%20395%20%D0%B3",
+    "pack": 395
+   },
+   "eggs": {
+    "p": 88.4,
+    "t": "Яйця курячі Ясенсвіт С0 10 шт",
+    "url": "https://metro.zakaz.ua/uk/search/?q=%D0%AF%D0%B9%D1%86%D1%8F%20%D0%BA%D1%83%D1%80%D1%8F%D1%87%D1%96%20%D0%AF%D1%81%D0%B5%D0%BD%D1%81%D0%B2%D1%96%D1%82%20%D0%A10%2010%20%D1%88%D1%82",
+    "pack": 600
+   },
+   "milk": {
+    "p": 49.9,
+    "t": "Молоко Metro Chef 2,5% 900 г",
+    "url": "https://metro.zakaz.ua/uk/search/?q=%D0%9C%D0%BE%D0%BB%D0%BE%D0%BA%D0%BE%20Metro%20Chef%202%2C5%25%20900%20%D0%B3",
+    "pack": 900
+   },
+   "tvorog": {
+    "p": 91.0,
+    "t": "Сир кисломолочний Metro Chef 5% 350 г",
+    "url": "https://metro.zakaz.ua/uk/search/?q=%D0%A1%D0%B8%D1%80%20%D0%BA%D0%B8%D1%81%D0%BB%D0%BE%D0%BC%D0%BE%D0%BB%D0%BE%D1%87%D0%BD%D0%B8%D0%B9%20Metro%20Chef%205%25%20350%20%D0%B3",
+    "pack": 350
+   },
+   "cheese": {
+    "p": 559.0,
+    "t": "Сир Metro Chef Едам 45%",
+    "url": "https://metro.zakaz.ua/uk/search/?q=%D0%A1%D0%B8%D1%80%20Metro%20Chef%20%D0%95%D0%B4%D0%B0%D0%BC%2045%25",
+    "kg": true
+   },
+   "smetana": {
+    "p": 58.24,
+    "t": "Сметана President 15% 300 г",
+    "url": "https://metro.zakaz.ua/uk/search/?q=%D0%A1%D0%BC%D0%B5%D1%82%D0%B0%D0%BD%D0%B0%20President%2015%25%20300%20%D0%B3",
+    "pack": 300
+   },
+   "butter": {
+    "p": 95.0,
+    "t": "Масло Metro Chef Селянське 73% 200 г",
+    "url": "https://metro.zakaz.ua/uk/search/?q=%D0%9C%D0%B0%D1%81%D0%BB%D0%BE%20Metro%20Chef%20%D0%A1%D0%B5%D0%BB%D1%8F%D0%BD%D1%81%D1%8C%D0%BA%D0%B5%2073%25%20200%20%D0%B3",
+    "pack": 200
+   },
+   "oil": {
+    "p": 77.2,
+    "t": "Олія Aro рафінована 850 мл",
+    "url": "https://metro.zakaz.ua/uk/search/?q=%D0%9E%D0%BB%D1%96%D1%8F%20Aro%20%D1%80%D0%B0%D1%84%D1%96%D0%BD%D0%BE%D0%B2%D0%B0%D0%BD%D0%B0%20850%20%D0%BC%D0%BB",
+    "pack": 850
+   },
+   "buckwheat": {
+    "p": 81.0,
+    "t": "Крупа гречана Aro 1 кг",
+    "url": "https://metro.zakaz.ua/uk/search/?q=%D0%9A%D1%80%D1%83%D0%BF%D0%B0%20%D0%B3%D1%80%D0%B5%D1%87%D0%B0%D0%BD%D0%B0%20Aro%201%20%D0%BA%D0%B3",
+    "pack": 1000
+   },
+   "rice": {
+    "p": 71.0,
+    "t": "Рис Metro Chef пропарений 1 кг",
+    "url": "https://metro.zakaz.ua/uk/search/?q=%D0%A0%D0%B8%D1%81%20Metro%20Chef%20%D0%BF%D1%80%D0%BE%D0%BF%D0%B0%D1%80%D0%B5%D0%BD%D0%B8%D0%B9%201%20%D0%BA%D0%B3",
+    "pack": 1000
+   },
+   "pasta": {
+    "p": 59.5,
+    "t": "Спагетті Fine Life 500 г",
+    "url": "https://metro.zakaz.ua/uk/search/?q=%D0%A1%D0%BF%D0%B0%D0%B3%D0%B5%D1%82%D1%82%D1%96%20Fine%20Life%20500%20%D0%B3",
+    "pack": 500
+   },
+   "oats": {
+    "p": 45.47,
+    "t": "Пластівці Сквирянка 400 г",
+    "url": "https://metro.zakaz.ua/uk/search/?q=%D0%9F%D0%BB%D0%B0%D1%81%D1%82%D1%96%D0%B2%D1%86%D1%96%20%D0%A1%D0%BA%D0%B2%D0%B8%D1%80%D1%8F%D0%BD%D0%BA%D0%B0%20400%20%D0%B3",
+    "pack": 400
+   },
+   "flour": {
+    "p": 38.2,
+    "t": "Борошно Metro Chef цільнозернове 1 кг",
+    "url": "https://metro.zakaz.ua/uk/search/?q=%D0%91%D0%BE%D1%80%D0%BE%D1%88%D0%BD%D0%BE%20Metro%20Chef%20%D1%86%D1%96%D0%BB%D1%8C%D0%BD%D0%BE%D0%B7%D0%B5%D1%80%D0%BD%D0%BE%D0%B2%D0%B5%201%20%D0%BA%D0%B3",
+    "pack": 1000
+   },
+   "beans": {
+    "p": 66.5,
+    "t": "Квасоля Metro Chef натуральна 500 г",
+    "url": "https://metro.zakaz.ua/uk/search/?q=%D0%9A%D0%B2%D0%B0%D1%81%D0%BE%D0%BB%D1%8F%20Metro%20Chef%20%D0%BD%D0%B0%D1%82%D1%83%D1%80%D0%B0%D0%BB%D1%8C%D0%BD%D0%B0%20500%20%D0%B3",
+    "pack": 500
+   },
+   "tpaste": {
+    "p": 73.0,
+    "t": "Паста томатна Fine Life 490 г",
+    "url": "https://metro.zakaz.ua/uk/search/?q=%D0%9F%D0%B0%D1%81%D1%82%D0%B0%20%D1%82%D0%BE%D0%BC%D0%B0%D1%82%D0%BD%D0%B0%20Fine%20Life%20490%20%D0%B3",
+    "pack": 490
+   },
+   "tortilla": {
+    "p": 84.0,
+    "t": "Тортилья Metro Chef 8 шт 320 г",
+    "url": "https://metro.zakaz.ua/uk/search/?q=%D0%A2%D0%BE%D1%80%D1%82%D0%B8%D0%BB%D1%8C%D1%8F%20Metro%20Chef%208%20%D1%88%D1%82%20320%20%D0%B3",
+    "pack": 320
+   },
+   "bread": {
+    "p": 39.6,
+    "t": "Батон Цар Хліб нарізаний 500 г",
+    "url": "https://metro.zakaz.ua/uk/search/?q=%D0%91%D0%B0%D1%82%D0%BE%D0%BD%20%D0%A6%D0%B0%D1%80%20%D0%A5%D0%BB%D1%96%D0%B1%20%D0%BD%D0%B0%D1%80%D1%96%D0%B7%D0%B0%D0%BD%D0%B8%D0%B9%20500%20%D0%B3",
+    "pack": 500
+   },
+   "potato": {
+    "p": 79.0,
+    "t": "Картопля Metro Chef 2,5 кг",
+    "url": "https://metro.zakaz.ua/uk/search/?q=%D0%9A%D0%B0%D1%80%D1%82%D0%BE%D0%BF%D0%BB%D1%8F%20Metro%20Chef%202%2C5%20%D0%BA%D0%B3",
+    "pack": 2500
+   },
+   "onion": {
+    "p": 19.76,
+    "t": "Цибуля ріпчаста імпорт",
+    "url": "https://metro.zakaz.ua/uk/search/?q=%D0%A6%D0%B8%D0%B1%D1%83%D0%BB%D1%8F%20%D1%80%D1%96%D0%BF%D1%87%D0%B0%D1%81%D1%82%D0%B0%20%D1%96%D0%BC%D0%BF%D0%BE%D1%80%D1%82",
+    "kg": true
+   },
+   "carrot": {
+    "p": 29.0,
+    "t": "Морква сітка 1,5 кг",
+    "url": "https://metro.zakaz.ua/uk/search/?q=%D0%9C%D0%BE%D1%80%D0%BA%D0%B2%D0%B0%20%D1%81%D1%96%D1%82%D0%BA%D0%B0%201%2C5%20%D0%BA%D0%B3",
+    "pack": 1500
+   },
+   "cabbage": {
+    "p": 16.9,
+    "t": "Капуста",
+    "url": "https://metro.zakaz.ua/uk/search/?q=%D0%9A%D0%B0%D0%BF%D1%83%D1%81%D1%82%D0%B0",
+    "kg": true
+   },
+   "beet": {
+    "p": 19.0,
+    "t": "Буряк сітка 1 кг",
+    "url": "https://metro.zakaz.ua/uk/search/?q=%D0%91%D1%83%D1%80%D1%8F%D0%BA%20%D1%81%D1%96%D1%82%D0%BA%D0%B0%201%20%D0%BA%D0%B3",
+    "pack": 1000
+   },
+   "tomato": {
+    "p": 81.0,
+    "t": "Томати Metro Chef коктейльні 680 г",
+    "url": "https://metro.zakaz.ua/uk/search/?q=%D0%A2%D0%BE%D0%BC%D0%B0%D1%82%D0%B8%20Metro%20Chef%20%D0%BA%D0%BE%D0%BA%D1%82%D0%B5%D0%B9%D0%BB%D1%8C%D0%BD%D1%96%20680%20%D0%B3",
+    "pack": 680
+   },
+   "cucumber": {
+    "p": 69.0,
+    "t": "Огірок Metro Chef гладкий (~300 г)",
+    "url": "https://metro.zakaz.ua/uk/search/?q=%D0%9E%D0%B3%D1%96%D1%80%D0%BE%D0%BA%20Metro%20Chef%20%D0%B3%D0%BB%D0%B0%D0%B4%D0%BA%D0%B8%D0%B9%20%28~300%20%D0%B3%29",
+    "pack": 300
+   },
+   "mush": {
+    "p": 99.0,
+    "t": "Печериці Metro Chef 450 г",
+    "url": "https://metro.zakaz.ua/uk/search/?q=%D0%9F%D0%B5%D1%87%D0%B5%D1%80%D0%B8%D1%86%D1%96%20Metro%20Chef%20450%20%D0%B3",
+    "pack": 450
+   },
+   "frozveg": {
+    "p": 91.0,
+    "t": "Суміш Fine Life Броколі мікс 400 г",
+    "url": "https://metro.zakaz.ua/uk/search/?q=%D0%A1%D1%83%D0%BC%D1%96%D1%88%20Fine%20Life%20%D0%91%D1%80%D0%BE%D0%BA%D0%BE%D0%BB%D1%96%20%D0%BC%D1%96%D0%BA%D1%81%20400%20%D0%B3",
+    "pack": 400
+   },
+   "banana": {
+    "p": 69.9,
+    "t": "Банан",
+    "url": "https://metro.zakaz.ua/uk/search/?q=%D0%91%D0%B0%D0%BD%D0%B0%D0%BD",
+    "kg": true
+   },
+   "apple": {
+    "p": 49.0,
+    "t": "Яблуко Metro Chef Голден",
+    "url": "https://metro.zakaz.ua/uk/search/?q=%D0%AF%D0%B1%D0%BB%D1%83%D0%BA%D0%BE%20Metro%20Chef%20%D0%93%D0%BE%D0%BB%D0%B4%D0%B5%D0%BD",
+    "kg": true
+   },
+   "kefir": {
+    "p": 63.5,
+    "t": "Кефір Metro Chef 2,5% 900 г",
+    "url": "https://metro.zakaz.ua/uk/search/?q=%D0%9A%D0%B5%D1%84%D1%96%D1%80%20Metro%20Chef%202%2C5%25%20900%20%D0%B3",
+    "pack": 900
+   },
+   "thigh": {
+    "p": 264.0,
+    "t": "Стегно куряче Наша Ряба",
+    "url": "https://metro.zakaz.ua/uk/search/?q=%D0%A1%D1%82%D0%B5%D0%B3%D0%BD%D0%BE%20%D0%BA%D1%83%D1%80%D1%8F%D1%87%D0%B5%20%D0%9D%D0%B0%D1%88%D0%B0%20%D0%A0%D1%8F%D0%B1%D0%B0",
+    "kg": true
+   },
+   "chmince": {
+    "p": 61.36,
+    "t": "Фарш курячий Епікур Філейний 500 г",
+    "url": "https://metro.zakaz.ua/uk/search/?q=%D0%A4%D0%B0%D1%80%D1%88%20%D0%BA%D1%83%D1%80%D1%8F%D1%87%D0%B8%D0%B9%20%D0%95%D0%BF%D1%96%D0%BA%D1%83%D1%80%20%D0%A4%D1%96%D0%BB%D0%B5%D0%B9%D0%BD%D0%B8%D0%B9%20500%20%D0%B3",
+    "pack": 500
+   },
+   "herring": {
+    "p": 185.0,
+    "t": "Філе оселедця Metro Chef 350 г",
+    "url": "https://metro.zakaz.ua/uk/search/?q=%D0%A4%D1%96%D0%BB%D0%B5%20%D0%BE%D1%81%D0%B5%D0%BB%D0%B5%D0%B4%D1%86%D1%8F%20Metro%20Chef%20350%20%D0%B3",
+    "pack": 350
+   },
+   "corn": {
+    "p": 49.9,
+    "t": "Кукурудза Aro цукрова 420 г",
+    "url": "https://metro.zakaz.ua/uk/search/?q=%D0%9A%D1%83%D0%BA%D1%83%D1%80%D1%83%D0%B4%D0%B7%D0%B0%20Aro%20%D1%86%D1%83%D0%BA%D1%80%D0%BE%D0%B2%D0%B0%20420%20%D0%B3",
+    "pack": 420
+   },
+   "peas": {
+    "p": 45.9,
+    "t": "Горошок зелений Aro 420 г",
+    "url": "https://metro.zakaz.ua/uk/search/?q=%D0%93%D0%BE%D1%80%D0%BE%D1%88%D0%BE%D0%BA%20%D0%B7%D0%B5%D0%BB%D0%B5%D0%BD%D0%B8%D0%B9%20Aro%20420%20%D0%B3",
+    "pack": 420
+   },
+   "millet": {
+    "p": 51.0,
+    "t": "Крупа пшоняна ARO 1 кг",
+    "url": "https://metro.zakaz.ua/uk/search/?q=%D0%9A%D1%80%D1%83%D0%BF%D0%B0%20%D0%BF%D1%88%D0%BE%D0%BD%D1%8F%D0%BD%D0%B0%20ARO%201%20%D0%BA%D0%B3",
+    "pack": 1000
+   },
+   "bulgur": {
+    "p": 59.5,
+    "t": "Булгур Metro Chef 1 кг",
+    "url": "https://metro.zakaz.ua/uk/search/?q=%D0%91%D1%83%D0%BB%D0%B3%D1%83%D1%80%20Metro%20Chef%201%20%D0%BA%D0%B3",
+    "pack": 1000
+   },
+   "lentils": {
+    "p": 63.0,
+    "t": "Сочевиця Metro Chef червона 500 г",
+    "url": "https://metro.zakaz.ua/uk/search/?q=%D0%A1%D0%BE%D1%87%D0%B5%D0%B2%D0%B8%D1%86%D1%8F%20Metro%20Chef%20%D1%87%D0%B5%D1%80%D0%B2%D0%BE%D0%BD%D0%B0%20500%20%D0%B3",
+    "pack": 500
+   },
+   "lavash": {
+    "p": 24.9,
+    "t": "Лаваш Metro Chef Вірменський 200 г",
+    "url": "https://metro.zakaz.ua/uk/search/?q=%D0%9B%D0%B0%D0%B2%D0%B0%D1%88%20Metro%20Chef%20%D0%92%D1%96%D1%80%D0%BC%D0%B5%D0%BD%D1%81%D1%8C%D0%BA%D0%B8%D0%B9%20200%20%D0%B3",
+    "pack": 200
+   },
+   "rye": {
+    "p": 35.6,
+    "t": "Хліб Кулиничі Житній Край 350 г",
+    "url": "https://metro.zakaz.ua/uk/search/?q=%D0%A5%D0%BB%D1%96%D0%B1%20%D0%9A%D1%83%D0%BB%D0%B8%D0%BD%D0%B8%D1%87%D1%96%20%D0%96%D0%B8%D1%82%D0%BD%D1%96%D0%B9%20%D0%9A%D1%80%D0%B0%D0%B9%20350%20%D0%B3",
+    "pack": 350
+   },
+   "zucchini": {
+    "p": 69.0,
+    "t": "Кабачок",
+    "url": "https://metro.zakaz.ua/uk/search/?q=%D0%9A%D0%B0%D0%B1%D0%B0%D1%87%D0%BE%D0%BA",
+    "kg": true
+   },
+   "broccoli": {
+    "p": 91.0,
+    "t": "Суміш Fine Life Броколі мікс 400 г",
+    "url": "https://metro.zakaz.ua/uk/search/?q=%D0%A1%D1%83%D0%BC%D1%96%D1%88%20Fine%20Life%20%D0%91%D1%80%D0%BE%D0%BA%D0%BE%D0%BB%D1%96%20%D0%BC%D1%96%D0%BA%D1%81%20400%20%D0%B3",
+    "pack": 400
+   },
+   "greenonion": {
+    "p": 49.0,
+    "t": "Цибуля зелена пучок 100 г",
+    "url": "https://metro.zakaz.ua/uk/search/?q=%D0%A6%D0%B8%D0%B1%D1%83%D0%BB%D1%8F%20%D0%B7%D0%B5%D0%BB%D0%B5%D0%BD%D0%B0%20%D0%BF%D1%83%D1%87%D0%BE%D0%BA%20100%20%D0%B3",
+    "pack": 100
+   },
+   "orange": {
+    "p": 499.01,
+    "t": "Апельсин Metro Chef 5 кг",
+    "url": "https://metro.zakaz.ua/uk/search/?q=%D0%90%D0%BF%D0%B5%D0%BB%D1%8C%D1%81%D0%B8%D0%BD%20Metro%20Chef%205%20%D0%BA%D0%B3",
+    "pack": 5000
+   },
+   "pear": {
+    "p": 82.16,
+    "t": "Груша",
+    "url": "https://metro.zakaz.ua/uk/search/?q=%D0%93%D1%80%D1%83%D1%88%D0%B0",
+    "kg": true
+   },
+   "honey": {
+    "p": 135.0,
+    "t": "Мед Fine Life з різнотрав'я 300 г",
+    "url": "https://metro.zakaz.ua/uk/search/?q=%D0%9C%D0%B5%D0%B4%20Fine%20Life%20%D0%B7%20%D1%80%D1%96%D0%B7%D0%BD%D0%BE%D1%82%D1%80%D0%B0%D0%B2%27%D1%8F%20300%20%D0%B3",
+    "pack": 300
+   },
+   "mayo": {
+    "p": 83.0,
+    "t": "Майонез Metro Chef Провансаль 500 г",
+    "url": "https://metro.zakaz.ua/uk/search/?q=%D0%9C%D0%B0%D0%B9%D0%BE%D0%BD%D0%B5%D0%B7%20Metro%20Chef%20%D0%9F%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D1%81%D0%B0%D0%BB%D1%8C%20500%20%D0%B3",
+    "pack": 500
+   },
+   "vp": {
+    "p": 95.0,
+    "pack": 1000,
+    "t": "Вареники Fine Life з картоплею 1 кг",
+    "url": "https://metro.zakaz.ua/uk/search/?q=%D0%92%D0%B0%D1%80%D0%B5%D0%BD%D0%B8%D0%BA%D0%B8%20Fine%20Life%20%D0%B7%20%D0%BA%D0%B0%D1%80%D1%82%D0%BE%D0%BF%D0%BB%D0%B5%D1%8E%201%20%D0%BA%D0%B3"
+   },
+   "vc": {
+    "p": 119.0,
+    "pack": 1000,
+    "t": "Вареники Fine Life з солодким сиром 1 кг",
+    "url": "https://metro.zakaz.ua/uk/search/?q=%D0%92%D0%B0%D1%80%D0%B5%D0%BD%D0%B8%D0%BA%D0%B8%20Fine%20Life%20%D0%B7%20%D1%81%D0%BE%D0%BB%D0%BE%D0%B4%D0%BA%D0%B8%D0%BC%20%D1%81%D0%B8%D1%80%D0%BE%D0%BC%201%20%D0%BA%D0%B3"
+   },
+   "pel": {
+    "p": 189.0,
+    "pack": 1000,
+    "t": "Пельмені Fine Life 1 кг",
+    "url": "https://metro.zakaz.ua/uk/search/?q=%D0%9F%D0%B5%D0%BB%D1%8C%D0%BC%D0%B5%D0%BD%D1%96%20Fine%20Life%201%20%D0%BA%D0%B3"
+   },
+   "syr": {
+    "p": 422.94,
+    "pack": 3000,
+    "t": "Сирники Левада Колосся заморожені 3 кг",
+    "url": "https://metro.zakaz.ua/uk/search/?q=%D0%A1%D0%B8%D1%80%D0%BD%D0%B8%D0%BA%D0%B8%20%D0%9B%D0%B5%D0%B2%D0%B0%D0%B4%D0%B0%20%D0%9A%D0%BE%D0%BB%D0%BE%D1%81%D1%81%D1%8F%20%D0%B7%D0%B0%D0%BC%D0%BE%D1%80%D0%BE%D0%B6%D0%B5%D0%BD%D1%96%203%20%D0%BA%D0%B3"
+   },
+   "kh": {
+    "p": 215.18,
+    "pack": 500,
+    "t": "Хачапурі Loven з сулугуні 5 шт 500 г",
+    "url": "https://metro.zakaz.ua/uk/search/?q=%D0%A5%D0%B0%D1%87%D0%B0%D0%BF%D1%83%D1%80%D1%96%20Loven%20%D0%B7%20%D1%81%D1%83%D0%BB%D1%83%D0%B3%D1%83%D0%BD%D1%96%205%20%D1%88%D1%82%20500%20%D0%B3"
+   },
+   "ml": {
+    "p": 75.26,
+    "pack": 310,
+    "t": "Млинці Левада з курячим м'ясом 310 г",
+    "url": "https://metro.zakaz.ua/uk/search/?q=%D0%9C%D0%BB%D0%B8%D0%BD%D1%86%D1%96%20%D0%9B%D0%B5%D0%B2%D0%B0%D0%B4%D0%B0%20%D0%B7%20%D0%BA%D1%83%D1%80%D1%8F%D1%87%D0%B8%D0%BC%20%D0%BC%27%D1%8F%D1%81%D0%BE%D0%BC%20310%20%D0%B3"
+   },
+   "der": {
+    "p": 355.0,
+    "pack": 1500,
+    "t": "Панкейки Metro Chef картопляні 1,5 кг",
+    "url": "https://metro.zakaz.ua/uk/search/?q=%D0%9F%D0%B0%D0%BD%D0%BA%D0%B5%D0%B9%D0%BA%D0%B8%20Metro%20Chef%20%D0%BA%D0%B0%D1%80%D1%82%D0%BE%D0%BF%D0%BB%D1%8F%D0%BD%D1%96%201%2C5%20%D0%BA%D0%B3"
+   },
+   "nug": {
+    "p": 309.0,
+    "pack": 1000,
+    "t": "Нагетси курячі Metro Chef 1 кг",
+    "url": "https://metro.zakaz.ua/uk/search/?q=%D0%9D%D0%B0%D0%B3%D0%B5%D1%82%D1%81%D0%B8%20%D0%BA%D1%83%D1%80%D1%8F%D1%87%D1%96%20Metro%20Chef%201%20%D0%BA%D0%B3"
+   },
+   "gol": {
+    "p": 268.18,
+    "pack": 800,
+    "t": "Голубці Смаколюб з м'ясом 800 г",
+    "url": "https://metro.zakaz.ua/uk/search/?q=%D0%93%D0%BE%D0%BB%D1%83%D0%B1%D1%86%D1%96%20%D0%A1%D0%BC%D0%B0%D0%BA%D0%BE%D0%BB%D1%8E%D0%B1%20%D0%B7%20%D0%BC%27%D1%8F%D1%81%D0%BE%D0%BC%20800%20%D0%B3"
+   },
+   "cheb": {
+    "p": 154.76,
+    "pack": 600,
+    "t": "Чебуреки Хуторок з м'ясом 600 г",
+    "url": "https://metro.zakaz.ua/uk/search/?q=%D0%A7%D0%B5%D0%B1%D1%83%D1%80%D0%B5%D0%BA%D0%B8%20%D0%A5%D1%83%D1%82%D0%BE%D1%80%D0%BE%D0%BA%20%D0%B7%20%D0%BC%27%D1%8F%D1%81%D0%BE%D0%BC%20600%20%D0%B3"
+   }
+  }
+ }
+}

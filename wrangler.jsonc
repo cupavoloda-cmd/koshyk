@@ -1,0 +1,6 @@
+{
+  // Cloudflare публікує лише папку site (статичний застосунок «Кошик»)
+  "name": "wild-sea-a0f8",
+  "compatibility_date": "2026-11-01",
+  "assets": { "directory": "./site" }
+}
