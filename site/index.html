@@ -189,6 +189,12 @@ input[type=range]{accent-color:var(--tint)}
 .sticky-cta .btn.sec{background:var(--glass);-webkit-backdrop-filter:saturate(200%) blur(24px);backdrop-filter:saturate(200%) blur(24px);border:.5px solid var(--b)}
 .nav{background:var(--glass)}
 .app{padding-bottom:calc(120px + env(safe-area-inset-bottom))}
+/* власні позначки мереж: назва в кольорі мережі (не логотип) */
+.sb{display:inline-flex;align-items:center;justify-content:center;padding:.18em .6em;border-radius:.6em;font-size:.8em;font-weight:700;letter-spacing:.01em;color:#fff;line-height:1.15;vertical-align:.05em;white-space:nowrap;box-shadow:inset 0 1px 0 rgba(255,255,255,.3)}
+.sb-atb{background:#d32f2f}.sb-silpo{background:#c25700}.sb-metro{background:#1d4aa8;color:#ffe066}.sb-mix{background:var(--tintbg);color:var(--tintt);box-shadow:none}
+.opt b{margin-bottom:0}.opt b .sb{font-size:20px;padding:.35em .8em}
+.chip .sb{font-size:14px}.chip.sel .sb{box-shadow:0 0 0 2px var(--c)}
+h2 .sb{font-size:17px}
 </style></head><body><div class="app" id="app"></div>
 <script>// Чиста логіка планувальника. Працює і в Node (тести), і в браузері (window.Core).
 (function (root) {
@@ -252,16 +258,17 @@ input[type=range]{accent-color:var(--tint)}
   function cost(ids, ctx, store) {
     const g = needs(ids, ctx.recipes, ctx.prefs.people);
     const asg = store === "mix" ? assign(g, ctx).asg : null;
-    let total = 0, stock = 0, promo = 0, promoN = 0; const missing = [], byStore = {};
+    let total = 0, stock = 0, promo = 0, promoN = 0, eaten = 0; const missing = [], byStore = {};
     for (const p in g) {
       const st = asg ? asg[p] : store, it = st ? itemOf(ctx.prices, st, p) : null;
       if (!it) { missing.push(p); continue; }
       const lc = lineCost(it, g[p], ctx.products[p]); total += lc.sum; byStore[st] = (byStore[st] || 0) + lc.sum;
+      eaten += it.kg ? it.p * g[p] / 1000 : it.p * g[p] / it.pack;
       if (lc.oldSum > lc.sum) { promo += lc.oldSum - lc.sum; promoN++; }  // економія на акціях
       if (ctx.products[p].frozen && !it.kg && lc.qty > g[p]) stock += lc.sum * (lc.qty - g[p]) / lc.qty; // залишок іде в морозилку
     }
     for (const k in byStore) byStore[k] = Math.round(byStore[k] * 100) / 100;
-    return { total: Math.round(total * 100) / 100, stock: Math.round(stock * 100) / 100, missing, byStore, promo: Math.round(promo), promoN };
+    return { total: Math.round(total * 100) / 100, stock: Math.round(stock * 100) / 100, missing, byStore, promo: Math.round(promo), promoN, eaten: Math.round(eaten) };
   }
   const SLOTS = ["breakfast", "lunch", "dinner", "snack"];
   // План: масив днів [{breakfast: id, lunch: id, dinner: id, snack: id}] — лише обрані прийоми (prefs.slots)
@@ -291,7 +298,9 @@ input[type=range]{accent-color:var(--tint)}
     pen += cc.missing.length * 120;                                          // товару немає в обраній мережі
     const semi = ids.filter(id => byId(ctx.recipes, id).semi).length;
     pen += Math.max(0, semi - (ctx.prefs.semiMax ?? 3)) * 60;                 // напівфабрикати — не частіше за вибране
-    return moodScore(ids, ctx.recipes, ctx.prefs.moods) * 4 - over * 2 - pen - repeats * 8 - c / 100;
+    // більший бюджет → дорожчі страви: тягнемося до ~92% бюджету, а зайве — на з'їдене (не на залишки упаковок)
+    const under = Math.max(0, ctx.prefs.budget * 0.92 - c);
+    return moodScore(ids, ctx.recipes, ctx.prefs.moods) * 4 - over * 3 - pen - repeats * 8 - under / 8 + cc.eaten / 60;
   }
   function generate(ctx, rng = mulberry32(Date.now() & 0xffffffff), iterations = 500) {
     const slots = slotsOf(ctx.prefs), pools = {};
@@ -377,7 +386,7 @@ const DIS = [["chicken","Курка"],["pork","Свинина/фарш"],["fish"
 const APP = [["stove","🔥","Плита"],["oven","♨️","Духовка"],["airfryer","🌀","Аерогриль"],["microwave","📡","Мікрохвильовка"]];
 const SL = { breakfast: ["☀️","Сніданок"], lunch: ["🍲","Обід"], dinner: ["🌙","Вечеря"], snack: ["🍏","Перекус"] };
 const ST = { atb: "АТБ", silpo: "Сільпо", metro: "METRO" };
-const ICON = { atb: "🟥", silpo: "🟧", metro: "🟦", mix: "🧺" };
+const ICON = { atb: `<span class="sb sb-atb">АТБ</span>`, silpo: `<span class="sb sb-silpo">Сільпо</span>`, metro: `<span class="sb sb-metro">METRO</span>`, mix: `<span class="sb sb-mix">Разом</span>` };
 const stName = k => k === "mix" ? "усіх обраних мереж (" + S.prefs.mixStores.map(x => ST[x]).join(" + ") + ")" : ST[k];
 const DS = ["Пн","Вт","Ср","Чт","Пт","Сб","Нд"];
 const DAYS = ["Понеділок","Вівторок","Середа","Четвер","П'ятниця","Субота","Неділя"];
@@ -408,9 +417,9 @@ const people = n => n === 1 ? "особа" : n < 5 ? "особи" : "осіб";
 
 const steps = [
   () => `<h1>Для скількох людей готуємо?</h1><div class="sub">Підберемо порції та кількість продуктів.</div><div class="stepper"><button aria-label="менше" onclick="setPeople(-1)">−</button><span>${S.prefs.people}</span><button aria-label="більше" onclick="setPeople(1)">+</button></div><div class="note" style="text-align:center">Стартовий бюджет: ${S.prefs.budget} ₴ на тиждень (змінюється далі)</div>`,
-  () => `<h1>Де купуєте продукти?</h1><div class="sub">Меню складемо з асортименту й цін обраних мереж.</div><div class="grid">${[...Object.entries(ST), ["mix", "Разом — де дешевше"]].map(([k,v]) => `<div class="opt ${S.prefs.store===k?"on":""}" onclick="setP('store','${k}')"><b>${ICON[k]}</b>${v}</div>`).join("")}</div>
+  () => `<h1>Де купуєте продукти?</h1><div class="sub">Меню складемо з асортименту й цін обраних мереж.</div><div class="grid">${[...Object.entries(ST), ["mix", "Разом — де дешевше"]].map(([k,v]) => `<div class="opt ${S.prefs.store===k?"on":""}" onclick="setP('store','${k}')"><b>${ICON[k]}</b>${k === "mix" ? `<div style="font-size:13px;color:var(--m);margin-top:6px">де дешевше</div>` : ""}</div>`).join("")}</div>
   ${S.prefs.store === "mix" ? `<h2>З яких мереж складати кошик?</h2><div class="sub" style="margin-bottom:10px">Кожен продукт візьмемо там, де він найдешевший. Оберіть щонайменше дві.</div>
-  <div class="chips">${Object.entries(ST).map(([k,v]) => `<div class="chip ${S.prefs.mixStores.includes(k)?"sel":""}" onclick="setP('mixStores',tg(S.prefs.mixStores,'${k}'))">${ICON[k]} ${v}</div>`).join("")}</div>
+  <div class="chips">${Object.entries(ST).map(([k,v]) => `<div class="chip ${S.prefs.mixStores.includes(k)?"sel":""}" onclick="setP('mixStores',tg(S.prefs.mixStores,'${k}'))">${ICON[k]}</div>`).join("")}</div>
   <h2>Іти в ще один магазин, якщо економія від</h2><div class="chips">${[0,50,100,200].map(v => `<div class="chip ${S.prefs.minSave===v?"sel":""}" onclick="setP('minSave',${v})">${v ? v + " ₴" : "будь-якої"}</div>`).join("")}</div>
   ${S.prefs.mixStores.length < 2 ? `<p class="bad">Оберіть щонайменше дві мережі.</p>` : ""}` : ""}`,
   () => `<h1>Які прийоми їжі плануємо?</h1><div class="sub">Можна обрати кілька.</div><div class="grid">${Object.entries(SL).map(([k,[e,t]]) => `<div class="opt ${S.prefs.slots.includes(k)?"on":""}" onclick="setP('slots',tg(S.prefs.slots,'${k}'))"><b>${e}</b>${t}</div>`).join("")}</div>
@@ -520,10 +529,10 @@ function render() {
   <button class="more" onclick="S.more=!S.more;render()">${S.more ? "Сховати ▴" : "Детальніше ▾"}</button>${S.more ? `<div class="details">
   ${c.total > S.prefs.budget ? `<div class="bad" style="margin:4px 0">Перевищення на ${Math.round(c.total - S.prefs.budget)} ₴ — збільште бюджет, зменште кількість днів або прийомів їжі.</div>` : ""}
   ${c.stock >= 20 ? `<div style="margin:2px 0 4px">🧊 з них ≈${Math.round(c.stock)} ₴ — залишок напівфабрикатів у морозилці на наступні тижні</div>` : ""}
-  ${S.plan.length} дн. · ${ids.length} страв · супів: ${ids.filter(id => rec(id).soup).length} · напівфабрикатів: ${ids.filter(id => rec(id).semi).length} · ${S.prefs.people} ${people(S.prefs.people)} · ≈${avg} ккал/день на людину${st === "mix" ? `<div style="margin:4px 0">${Object.entries(c.byStore).map(([k, v]) => `${ICON[k]} ${ST[k]}: <b>${Math.round(v)} ₴</b>`).join(" · ")}</div>${mixSaving(ids, c)}` : ""}<br>${st === "mix" ? "Якщо купувати в одній мережі" : "Той самий кошик"}: ${others}
+  ${S.plan.length} дн. · ${ids.length} страв · супів: ${ids.filter(id => rec(id).soup).length} · напівфабрикатів: ${ids.filter(id => rec(id).semi).length} · ${S.prefs.people} ${people(S.prefs.people)} · ≈${avg} ккал/день на людину${st === "mix" ? `<div style="margin:4px 0">${Object.entries(c.byStore).map(([k, v]) => `${ICON[k]} <b>${Math.round(v)} ₴</b>`).join(" · ")}</div>${mixSaving(ids, c)}` : ""}<br>${st === "mix" ? "Якщо купувати в одній мережі" : "Той самий кошик"}: ${others}
   ${c.promo >= 5 ? `<div style="margin-top:4px">🏷 На акціях ${c.promoN} товар${c.promoN === 1 ? "" : c.promoN < 5 ? "и" : "ів"}: економія ${c.promo} ₴. Після акцій кошик може подорожчати.</div>` : ""}
   ${refreshBox()}
-  ${c.missing.length ? `<div class="warn" style="margin-top:4px">Немає в цій мережі: ${c.missing.map(p => esc(PR[p].name)).join(", ")} — не враховано в сумі.</div>` : ""}</div>` : ""}</div>` : `<h1 style="margin:4px 0 12px">${S.tab === "prep" ? "Заготовки" : "Покупки"}</h1>${S.tab === "list" ? `<div class="sub" style="margin:-6px 0 4px">${Math.round(c.total)} ₴ · ${stName(st)}${c.promo >= 5 ? ` · 🏷 −${c.promo} ₴ на акціях` : ""}</div>` : ""}`}`;
+  ${c.missing.length ? `<div class="warn" style="margin-top:4px">Немає в цій мережі: ${c.missing.map(p => esc(PR[p].name)).join(", ")} — не враховано в сумі.</div>` : ""}</div>` : ""}</div>` : `<h1 style="margin:4px 0 12px">${S.tab === "prep" ? "Заготовки" : "Покупки"}</h1>${S.tab === "list" ? `<div class="sub" style="margin:-6px 0 4px">${Math.round(c.total)} ₴ · ${st === "mix" ? "разом: " + S.prefs.mixStores.map(k => ST[k]).join(" + ") : ST[st]}${c.promo >= 5 ? ` · 🏷 −${c.promo} ₴ на акціях` : ""}</div>` : ""}`}`;
   if (S.tab === "plan") {
     const d = Math.min(S.day, S.plan.length - 1), day = S.plan[d], m = Core.dayMacro(day, RC);
     h += `<div class="days" id="days">${S.plan.map((_, i) => `<button class="${i===d?"on":""}" onclick="S.day=${i};render()">${DS[i]}<b>${i + 1}</b></button>`).join("")}</div>
@@ -539,7 +548,7 @@ function render() {
     const all = Core.shoppingList(ids, ctx(), st).flatMap(g => g.items), got = all.filter(it => S.ck[it.id]).length;
     h += `<div class="stat">Куплено ${got} з ${all.length}</div><div class="progress"><i style="width:${all.length ? got / all.length * 100 : 0}%"></i></div>`;
     let lastSt = "";
-    h += Core.shoppingList(ids, ctx(), st).map(g => { const head = g.store !== undefined && g.store !== lastSt ? (lastSt = g.store, `<h2 style="margin-top:22px">${g.store ? ICON[g.store] + " " + ST[g.store] + ` <span style="font-size:14px;font-weight:400;color:var(--m)">${Math.round(c.byStore[g.store] || 0)} ₴</span>` : "Немає в обраних мережах"}</h2>`) : "";
+    h += Core.shoppingList(ids, ctx(), st).map(g => { const head = g.store !== undefined && g.store !== lastSt ? (lastSt = g.store, `<h2 style="margin-top:22px">${g.store ? ICON[g.store] + ` <span style="font-size:14px;font-weight:400;color:var(--m)">${Math.round(c.byStore[g.store] || 0)} ₴</span>` : "Немає в обраних мережах"}</h2>`) : "";
       return head + `<div class="cat">${esc(g.cat)}</div><div class="group">` + g.items.map(it =>
       `<label class="item ${S.ck[it.id]?"ck":""}"><input type="checkbox" ${S.ck[it.id]?"checked":""} onchange="S.ck['${it.id}']=this.checked;save();render()"><span>${esc(it.title || it.name)} <small style="color:var(--m)">${qtyText(it)}${it.promoPct ? ` <span class="promo">🏷 −${it.promoPct}%${it.until ? " до " + new Date(it.until).toLocaleDateString("uk-UA", { day: "numeric", month: "numeric" }) : ""}</span>` : ""}${it.left ? ` · 🧊 залишок ≈${it.left >= 1000 ? (it.left/1000).toLocaleString("uk-UA") + " кг" : it.left + " г"}` : ""}</small>${it.url ? ` <a href="${esc(it.url)}" target="_blank" rel="noopener" style="color:var(--tint);font-size:12px" onclick="event.stopPropagation()">↗</a>` : ""}</span><span class="p">${it.sum===null?"немає":Math.round(it.sum)+" ₴"}${it.oldSum ? `<br><s style="color:var(--m);font-weight:400;font-size:12px">${Math.round(it.oldSum)} ₴</s>` : ""}</span></label>`).join("") + `</div>`; }).join("");
     h += `<div class="row"><button class="btn sec" onclick="copyList()">📋 Копіювати список</button></div><div id="cp" class="note" aria-live="polite"></div>`;
