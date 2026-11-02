@@ -22,7 +22,7 @@ h1{font-size:26px;line-height:1.15;margin:6px 0 6px}h2{font-size:19px;margin:18p
 .stepper{display:flex;align-items:center;justify-content:center;gap:28px;margin:40px 0}.stepper button{width:48px;height:48px;border-radius:50%;border:1.5px solid var(--b);background:var(--c);font-size:24px;cursor:pointer}.stepper span{font-size:56px;font-weight:700;min-width:70px;text-align:center}
 .big{font-size:52px;font-weight:700;text-align:center;margin:30px 0 10px}input[type=range]{width:100%;accent-color:var(--gd)}
 .store{display:flex;gap:8px}.store .opt{flex:1;font-weight:600;font-size:15px;padding:14px 4px}
-.tabs{display:flex;gap:6px;background:var(--chip);border-radius:30px;padding:4px;margin-bottom:12px}.tabs button{flex:1;border:0;background:none;padding:9px;border-radius:30px;font-weight:600;cursor:pointer;color:var(--m)}.tabs button.on{background:var(--c);color:var(--t);box-shadow:0 1px 3px var(--sh)}
+.tabs{display:flex;gap:6px;background:var(--chip);border-radius:30px;padding:4px;margin-bottom:12px}.tabs button{flex:1;white-space:nowrap;padding-left:4px;padding-right:4px;border:0;background:none;padding:9px;border-radius:30px;font-weight:600;cursor:pointer;color:var(--m)}.tabs button.on{background:var(--c);color:var(--t);box-shadow:0 1px 3px var(--sh)}
 .sum{background:var(--soft);border-radius:16px;padding:14px;margin-bottom:14px;font-size:14px}.sum .tot{font-size:24px;font-weight:700}.ok{color:var(--gd)}.bad{color:var(--bad)}
 .meal{display:flex;gap:12px;align-items:center;border:1px solid var(--b);border-radius:16px;padding:10px;margin-bottom:10px;cursor:pointer}.meal .em{font-size:34px;width:54px;height:54px;border-radius:12px;background:var(--tile);display:flex;align-items:center;justify-content:center;flex:none}
 .meal .d{font-size:12px;color:var(--m)}.meal .n{font-weight:600}.meal.done{opacity:.5}.meal .k{font-size:12px;color:var(--m)}
@@ -245,7 +245,7 @@ function applyTheme() {
   document.querySelectorAll('meta[name="theme-color"]').forEach(m => { m.setAttribute("content", dark ? "#171b14" : "#8bd635"); m.removeAttribute("media"); });
 }
 function setTheme(t) { S.theme = t; save(); applyTheme(); render(); }
-const themeBox = () => `<div class="theme" role="group" aria-label="Тема">${[["auto","🌓","Як у телефоні"],["light","☀️","Світла"],["dark","🌙","Темна"]].map(([k,e,t]) => `<button class="${(S.theme||"auto")===k?"on":""}" title="${t}" aria-label="${t}" onclick="setTheme('${k}')">${e}${k==="auto"?" Авто":""}</button>`).join("")}</div>`;
+const themeBox = () => `<div class="theme" role="group" aria-label="Тема">${[["auto","🌓","Як у телефоні"],["light","☀️","Світла"],["dark","🌙","Темна"]].map(([k,e,t]) => `<button class="${(S.theme||"auto")===k?"on":""}" title="${t}" aria-label="${t}" onclick="setTheme('${k}')">${e}</button>`).join("")}</div>`;
 try { matchMedia("(prefers-color-scheme: dark)").addEventListener("change", applyTheme); } catch (e) {}
 const save = () => { try { localStorage.setItem("koshyk3", JSON.stringify(S)); } catch (e) {} };
 const ctx = () => ({ products: PR, recipes: RC, prices: PRICES, prep: PREP, prefs: S.prefs });
@@ -362,8 +362,7 @@ function render() {
   const others = Object.keys(ST).filter(k => k !== st).map(k => { const x = Core.cost(ids, ctx(), k), d = Math.round(x.total - c.total);
     return `${ST[k]}: <b>${Math.round(x.total)} ₴</b> ${d > 0 ? `<span class="ok">(+${d})</span>` : d < 0 ? `<span class="warn">(−${-d})</span>` : ""}${x.missing.length ? `<span class="warn" title="немає ціни для ${x.missing.length} товарів">*</span>` : ""}`; }).join(" · ");
   const avg = Math.round(S.plan.reduce((s, d) => s + Core.dayMacro(d, RC)[0], 0) / S.plan.length);
-  let h = `<div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><h1 style="margin:0">Ваш тиждень</h1><button class="back" style="font-size:14px" onclick="S.step=0;S.plan=[];save();render()">⚙️ Змінити</button></div>
-  <div style="display:flex;justify-content:flex-end;margin-top:8px">${themeBox()}</div>
+  let h = `<div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><h1 style="margin:0">Week</h1><div style="display:flex;align-items:center;gap:8px">${themeBox()}<button class="back" style="font-size:14px" onclick="S.step=0;S.plan=[];save();render()">⚙️ Змінити</button></div></div>
   <div class="tabs" style="margin-top:14px">${[...Object.entries(ST), ["mix", "🧺 Разом"]].map(([k,v]) => `<button class="${st===k?"on":""}" onclick="S.prefs.store='${k}';${k==="mix" && S.prefs.mixStores.length < 2 ? "S.prefs.mixStores=['atb','silpo','metro'];" : ""}save();render()">${v}</button>`).join("")}</div>
   <div class="sum"><div class="tot ${c.total<=S.prefs.budget?"ok":"bad"}">${Math.round(c.total)} ₴ <span style="font-size:14px;font-weight:400;color:var(--m)">з ${S.prefs.budget} ₴</span></div>
   ${c.total > S.prefs.budget ? `<div class="bad" style="margin:4px 0">Перевищення на ${Math.round(c.total - S.prefs.budget)} ₴ — збільште бюджет, зменште кількість днів або прийомів їжі.</div>` : ""}
