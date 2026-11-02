@@ -17,11 +17,17 @@ jobs:
         timeout-minutes: 18
         env: { STORES: metro }
         run: node tools/update_site.js
-      - name: Зберегти, якщо змінилось
+      - name: Зберегти METRO поверх найсвіжішої версії
         run: |
           git config user.name "koshyk-bot"
           git config user.email "koshyk-bot@users.noreply.github.com"
-          git add site/prices.json
-          git diff --cached --quiet && exit 0
-          git commit -m "Ціни METRO $(date -u +%F)"
-          for i in 1 2 3; do git pull --rebase -X theirs origin main && git push && exit 0; sleep 5; done; exit 1
+          cp site/prices.json /tmp/new.json
+          for i in 1 2 3; do
+            git fetch -q origin main && git reset -q --hard origin/main
+            node -e "const f='site/prices.json',a=require('/tmp/new.json'),b=require('./'+f);for(const k of ['p','old','until']){b[k]=b[k]||{};b[k].metro=(a[k]||{}).metro||{}};b.updated=a.updated;require('fs').writeFileSync(f,JSON.stringify(b))"
+            git add site/prices.json
+            git diff --cached --quiet && exit 0
+            git commit -qm "Ціни METRO $(date -u +%F)" && git push && exit 0
+            sleep 5
+          done
+          exit 1
