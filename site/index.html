@@ -1,48 +1,107 @@
 <!DOCTYPE html>
 <html lang="uk"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Кошик"><meta name="theme-color" content="#8bd635" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#171b14" media="(prefers-color-scheme: dark)"><meta name="color-scheme" content="light dark">
+<meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Кошик"><meta name="theme-color" content="#8bd635" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#171b14" media="(prefers-color-scheme: dark)"><meta name="color-scheme" content="light dark">
 <link rel="manifest" href="manifest.json"><link rel="apple-touch-icon" href="icon-180.png"><link rel="icon" href="icon-192.png">
 <title>Кошик — меню на тиждень з АТБ, Сільпо і METRO</title>
 <style>
-:root{--g:#8bd635;--gd:#2f6b12;--bg:#f6f7f2;--c:#fff;--t:#1d2318;--m:#6b7263;--b:#e3e6dc;--soft:#f3fbe9;--chip:#eef1e8;--tile:#f3f4ee;--no:#fdeeec;--pr:#ffe9d6;--prt:#a3480b;--bad:#c4402f;--warn:#b86b00;--on:#14200a;--sh:#0002;color-scheme:light}
-:root[data-theme=dark]{--g:#8bd635;--gd:#9fe05a;--bg:#0f120d;--c:#171b14;--t:#e9eee3;--m:#9aa391;--b:#2c3327;--soft:#1f2a16;--chip:#232a1e;--tile:#3a4433;--no:#3a1d19;--pr:#3d2615;--prt:#ffb27a;--bad:#ff7b6b;--warn:#f0b04a;--on:#14200a;--sh:#0008;color-scheme:dark}
-@media (prefers-color-scheme:dark){:root:not([data-theme=light]):not([data-theme=dark]){--g:#8bd635;--gd:#9fe05a;--bg:#0f120d;--c:#171b14;--t:#e9eee3;--m:#9aa391;--b:#2c3327;--soft:#1f2a16;--chip:#232a1e;--tile:#3a4433;--no:#3a1d19;--pr:#3d2615;--prt:#ffb27a;--bad:#ff7b6b;--warn:#f0b04a;--on:#14200a;--sh:#0008;color-scheme:dark}}
-*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--t)}
-.app{max-width:440px;margin:0 auto;min-height:100vh;background:var(--c);padding:calc(20px + env(safe-area-inset-top)) calc(18px + env(safe-area-inset-right)) calc(90px + env(safe-area-inset-bottom)) calc(18px + env(safe-area-inset-left));position:relative;-webkit-text-size-adjust:100%}
-button,.opt,.chip,.meal,label.item{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
-input,select{font-size:16px}
-.bar{height:5px;background:var(--b);border-radius:9px;margin:4px 0 22px}.bar i{display:block;height:100%;background:var(--g);border-radius:9px;transition:.3s}
-h1{font-size:26px;line-height:1.15;margin:6px 0 6px}h2{font-size:19px;margin:18px 0 8px}.sub{color:var(--m);font-size:14px;margin-bottom:20px}
-.btn{display:block;width:100%;border:0;border-radius:40px;padding:15px;font-size:16px;font-weight:600;background:var(--g);color:var(--on);cursor:pointer}
-.btn.sec{background:var(--chip);color:var(--t)}.foot{position:fixed;left:50%;transform:translateX(-50%);bottom:0;width:100%;max-width:440px;padding:12px 18px calc(18px + env(safe-area-inset-bottom));background:linear-gradient(transparent,var(--c) 30%)}
-.back{border:0;background:none;font-size:22px;cursor:pointer;color:var(--m);padding:0}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.opt{border:1.5px solid var(--b);border-radius:16px;padding:14px 10px;text-align:center;cursor:pointer;font-size:14px;background:var(--c)}
-.opt b{display:block;font-size:26px;margin-bottom:4px}.opt.on{border-color:var(--g);background:var(--soft)}
-.chips{display:flex;flex-wrap:wrap;gap:8px}.chip{border:1.5px solid var(--b);border-radius:30px;padding:8px 12px;font-size:14px;cursor:pointer;background:var(--c)}.chip.on{border-color:var(--bad);background:var(--no);text-decoration:line-through}
-.stepper{display:flex;align-items:center;justify-content:center;gap:28px;margin:40px 0}.stepper button{width:48px;height:48px;border-radius:50%;border:1.5px solid var(--b);background:var(--c);font-size:24px;cursor:pointer}.stepper span{font-size:56px;font-weight:700;min-width:70px;text-align:center}
-.big{font-size:52px;font-weight:700;text-align:center;margin:30px 0 10px}input[type=range]{width:100%;accent-color:var(--gd)}
-.store{display:flex;gap:8px}.store .opt{flex:1;font-weight:600;font-size:15px;padding:14px 4px}
-.tabs{display:flex;gap:6px;background:var(--chip);border-radius:30px;padding:4px;margin-bottom:12px}.tabs button{flex:1;white-space:nowrap;padding-left:4px;padding-right:4px;border:0;background:none;padding:9px;border-radius:30px;font-weight:600;cursor:pointer;color:var(--m)}.tabs button.on{background:var(--c);color:var(--t);box-shadow:0 1px 3px var(--sh)}
-.sum{background:var(--soft);border-radius:16px;padding:14px;margin-bottom:14px;font-size:14px}.sum .tot{font-size:24px;font-weight:700}.ok{color:var(--gd)}.bad{color:var(--bad)}
-.meal{display:flex;gap:12px;align-items:center;border:1px solid var(--b);border-radius:16px;padding:10px;margin-bottom:10px;cursor:pointer}.meal .em{font-size:34px;width:54px;height:54px;border-radius:12px;background:var(--tile);display:flex;align-items:center;justify-content:center;flex:none}
-.meal .d{font-size:12px;color:var(--m)}.meal .n{font-weight:600}.meal.done{opacity:.6}.meal .k{font-size:12px;color:var(--m)}
-.macro{display:flex;justify-content:space-around;text-align:center;margin:12px 0}.macro b{display:block;font-size:20px}.macro span{font-size:12px;color:var(--m)}
-.hero{font-size:80px;text-align:center;background:var(--tile);border-radius:20px;padding:20px 0}
-ol li{margin-bottom:8px;font-size:15px;line-height:1.4}ul.ing{padding-left:18px}ul.ing li{font-size:14px;margin-bottom:4px}
-.cat{font-size:13px;font-weight:700;color:var(--gd);text-transform:uppercase;margin:14px 0 6px}
-.item{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--b);font-size:14px}.item input{width:20px;height:20px;accent-color:var(--gd)}.item .p{margin-left:auto;font-weight:600;white-space:nowrap}.item.ck span{text-decoration:line-through;color:var(--m)}
-.row{display:flex;gap:8px;margin-top:10px}.row .btn{padding:12px;font-size:14px}
-.load{text-align:center;padding-top:60px}.load .logo{font-size:42px;font-weight:800;color:var(--gd)}.load li{list-style:none;color:var(--m);margin:8px 0}
-.chip.sel{border-color:var(--g);background:var(--soft)}.warn{color:var(--warn)}.btn:disabled{opacity:.4;cursor:not-allowed}.meal:focus{outline:2px solid var(--g)}
-.days{display:flex;gap:4px;margin-bottom:10px}.days button{flex:1;border:1.5px solid var(--b);background:var(--c);border-radius:12px;padding:8px 0;font-weight:600;cursor:pointer}.days button.on{border-color:var(--g);background:var(--soft)}.dayhead{display:flex;justify-content:space-between;align-items:baseline;margin:4px 0 10px;font-size:13px;color:var(--m)}.dayhead b{font-size:17px;color:var(--t)}
-.prep{border:1px solid var(--b);border-radius:16px;padding:6px 12px;margin-bottom:12px}.ph{display:flex;justify-content:space-between;align-items:center;padding:6px 0}.ph span{font-size:13px;color:var(--m)}
-.rf{display:flex;align-items:center;gap:8px;margin-top:8px;font-size:13px}.rf button{border:1.5px solid var(--g);background:var(--c);border-radius:20px;padding:7px 12px;font-weight:600;cursor:pointer;color:var(--gd);white-space:nowrap}.rf button:disabled{opacity:.5}
-.promo{background:var(--pr);color:var(--prt);border-radius:8px;padding:1px 6px;font-size:11px;font-weight:600;white-space:nowrap}
-.note{font-size:12px;color:var(--m);margin-top:14px;line-height:1.4}
-
-body{background:var(--bg);color:var(--t)}input,select{background:var(--c);color:var(--t)}.btn{color:var(--on)}
-.theme{display:flex;gap:4px;background:var(--chip);border-radius:20px;padding:3px}.theme button{border:0;background:none;border-radius:16px;padding:5px 9px;font-size:13px;cursor:pointer;color:var(--m)}.theme button.on{background:var(--c);color:var(--t);box-shadow:0 1px 3px var(--sh)}
-.em2{font-size:24px!important;letter-spacing:-4px}.hero.em2{font-size:64px!important;letter-spacing:-10px}
+:root{--g:#8bd635;--gd:#2f6b12;--bg:#f2f3ee;--c:#fff;--glass:rgba(249,250,246,.78);--t:#1d2318;--m:#6b7263;--b:rgba(60,67,50,.16);--soft:#f3fbe9;--chip:#eef1e8;--tile:#f3f4ee;--no:#fdeeec;--pr:#ffe9d6;--prt:#a3480b;--bad:#c4402f;--warn:#b86b00;--on:#14200a;--sh:#0002;color-scheme:light}
+:root[data-theme=dark]{--g:#8bd635;--gd:#9fe05a;--bg:#000;--c:#16190f;--glass:rgba(22,25,15,.72);--t:#e9eee3;--m:#9aa391;--b:rgba(235,245,220,.13);--soft:#1f2a16;--chip:#232a1e;--tile:#3a4433;--no:#3a1d19;--pr:#3d2615;--prt:#ffb27a;--bad:#ff7b6b;--warn:#f0b04a;--on:#14200a;--sh:#0008;color-scheme:dark}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]):not([data-theme=dark]){--g:#8bd635;--gd:#9fe05a;--bg:#000;--c:#16190f;--glass:rgba(22,25,15,.72);--t:#e9eee3;--m:#9aa391;--b:rgba(235,245,220,.13);--soft:#1f2a16;--chip:#232a1e;--tile:#3a4433;--no:#3a1d19;--pr:#3d2615;--prt:#ffb27a;--bad:#ff7b6b;--warn:#f0b04a;--on:#14200a;--sh:#0008;color-scheme:dark}}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;background:var(--bg)}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Inter",system-ui,sans-serif;font-size:17px;line-height:1.35;letter-spacing:-.01em;background:var(--bg);color:var(--t);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-feature-settings:"kern"}
+.app{max-width:500px;margin:0 auto;min-height:100vh;min-height:100dvh;padding:calc(12px + env(safe-area-inset-top)) calc(16px + env(safe-area-inset-right)) calc(110px + env(safe-area-inset-bottom)) calc(16px + env(safe-area-inset-left))}
+.enter>*:not(.tabbar):not(.foot):not(.nav){animation:enter .38s cubic-bezier(.2,.85,.25,1) backwards}
+@keyframes enter{from{opacity:0;transform:translateY(10px)}}
+@media (prefers-reduced-motion:reduce){.enter>*{animation:none!important}html{scroll-behavior:auto}}
+button,.opt,.chip,.meal,label.item,.days button{touch-action:manipulation;-webkit-user-select:none;user-select:none;transition:transform .18s cubic-bezier(.2,.8,.2,1),background-color .2s,border-color .2s,box-shadow .2s,opacity .2s}
+button:active,.opt:active,.chip:active,.meal:active,.days button:active{transform:scale(.96)}
+input,select{font:inherit;font-size:17px;background:var(--c);color:var(--t)}
+h1{font-size:34px;line-height:1.1;font-weight:700;letter-spacing:-.025em;margin:8px 0 6px}
+h2{font-size:22px;line-height:1.2;font-weight:700;letter-spacing:-.018em;margin:26px 0 10px}
+.sub{color:var(--m);font-size:15px;line-height:1.4;margin-bottom:22px}
+.num,.tot,.p,.macro b,.big,.stepper span{font-variant-numeric:tabular-nums;font-feature-settings:"tnum"}
+/* верх анкети */
+.top{display:flex;align-items:center;gap:12px;min-height:36px}
+.bar{height:4px;background:var(--b);border-radius:9px;flex:1}.bar i{display:block;height:100%;background:var(--g);border-radius:9px;transition:width .45s cubic-bezier(.2,.8,.2,1)}
+.back{border:0;background:none;font-size:17px;cursor:pointer;color:var(--gd);padding:6px 4px;font-weight:500;display:inline-flex;align-items:center;gap:2px}
+.back .chev{font-size:26px;line-height:.8;margin-top:-2px}
+.link{border:0;background:none;color:var(--gd);font-size:17px;font-weight:500;cursor:pointer;padding:6px 2px}
+/* кнопки */
+.btn{display:block;width:100%;border:0;border-radius:14px;min-height:52px;padding:14px;font-size:17px;font-weight:600;letter-spacing:-.01em;background:var(--g);color:var(--on);cursor:pointer}
+.btn.sec{background:var(--c);color:var(--gd);box-shadow:0 0 0 .5px var(--b) inset}
+.btn:disabled{opacity:.35;cursor:not-allowed}
+.foot{position:fixed;left:0;right:0;bottom:0;padding:12px max(16px,env(safe-area-inset-right)) calc(12px + env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left));background:var(--glass);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px);border-top:.5px solid var(--b);z-index:20}
+.foot .btn{max-width:468px;margin:0 auto}
+/* вибір */
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.opt{border:0;box-shadow:0 0 0 .5px var(--b) inset,0 1px 2px rgba(0,0,0,.03);border-radius:18px;padding:16px 10px;text-align:center;cursor:pointer;font-size:15px;font-weight:500;background:var(--c)}
+.opt b{display:block;font-size:30px;margin-bottom:6px}
+.opt.on{box-shadow:0 0 0 2px var(--g) inset;background:var(--soft)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:0;box-shadow:0 0 0 .5px var(--b) inset;border-radius:20px;padding:9px 14px;font-size:15px;cursor:pointer;background:var(--c)}
+.chip.on{box-shadow:0 0 0 1.5px var(--bad) inset;background:var(--no);text-decoration:line-through}
+.chip.sel{box-shadow:0 0 0 2px var(--g) inset;background:var(--soft)}
+.stepper{display:flex;align-items:center;justify-content:center;gap:30px;margin:44px 0}
+.stepper button{width:52px;height:52px;border-radius:50%;border:0;box-shadow:0 0 0 .5px var(--b) inset;background:var(--c);font-size:26px;cursor:pointer;color:var(--t)}
+.stepper span{font-size:64px;font-weight:700;letter-spacing:-.03em;min-width:80px;text-align:center}
+.big{font-size:56px;font-weight:700;letter-spacing:-.03em;text-align:center;margin:30px 0 12px}
+input[type=range]{width:100%;accent-color:var(--g);height:32px}
+.store{display:flex;gap:8px}.store .opt{flex:1;font-weight:600;padding:14px 4px}
+/* верхня панель результатів (як навігація iOS) */
+.nav{position:sticky;top:0;z-index:15;margin:calc(-12px - env(safe-area-inset-top)) -16px 12px;padding:calc(8px + env(safe-area-inset-top)) 16px 10px;background:var(--glass);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px);border-bottom:.5px solid var(--b)}
+.navrow{display:flex;justify-content:space-between;align-items:center;gap:8px}.navrow h1{margin:0}
+.navr{display:flex;align-items:center;gap:6px}
+/* сегменти */
+.tabs{display:flex;background:var(--chip);border-radius:10px;padding:2px;margin:10px 0 0}
+.tabs button{flex:1;white-space:nowrap;border:0;background:none;padding:7px 4px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;color:var(--m)}
+.tabs button.on{background:var(--c);color:var(--t);box-shadow:0 1px 3px var(--sh),0 0 0 .5px var(--b)}
+.theme{display:flex;background:var(--chip);border-radius:9px;padding:2px}
+.theme button{border:0;background:none;border-radius:7px;padding:4px 8px;font-size:14px;cursor:pointer;color:var(--m)}
+.theme button.on{background:var(--c);box-shadow:0 1px 3px var(--sh)}
+/* картки */
+.card,.sum,.prep{background:var(--c);border-radius:20px;padding:16px;margin-bottom:14px;box-shadow:0 0 0 .5px var(--b),0 2px 10px rgba(0,0,0,.035)}
+.sum{font-size:15px;line-height:1.45}.sum .tot{font-size:40px;font-weight:700;letter-spacing:-.03em;line-height:1.05;margin-bottom:6px}
+.sum .tot small{font-size:15px;font-weight:500;color:var(--m);letter-spacing:0}
+.ok{color:var(--gd)}.bad{color:var(--bad)}.warn{color:var(--warn)}
+/* меню */
+.days{display:flex;gap:6px;margin:4px 0 12px;overflow-x:auto;scrollbar-width:none}.days::-webkit-scrollbar{display:none}
+.days button{flex:1;min-width:44px;border:0;box-shadow:0 0 0 .5px var(--b) inset;background:var(--c);border-radius:12px;padding:9px 0;font-size:15px;font-weight:600;cursor:pointer;color:var(--t)}
+.days button.on{background:var(--g);color:var(--on);box-shadow:none}
+.dayhead{display:flex;justify-content:space-between;align-items:baseline;margin:6px 2px 10px;font-size:13px;color:var(--m)}.dayhead b{font-size:22px;letter-spacing:-.02em;color:var(--t)}
+.meal{display:flex;gap:14px;align-items:center;background:var(--c);border-radius:18px;padding:12px;margin-bottom:10px;cursor:pointer;box-shadow:0 0 0 .5px var(--b),0 2px 8px rgba(0,0,0,.03)}
+.meal .em{font-size:34px;width:60px;height:60px;border-radius:15px;background:var(--tile);display:flex;align-items:center;justify-content:center;flex:none}
+.meal .d{font-size:12px;font-weight:600;color:var(--m);text-transform:uppercase;letter-spacing:.04em}.meal .n{font-size:17px;font-weight:600;letter-spacing:-.015em;line-height:1.25;margin:1px 0 2px}.meal .k{font-size:13px;color:var(--m)}
+.meal.done{opacity:.55}.meal:focus-visible{outline:2px solid var(--g)}
+.meal .chev{margin-left:auto;color:var(--m);font-size:22px;opacity:.5}
+/* рецепт */
+.hero{font-size:84px;text-align:center;background:var(--tile);border-radius:24px;padding:26px 0;margin-top:6px}
+.macro{display:grid;grid-template-columns:repeat(4,1fr);text-align:center;margin:14px 0 4px;background:var(--c);border-radius:18px;padding:14px 4px;box-shadow:0 0 0 .5px var(--b)}
+.macro b{display:block;font-size:22px;letter-spacing:-.02em}.macro span{font-size:12px;color:var(--m)}
+ol{padding-left:22px}ol li{margin-bottom:12px;font-size:17px;line-height:1.45}ol li::marker{color:var(--gd);font-weight:700}
+ul.ing{list-style:none;padding:0;margin:0;background:var(--c);border-radius:18px;box-shadow:0 0 0 .5px var(--b);overflow:hidden}
+ul.ing li{font-size:16px;padding:12px 16px;border-bottom:.5px solid var(--b)}ul.ing li:last-child{border:0}
+/* списки */
+.cat{font-size:13px;font-weight:600;color:var(--m);text-transform:uppercase;letter-spacing:.05em;margin:20px 4px 8px}
+.group{background:var(--c);border-radius:18px;box-shadow:0 0 0 .5px var(--b);overflow:hidden;margin-bottom:6px}
+.item{display:flex;align-items:center;gap:12px;padding:12px 14px;border-bottom:.5px solid var(--b);font-size:16px;line-height:1.3;cursor:pointer}
+.group .item:last-child{border-bottom:0}.prep .item:last-child{border-bottom:0}.prep .item{padding:12px 0}
+.item input{width:24px;height:24px;flex:none;accent-color:var(--g);margin:0}
+.item .p{margin-left:auto;font-weight:600;white-space:nowrap;text-align:right}.item.ck span{color:var(--m)}.item.ck>span:first-of-type{text-decoration:line-through}
+.prep{padding:6px 16px}.ph{display:flex;justify-content:space-between;align-items:center;padding:10px 0 4px;font-size:17px}.ph span{font-size:13px;color:var(--m)}
+.row{display:flex;gap:10px;margin-top:14px}.row .btn{min-height:48px;font-size:16px}
+.promo{background:var(--pr);color:var(--prt);border-radius:6px;padding:1px 6px;font-size:11px;font-weight:700;white-space:nowrap}
+.rf{display:flex;align-items:center;gap:8px;margin-top:10px;font-size:13px}
+.note{font-size:13px;color:var(--m);margin-top:16px;line-height:1.45}
+.load{text-align:center;padding-top:22vh}.load .logo{font-size:44px;font-weight:800;letter-spacing:-.03em;color:var(--gd);animation:pulse 1.4s ease-in-out infinite}.load li{list-style:none;color:var(--m);margin:10px 0;font-size:15px}
+@keyframes pulse{50%{transform:scale(1.06);opacity:.85}}
+/* нижня панель вкладок iOS */
+.tabbar{position:fixed;left:0;right:0;bottom:0;z-index:20;display:flex;justify-content:center;padding:6px max(8px,env(safe-area-inset-right)) calc(4px + env(safe-area-inset-bottom)) max(8px,env(safe-area-inset-left));background:var(--glass);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px);border-top:.5px solid var(--b)}
+.tabbar button{flex:1;max-width:120px;border:0;background:none;display:flex;flex-direction:column;align-items:center;gap:2px;padding:4px 0;font-size:10.5px;font-weight:600;color:var(--m);cursor:pointer;letter-spacing:.01em}
+.tabbar button i{font-style:normal;font-size:23px;line-height:1;filter:grayscale(1);opacity:.55;transition:filter .2s,opacity .2s,transform .2s}
+.tabbar button.on{color:var(--gd)}.tabbar button.on i{filter:none;opacity:1;transform:translateY(-1px)}
+.search{width:100%;padding:11px 14px;border:0;border-radius:12px;font-size:17px;background:var(--chip);color:var(--t);margin:4px 0 8px;outline:none}
+.em2{font-size:26px!important;letter-spacing:-5px}.hero.em2{font-size:68px!important;letter-spacing:-12px}
 </style></head><body><div class="app" id="app"></div>
 <script>// Чиста логіка планувальника. Працює і в Node (тести), і в браузері (window.Core).
 (function (root) {
@@ -349,12 +408,12 @@ function priceNote() {
 function render() {
   const a = $("app");
   if (S.step <= LAST) {
-    a.innerHTML = `<div style="display:flex;align-items:center;gap:12px">${S.step ? `<button class="back" aria-label="назад" onclick="S.step--;render()">←</button>` : ""}<div class="bar" style="flex:1;margin:0"><i style="width:${(S.step+1)/steps.length*100}%"></i></div></div><div style="display:flex;justify-content:flex-end;margin:10px 0 4px">${S.step === 0 ? themeBox() : ""}</div>${steps[S.step]()}
-    <div class="foot"><button class="btn" ${canNext()?"":"disabled"} onclick="next()">${S.step===LAST ? "Скласти меню" : "Далі"}</button></div>`;
+    paint(`<div class="top">${S.step ? `<button class="back" aria-label="назад" onclick="S.step--;render()"><span class="chev">‹</span></button>` : ""}<div class="bar"><i style="width:${(S.step+1)/steps.length*100}%"></i></div>${S.step === 0 ? themeBox() : ""}</div><div style="height:14px"></div>${steps[S.step]()}
+    <div class="foot"><button class="btn" ${canNext()?"":"disabled"} onclick="next()">${S.step===LAST ? "Скласти меню" : "Далі"}</button></div>`, "q" + S.step);
     return;
   }
   if (S.step === 8) {
-    a.innerHTML = `<div class="load"><div class="logo">🛒 кошик</div><div class="sub" style="margin-top:30px">Складаємо ваш тиждень…</div><ul style="padding:0"><li>✅ Підбираємо сніданки, обіди, вечері й перекуси</li><li>✅ Беремо товари й ціни ${stName(S.prefs.store)}</li><li>⏳ Вкладаємось у бюджет і збираємо список</li></ul></div>`;
+    paint(`<div class="load"><div class="logo">🛒 кошик</div><div class="sub" style="margin-top:30px">Складаємо ваш тиждень…</div><ul style="padding:0"><li>✅ Підбираємо сніданки, обіди, вечері й перекуси</li><li>✅ Беремо товари й ціни ${stName(S.prefs.store)}</li><li>⏳ Вкладаємось у бюджет і збираємо список</li></ul></div>`, "load");
     return;
   }
   if (S.open) return recipe();
@@ -363,22 +422,22 @@ function render() {
   const others = Object.keys(ST).filter(k => k !== st).map(k => { const x = Core.cost(ids, ctx(), k), d = Math.round(x.total - c.total);
     return `${ST[k]}: <b>${Math.round(x.total)} ₴</b> ${d > 0 ? `<span class="ok">(+${d})</span>` : d < 0 ? `<span class="warn">(−${-d})</span>` : ""}${x.missing.length ? `<span class="warn" title="немає ціни для ${x.missing.length} товарів">*</span>` : ""}`; }).join(" · ");
   const avg = Math.round(S.plan.reduce((s, d) => s + Core.dayMacro(d, RC)[0], 0) / S.plan.length);
-  let h = `<div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><h1 style="margin:0">Week</h1><div style="display:flex;align-items:center;gap:8px">${themeBox()}<button class="back" style="font-size:14px" onclick="S.step=0;S.plan=[];save();render()">⚙️ Змінити</button></div></div>
-  <div class="tabs" style="margin-top:14px">${[...Object.entries(ST), ["mix", "🧺 Разом"]].map(([k,v]) => `<button class="${st===k?"on":""}" onclick="S.prefs.store='${k}';${k==="mix" && S.prefs.mixStores.length < 2 ? "S.prefs.mixStores=['atb','silpo','metro'];" : ""}save();render()">${v}</button>`).join("")}</div>
-  <div class="sum"><div class="tot ${c.total<=S.prefs.budget?"ok":"bad"}">${Math.round(c.total)} ₴ <span style="font-size:14px;font-weight:400;color:var(--m)">з ${S.prefs.budget} ₴</span></div>
+  let h = `<header class="nav"><div class="navrow"><h1>Week</h1><div class="navr">${themeBox()}<button class="link" onclick="S.step=0;S.plan=[];save();render()">Змінити</button></div></div>
+  <div class="tabs">${[...Object.entries(ST), ["mix", "🧺 Разом"]].map(([k,v]) => `<button class="${st===k?"on":""}" onclick="S.prefs.store='${k}';${k==="mix" && S.prefs.mixStores.length < 2 ? "S.prefs.mixStores=['atb','silpo','metro'];" : ""}save();render()">${v}</button>`).join("")}</div>
+</header>
+  ${S.tab === "plan" ? `<div class="sum"><div class="tot ${c.total<=S.prefs.budget?"ok":"bad"}">${Math.round(c.total)} ₴ <small>з ${S.prefs.budget} ₴</small></div>
   ${c.total > S.prefs.budget ? `<div class="bad" style="margin:4px 0">Перевищення на ${Math.round(c.total - S.prefs.budget)} ₴ — збільште бюджет, зменште кількість днів або прийомів їжі.</div>` : ""}
   ${c.stock >= 20 ? `<div style="margin:2px 0 4px">🧊 з них ≈${Math.round(c.stock)} ₴ — залишок напівфабрикатів у морозилці на наступні тижні</div>` : ""}
   ${S.plan.length} дн. · ${ids.length} страв · супів: ${ids.filter(id => rec(id).soup).length} · напівфабрикатів: ${ids.filter(id => rec(id).semi).length} · ${S.prefs.people} ${people(S.prefs.people)} · ≈${avg} ккал/день на людину${st === "mix" ? `<div style="margin:4px 0">${Object.entries(c.byStore).map(([k, v]) => `${ICON[k]} ${ST[k]}: <b>${Math.round(v)} ₴</b>`).join(" · ")}</div>${mixSaving(ids, c)}` : ""}<br>${st === "mix" ? "Якщо купувати в одній мережі" : "Той самий кошик"}: ${others}
   ${c.promo >= 5 ? `<div style="margin-top:4px">🏷 На акціях ${c.promoN} товар${c.promoN === 1 ? "" : c.promoN < 5 ? "и" : "ів"}: економія ${c.promo} ₴. Після акцій кошик може подорожчати.</div>` : ""}
   ${refreshBox()}
-  ${c.missing.length ? `<div class="warn" style="margin-top:4px">Немає в цій мережі: ${c.missing.map(p => esc(PR[p].name)).join(", ")} — не враховано в сумі.</div>` : ""}</div>
-  <div class="tabs"><button class="${S.tab==="plan"?"on":""}" onclick="S.tab='plan';render()">Меню</button><button class="${S.tab==="prep"?"on":""}" onclick="S.tab='prep';render()">Заготовки</button><button class="${S.tab==="list"?"on":""}" onclick="S.tab='list';render()">Покупки</button></div>`;
+  ${c.missing.length ? `<div class="warn" style="margin-top:4px">Немає в цій мережі: ${c.missing.map(p => esc(PR[p].name)).join(", ")} — не враховано в сумі.</div>` : ""}</div>` : `<h1 style="margin:4px 0 12px">${S.tab === "prep" ? "Заготовки" : "Покупки"}</h1>${S.tab === "list" ? `<div class="sub" style="margin:-6px 0 4px">${Math.round(c.total)} ₴ · ${stName(st)}${c.promo >= 5 ? ` · 🏷 −${c.promo} ₴ на акціях` : ""}</div>` : ""}`}`;
   if (S.tab === "plan") {
     const d = Math.min(S.day, S.plan.length - 1), day = S.plan[d], m = Core.dayMacro(day, RC);
     h += `<div class="days">${S.plan.map((_, i) => `<button class="${i===d?"on":""}" onclick="S.day=${i};render()">${DS[i]}</button>`).join("")}</div>
     <div class="dayhead"><b>${DAYS[d]}</b><span>${m[0]} ккал · Б ${m[1]} · Ж ${m[2]} · В ${m[3]} г</span></div>`;
     h += Core.SLOTS.filter(s => day[s] != null).map(s => { const r = rec(day[s]), key = d + "-" + s;
-      return `<div class="meal ${S.done[key]?"done":""}" role="button" tabindex="0" onclick="S.open={d:${d},s:'${s}'};render()"><div class="em${[...r.emoji].filter(c => c.codePointAt(0) > 0x2000 && c !== "\uFE0F").length > 1 ? " em2" : ""}">${r.emoji}</div><div><div class="d">${SL[s][0]} ${SL[s][1]}</div><div class="n">${esc(r.name)}</div><div class="k">${r.macro[0]} ккал · Б ${r.macro[1]} г · ${r.time} хв</div></div></div>`; }).join("");
+      return `<div class="meal ${S.done[key]?"done":""}" role="button" tabindex="0" onclick="S.open={d:${d},s:'${s}'};render()"><div class="em${[...r.emoji].filter(c => c.codePointAt(0) > 0x2000 && c !== "\uFE0F").length > 1 ? " em2" : ""}">${r.emoji}</div><div><div class="d">${SL[s][0]} ${SL[s][1]}</div><div class="n">${esc(r.name)}</div><div class="k">${r.macro[0]} ккал · Б ${r.macro[1]} г · ${r.time} хв</div></div><span class="chev">›</span></div>`; }).join("");
   } else if (S.tab === "prep") {
     const pp = Core.prepPlan(S.plan, ctx());
     h += pp.length ? `<div class="sub" style="margin:0 0 6px">Готуйте наперед 1–2 рази на тиждень, щоб у будні лише розігрівати й збирати страви.</div>` + pp.map((ses, w) => `<div class="prep"><div class="ph"><b>🔪 ${ses.title}</b><span>≈ ${Math.round(ses.minutes / 5) * 5} хв</span></div>` +
@@ -387,22 +446,32 @@ function render() {
   } else {
     let lastSt = "";
     h += Core.shoppingList(ids, ctx(), st).map(g => { const head = g.store !== undefined && g.store !== lastSt ? (lastSt = g.store, `<h2 style="margin-top:22px">${g.store ? ICON[g.store] + " " + ST[g.store] + ` <span style="font-size:14px;font-weight:400;color:var(--m)">${Math.round(c.byStore[g.store] || 0)} ₴</span>` : "Немає в обраних мережах"}</h2>`) : "";
-      return head + `<div class="cat">${esc(g.cat)}</div>` + g.items.map(it =>
-      `<label class="item ${S.ck[it.id]?"ck":""}"><input type="checkbox" ${S.ck[it.id]?"checked":""} onchange="S.ck['${it.id}']=this.checked;save();render()"><span>${esc(it.title || it.name)} <small style="color:var(--m)">${qtyText(it)}${it.promoPct ? ` <span class="promo">🏷 −${it.promoPct}%${it.until ? " до " + new Date(it.until).toLocaleDateString("uk-UA", { day: "numeric", month: "numeric" }) : ""}</span>` : ""}${it.left ? ` · 🧊 залишок ≈${it.left >= 1000 ? (it.left/1000).toLocaleString("uk-UA") + " кг" : it.left + " г"}` : ""}</small>${it.url ? ` <a href="${esc(it.url)}" target="_blank" rel="noopener" style="color:var(--gd);font-size:12px" onclick="event.stopPropagation()">↗</a>` : ""}</span><span class="p">${it.sum===null?"немає":Math.round(it.sum)+" ₴"}${it.oldSum ? `<br><s style="color:var(--m);font-weight:400;font-size:12px">${Math.round(it.oldSum)} ₴</s>` : ""}</span></label>`).join(""); }).join("");
+      return head + `<div class="cat">${esc(g.cat)}</div><div class="group">` + g.items.map(it =>
+      `<label class="item ${S.ck[it.id]?"ck":""}"><input type="checkbox" ${S.ck[it.id]?"checked":""} onchange="S.ck['${it.id}']=this.checked;save();render()"><span>${esc(it.title || it.name)} <small style="color:var(--m)">${qtyText(it)}${it.promoPct ? ` <span class="promo">🏷 −${it.promoPct}%${it.until ? " до " + new Date(it.until).toLocaleDateString("uk-UA", { day: "numeric", month: "numeric" }) : ""}</span>` : ""}${it.left ? ` · 🧊 залишок ≈${it.left >= 1000 ? (it.left/1000).toLocaleString("uk-UA") + " кг" : it.left + " г"}` : ""}</small>${it.url ? ` <a href="${esc(it.url)}" target="_blank" rel="noopener" style="color:var(--gd);font-size:12px" onclick="event.stopPropagation()">↗</a>` : ""}</span><span class="p">${it.sum===null?"немає":Math.round(it.sum)+" ₴"}${it.oldSum ? `<br><s style="color:var(--m);font-weight:400;font-size:12px">${Math.round(it.oldSum)} ₴</s>` : ""}</span></label>`).join("") + `</div>`; }).join("");
     h += `<div class="row"><button class="btn sec" onclick="copyList()">📋 Копіювати список</button></div><div id="cp" class="note" aria-live="polite"></div>`;
   }
-  h += `<div class="row"><button class="btn sec" onclick="S.book=true;S.bookQ='';render()">📖 Усі рецепти (${RC.length})</button></div><p class="note">${priceNote()}</p>`;
-  a.innerHTML = h;
+  h += `<p class="note">${priceNote()}</p>` + tabbar();
+  paint(h, "r-" + S.tab);
 }
 
+// ---- Малювання з плавною появою нового екрана ----
+let LASTKEY = "";
+function paint(html, key) {
+  const a = $("app"); a.innerHTML = html;
+  if (key !== LASTKEY) { a.classList.remove("enter"); void a.offsetWidth; a.classList.add("enter"); if (!key.startsWith("q") || LASTKEY.startsWith("q")) window.scrollTo({ top: 0, behavior: "instant" }); LASTKEY = key; }
+}
+function tabbar() {
+  const T = [["plan", "🍽️", "Меню"], ["prep", "🔪", "Заготовки"], ["list", "🛒", "Покупки"], ["book", "📖", "Рецепти"]];
+  return `<nav class="tabbar">${T.map(([k, e, t]) => `<button class="${(k === "book" ? S.book : !S.book && S.tab === k) ? "on" : ""}" onclick="${k === "book" ? "S.book=true;S.bookQ=S.bookQ||''" : `S.book=false;S.tab='${k}'`};render()"><i>${e}</i>${t}</button>`).join("")}</nav>`;
+}
 function book() {
   const q = (S.bookQ || "").toLowerCase();
   const TAG = Object.fromEntries(MOODS.map(([k, e, t]) => [k, e]));
-  $("app").innerHTML = `<button class="back" aria-label="назад" onclick="S.book=false;render()">←</button><h1 style="margin-top:8px">Усі рецепти</h1>
-  <input id="bq" type="search" placeholder="Пошук страви або продукту" value="${esc(S.bookQ || "")}" style="width:100%;padding:12px 14px;border:1.5px solid var(--b);border-radius:14px;font-size:15px;margin-bottom:6px">
+  paint(`<header class="nav"><div class="navrow"><h1>Рецепти</h1><div class="navr">${themeBox()}</div></div>
+  <input id="bq" class="search" type="search" placeholder="🔍 Страва або продукт" value="${esc(S.bookQ || "")}" style="margin-top:10px"></header>
   <div class="note" style="margin:0 0 6px">${MOODS.map(([k, e, t]) => `${e} ${t}`).join(" · ")} · 🍲 суп · 🧊 напівфабрикат</div>` +
   Core.SLOTS.map(sl => { const list = RC.filter(r => r.meals.includes(sl) && (!q || r.name.toLowerCase().includes(q) || r.ing.some(([p]) => PR[p].name.toLowerCase().includes(q))));
-    return list.length ? `<div class="cat">${SL[sl][0]} ${SL[sl][1]} · ${list.length}</div>` + list.map(r => `<div class="meal" role="button" tabindex="0" onclick="S.open={rid:${r.id}};render()"><div class="em${[...r.emoji].filter(c => c.codePointAt(0) > 0x2000 && c !== "\uFE0F").length > 1 ? " em2" : ""}">${r.emoji}</div><div><div class="n">${esc(r.name)}</div><div class="k">${r.macro[0]} ккал · Б ${r.macro[1]} г · ${r.time} хв · ${r.tags.map(t => TAG[t] || "").join("")}${r.soup ? "🍲" : ""}${r.semi ? "🧊" : ""}</div></div></div>`).join("") : ""; }).join("");
+    return list.length ? `<div class="cat">${SL[sl][0]} ${SL[sl][1]} · ${list.length}</div>` + list.map(r => `<div class="meal" role="button" tabindex="0" onclick="S.open={rid:${r.id}};render()"><div class="em${[...r.emoji].filter(c => c.codePointAt(0) > 0x2000 && c !== "\uFE0F").length > 1 ? " em2" : ""}">${r.emoji}</div><div><div class="n">${esc(r.name)}</div><div class="k">${r.macro[0]} ккал · Б ${r.macro[1]} г · ${r.time} хв · ${r.tags.map(t => TAG[t] || "").join("")}${r.soup ? "🍲" : ""}${r.semi ? "🧊" : ""}</div></div><span class="chev">›</span></div>`).join("") : ""; }).join("") + tabbar(), "book");
   const inp = $("bq"); inp.oninput = () => { S.bookQ = inp.value; const pos = inp.selectionStart; book(); const i2 = $("bq"); i2.focus(); i2.setSelectionRange(pos, pos); };
 }
 function recipe() {
@@ -411,13 +480,13 @@ function recipe() {
 }
 function recipeView(r, d, s) {
   const n = S.prefs.people, key = d + "-" + s, inPlan = d !== null;
-  $("app").innerHTML = `<button class="back" aria-label="назад" onclick="S.open=null;render()">←</button><div class="hero${[...r.emoji].filter(c => c.codePointAt(0) > 0x2000 && c !== "\uFE0F").length > 1 ? " em2" : ""}" style="margin-top:10px">${r.emoji}</div><h1>${esc(r.name)}</h1><div class="sub">${inPlan ? DAYS[d] + " · " + SL[s][1] + " · " : r.meals.map(m => SL[m][1]).join(" / ") + " · "}${r.time} хв · ${n} ${n===1?"порція":n<5?"порції":"порцій"}</div>
+  paint(`<header class="nav"><div class="navrow"><button class="back" aria-label="назад" onclick="S.open=null;render()"><span class="chev">‹</span> ${S.book ? "Рецепти" : "Меню"}</button></div></header><div class="hero${[...r.emoji].filter(c => c.codePointAt(0) > 0x2000 && c !== "\uFE0F").length > 1 ? " em2" : ""}" style="margin-top:10px">${r.emoji}</div><h1>${esc(r.name)}</h1><div class="sub">${inPlan ? DAYS[d] + " · " + SL[s][1] + " · " : r.meals.map(m => SL[m][1]).join(" / ") + " · "}${r.time} хв · ${n} ${n===1?"порція":n<5?"порції":"порцій"}</div>
   <div class="macro"><div><b>${r.macro[0]}</b><span>ккал</span></div><div><b>${r.macro[1]} г</b><span>білки</span></div><div><b>${r.macro[2]} г</b><span>жири</span></div><div><b>${r.macro[3]} г</b><span>вуглеводи</span></div></div>
   <div class="note" style="margin-top:0;text-align:center">на 1 порцію</div>
   ${(r.prep || []).filter(k => PREP[k]).length ? `<div class="sum" style="margin-top:10px">💡 Заготовка: ${(r.prep || []).filter(k => PREP[k]).map(k => esc(PREP[k].text.toLowerCase())).join("; ")} — див. вкладку «Заготовки».</div>` : ""}
   <h2>Інгредієнти</h2><ul class="ing">${r.ing.map(([p,q]) => `<li>${esc(PR[p].name)} — ${q*n} ${PR[p].ml?"мл":"г"}</li>`).join("")}<li>Сіль, спеції — за смаком</li></ul>
   <h2>Приготування</h2><ol>${r.steps.map(x => `<li>${esc(x)}</li>`).join("")}</ol>
-  ${inPlan ? `<div class="row"><button class="btn sec" onclick="doSwap(${d},'${s}')">🔄 Замінити страву</button><button class="btn" onclick="S.done['${key}']=!S.done['${key}'];save();S.open=null;render()">${S.done[key]?"Не приготовано":"✓ Приготовано"}</button></div>` : ""}`;
+  ${inPlan ? `<div class="row"><button class="btn sec" onclick="doSwap(${d},'${s}')">🔄 Замінити страву</button><button class="btn" onclick="S.done['${key}']=!S.done['${key}'];save();S.open=null;render()">${S.done[key]?"Не приготовано":"✓ Приготовано"}</button></div>` : ""}`, "rec" + r.id);
 }
 function mixSaving(ids, c) {
   const singles = S.prefs.mixStores.map(k => ({ k, x: Core.cost(ids, ctx(), k) })).filter(o => !o.x.missing.length);
