@@ -391,6 +391,44 @@
     "t": "Чебуреки 0,5 кг Левада",
     "url": "https://www.atbmarket.com/product/cebureki-05-kg-levada-pet",
     "old": 107.4
+   },
+   "salmon": {
+    "p": 449.9,
+    "pack": 340,
+    "t": "Лосось 340г Norven порції б/ш с/м",
+    "url": "https://www.atbmarket.com/product/losos-340g-norven-porcii-bs-sm-pet"
+   },
+   "beef": {
+    "p": 166.29,
+    "pack": 330,
+    "t": "Слайси яловичі 330 г Skott Smeat в маринаді охолоджені",
+    "url": "https://www.atbmarket.com/product/stejk-330g-skott-smeat-alovicij-v-marinadi-oholodzenij-vakupak"
+   },
+   "shrimp": {
+    "p": 272.9,
+    "pack": 400,
+    "t": "М'ясо креветки 400 г Своя лінія варено-морожене",
+    "url": "https://www.atbmarket.com/product/maso-krevetki-400-g-svoa-linia-vareno-morozene-glazurovane"
+   },
+   "mozz": {
+    "p": 69.2,
+    "old": 89.4,
+    "pack": 125,
+    "t": "Сир м'який 125 г Яготинська Моццарелла Міні 45%",
+    "url": "https://www.atbmarket.com/product/sir-makij-125-g-agotinska-moccarella-mini-45-pet"
+   },
+   "avocado": {
+    "p": 179.95,
+    "kg": true,
+    "t": "Авокадо вагове 1 гат",
+    "url": "https://www.atbmarket.com/product/avokado-vagove-1-gat"
+   },
+   "nuts": {
+    "p": 64.9,
+    "old": 80.2,
+    "pack": 75,
+    "t": "Ядро мигдалю 75г Своя лінія сушене",
+    "url": "https://www.atbmarket.com/product/adro-migdalu-75g-svoa-linia-susene"
    }
   },
   "silpo": {
@@ -796,6 +834,45 @@
     "pack": 800,
     "t": "Голубці Хуторок Сільські 800 г",
     "url": "https://silpo.ua/product/golubtsi-khutorok-silski-973364"
+   },
+   "salmon": {
+    "p": 1199,
+    "kg": true,
+    "t": "Сьомга (лосось), філе охолоджене",
+    "url": "https://silpo.ua/product/somga-losos-file-okholodzhene-702854"
+   },
+   "beef": {
+    "p": 1299,
+    "kg": true,
+    "t": "Яловичина розробка вирізка охолоджена",
+    "url": "https://silpo.ua/product/yalovychyna-rozrobka-vyrizka-okholodzhena-951019"
+   },
+   "shrimp": {
+    "p": 469,
+    "old": 789,
+    "kg": true,
+    "t": "Креветка королівська в панцирі 40/80 с/м",
+    "url": "https://silpo.ua/product/krevetka-korolivska-v-pantsyri-40-80-s-m-864125"
+   },
+   "mozz": {
+    "p": 79.49,
+    "pack": 125,
+    "t": "Сир Яготинська Моцарела максі 45%",
+    "url": "https://silpo.ua/product/syr-yagotynska-motsarela-maksi-45-937183"
+   },
+   "avocado": {
+    "p": 34.99,
+    "old": 49.9,
+    "pack": 200,
+    "t": "Авокадо (1 шт)",
+    "url": "https://silpo.ua/product/avokado-32490"
+   },
+   "nuts": {
+    "p": 117.39,
+    "old": 129,
+    "pack": 150,
+    "t": "Горіх волоський Eat4fit 150 г",
+    "url": "https://silpo.ua/product/gorikh-voloskyi-eat4fit-822566"
    }
   },
   "metro": {
@@ -1164,6 +1241,44 @@
     "pack": 600,
     "t": "Чебуреки Хуторок з м'ясом 600 г",
     "url": "https://metro.zakaz.ua/uk/search/?q=%D0%A7%D0%B5%D0%B1%D1%83%D1%80%D0%B5%D0%BA%D0%B8%20%D0%A5%D1%83%D1%82%D0%BE%D1%80%D0%BE%D0%BA%20%D0%B7%20%D0%BC%27%D1%8F%D1%81%D0%BE%D0%BC%20600%20%D0%B3"
+   },
+   "salmon": {
+    "p": 869,
+    "kg": true,
+    "t": "Лосось філе на шкірі 4-5кг",
+    "url": "https://metro.zakaz.ua/uk/search/?q=%D0%9B%D0%BE%D1%81%D0%BE%D1%81%D1%8C%20%D1%84%D1%96%D0%BB%D0%B5%20%D0%BD%D0%B0%20%D1%88%D0%BA%D1%96%D1%80%D1%96%204-5%D0%BA%D0%B3"
+   },
+   "beef": {
+    "p": 549,
+    "kg": true,
+    "t": "Стейк яловичий Metro Chef охолоджений",
+    "url": "https://metro.zakaz.ua/uk/search/?q=%D0%A1%D1%82%D0%B5%D0%B9%D0%BA%20%D1%8F%D0%BB%D0%BE%D0%B2%D0%B8%D1%87%D0%B8%D0%B9%20Metro%20Chef%20%D0%BE%D1%85%D0%BE%D0%BB%D0%BE%D0%B4%D0%B6%D0%B5%D0%BD%D0%B8%D0%B9"
+   },
+   "shrimp": {
+    "p": 179,
+    "pack": 200,
+    "t": "Креветки Metro Chef варені чищені в розсолі 200г",
+    "url": "https://metro.zakaz.ua/uk/search/?q=%D0%9A%D1%80%D0%B5%D0%B2%D0%B5%D1%82%D0%BA%D0%B8%20Metro%20Chef%20%D0%B2%D0%B0%D1%80%D0%B5%D0%BD%D1%96%20%D1%87%D0%B8%D1%89%D0%B5%D0%BD%D1%96%20%D0%B2%20%D1%80%D0%BE%D0%B7%D1%81%D0%BE%D0%BB%D1%96%20200%D0%B3"
+   },
+   "mozz": {
+    "p": 160.92,
+    "pack": 125,
+    "t": "Сир Jager Моцарела міні 45% 125г",
+    "url": "https://metro.zakaz.ua/uk/search/?q=%D0%A1%D0%B8%D1%80%20Jager%20%D0%9C%D0%BE%D1%86%D0%B0%D1%80%D0%B5%D0%BB%D0%B0%20%D0%BC%D1%96%D0%BD%D1%96%2045%25%20125%D0%B3"
+   },
+   "avocado": {
+    "p": 199,
+    "old": 249,
+    "until": "2026-11-30",
+    "pack": 1000,
+    "t": "Авокадо Metro Chef в сітці 1кг",
+    "url": "https://metro.zakaz.ua/uk/search/?q=%D0%90%D0%B2%D0%BE%D0%BA%D0%B0%D0%B4%D0%BE%20Metro%20Chef%20%D0%B2%20%D1%81%D1%96%D1%82%D1%86%D1%96%201%D0%BA%D0%B3"
+   },
+   "nuts": {
+    "p": 639,
+    "pack": 500,
+    "t": "Горіх волоський Metro Chef 500г",
+    "url": "https://metro.zakaz.ua/uk/search/?q=%D0%93%D0%BE%D1%80%D1%96%D1%85%20%D0%B2%D0%BE%D0%BB%D0%BE%D1%81%D1%8C%D0%BA%D0%B8%D0%B9%20Metro%20Chef%20500%D0%B3"
    }
   }
  }
