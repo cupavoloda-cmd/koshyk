@@ -195,6 +195,12 @@ input[type=range]{accent-color:var(--tint)}
 .opt b{margin-bottom:0}.opt b .sb{font-size:20px;padding:.35em .8em}
 .chip .sb{font-size:14px}.chip.sel .sb{box-shadow:0 0 0 2px var(--c)}
 h2 .sb{font-size:17px}
+.nw{white-space:nowrap}
+body.swiping .meal:active,body.swiping .meal{background:transparent!important;transform:none!important}
+@media (hover:none){.meal:active{background:transparent}.meal:active .n{opacity:.6}}
+.slide-l{animation:slideL .28s cubic-bezier(.2,.8,.2,1)}.slide-r{animation:slideR .28s cubic-bezier(.2,.8,.2,1)}
+@keyframes slideL{from{opacity:.3;transform:translateX(40px)}}@keyframes slideR{from{opacity:.3;transform:translateX(-40px)}}
+@media (prefers-reduced-motion:reduce){.slide-l,.slide-r{animation:none}}
 </style></head><body><div class="app" id="app"></div>
 <script>// Чиста логіка планувальника. Працює і в Node (тести), і в браузері (window.Core).
 (function (root) {
@@ -416,7 +422,7 @@ const emptySlots = () => Core.slotsOf(S.prefs).filter(s => !Core.poolFor(s, ctx(
 const people = n => n === 1 ? "особа" : n < 5 ? "особи" : "осіб";
 
 const steps = [
-  () => `<h1>Для скількох людей готуємо?</h1><div class="sub">Підберемо порції та кількість продуктів.</div><div class="stepper"><button aria-label="менше" onclick="setPeople(-1)">−</button><span>${S.prefs.people}</span><button aria-label="більше" onclick="setPeople(1)">+</button></div><div class="note" style="text-align:center">Стартовий бюджет: ${S.prefs.budget} ₴ на тиждень (змінюється далі)</div>`,
+  () => `<h1>Для скількох людей готуємо?</h1><div class="sub">Підберемо порції та кількість продуктів.</div><div class="stepper"><button aria-label="менше" onclick="setPeople(-1)">−</button><span>${S.prefs.people}</span><button aria-label="більше" onclick="setPeople(1)">+</button></div><div class="note" style="text-align:center">Стартовий бюджет: ${S.prefs.budget}&nbsp;₴ на тиждень (змінюється далі)</div>`,
   () => `<h1>Де купуєте продукти?</h1><div class="sub">Меню складемо з асортименту й цін обраних мереж.</div><div class="grid">${[...Object.entries(ST), ["mix", "Разом — де дешевше"]].map(([k,v]) => `<div class="opt ${S.prefs.store===k?"on":""}" onclick="setP('store','${k}')"><b>${ICON[k]}</b>${k === "mix" ? `<div style="font-size:13px;color:var(--m);margin-top:6px">де дешевше</div>` : ""}</div>`).join("")}</div>
   ${S.prefs.store === "mix" ? `<h2>З яких мереж складати кошик?</h2><div class="sub" style="margin-bottom:10px">Кожен продукт візьмемо там, де він найдешевший. Оберіть щонайменше дві.</div>
   <div class="chips">${Object.entries(ST).map(([k,v]) => `<div class="chip ${S.prefs.mixStores.includes(k)?"sel":""}" onclick="setP('mixStores',tg(S.prefs.mixStores,'${k}'))">${ICON[k]}</div>`).join("")}</div>
@@ -424,7 +430,7 @@ const steps = [
   ${S.prefs.mixStores.length < 2 ? `<p class="bad">Оберіть щонайменше дві мережі.</p>` : ""}` : ""}`,
   () => `<h1>Які прийоми їжі плануємо?</h1><div class="sub">Можна обрати кілька.</div><div class="grid">${Object.entries(SL).map(([k,[e,t]]) => `<div class="opt ${S.prefs.slots.includes(k)?"on":""}" onclick="setP('slots',tg(S.prefs.slots,'${k}'))"><b>${e}</b>${t}</div>`).join("")}</div>
   <h2>На скільки днів?</h2><div class="chips">${[3,5,7].map(d => `<div class="chip ${S.prefs.days===d?"sel":""}" onclick="setP('days',${d})">${d} днів</div>`).join("")}</div>`,
-  () => `<h1>Який бюджет на тиждень?</h1><div class="sub">Без солі, спецій і того, що вже є вдома. Фасовані продукти рахуються цілими упаковками.</div><div class="big">${S.prefs.budget} ₴</div><input type="range" min="300" max="8000" step="100" value="${S.prefs.budget}" oninput="S.prefs.budget=+this.value;document.querySelector('.big').textContent=this.value+' ₴'">`,
+  () => `<h1>Який бюджет на тиждень?</h1><div class="sub">Без солі, спецій і того, що вже є вдома. Фасовані продукти рахуються цілими упаковками.</div><div class="big">${S.prefs.budget}&nbsp;₴</div><input type="range" min="300" max="8000" step="100" value="${S.prefs.budget}" oninput="S.prefs.budget=+this.value;document.querySelector('.big').textContent=this.value+' ₴'">`,
   () => `<h1>Що хочеться цього тижня?</h1><div class="sub">Можна обрати кілька.</div><div class="grid">${MOODS.map(([k,e,t]) => `<div class="opt ${S.prefs.moods.includes(k)?"on":""}" onclick="setP('moods',tg(S.prefs.moods,'${k}'))"><b>${e}</b>${t}</div>`).join("")}</div>
   <h2>Напівфабрикати з морозилки</h2><div class="sub" style="margin-bottom:10px">Вареники, пельмені, сирники, хачапурі, деруни, голубці…</div><div class="chips">${[[0,"Не беру"],[3,"Іноді (до 3 на тиждень)"],[7,"Часто (до 7)"]].map(([v,t]) => `<div class="chip ${(S.prefs.semiMax ?? 3)===v?"sel":""}" onclick="setP('semiMax',${v})">${t}</div>`).join("")}</div>`,
   () => `<h1>Чого не їсте?</h1><div class="sub">Такі страви не потраплять у меню.</div><div class="chips">${DIS.map(([k,t]) => `<div class="chip ${S.prefs.dislikes.includes(k)?"on":""}" onclick="setP('dislikes',tg(S.prefs.dislikes,'${k}'))">${t}</div>`).join("")}</div>`,
@@ -504,6 +510,7 @@ function priceNote() {
 }
 
 function render() {
+  document.body.classList.remove("swiping");
   const a = $("app");
   if (S.step <= LAST) {
     paint(`<div class="top">${S.step ? `<button class="back" aria-label="назад" onclick="S.step--;render()"><span class="chev">‹</span></button>` : ""}<div class="bar"><i style="width:${(S.step+1)/steps.length*100}%"></i></div></div><div style="height:14px"></div>${steps[S.step]()}
@@ -519,25 +526,27 @@ function render() {
   if (S.book) return book();
   const st = S.prefs.store, ids = Core.flat(S.plan), c = Core.cost(ids, ctx(), st);
   const others = Object.keys(ST).filter(k => k !== st).map(k => { const x = Core.cost(ids, ctx(), k), d = Math.round(x.total - c.total);
-    return `${ST[k]}: <b>${Math.round(x.total)} ₴</b> ${d > 0 ? `<span class="ok">(+${d})</span>` : d < 0 ? `<span class="warn">(−${-d})</span>` : ""}${x.missing.length ? `<span class="warn" title="немає ціни для ${x.missing.length} товарів">*</span>` : ""}`; }).join(" · ");
+    return `${ST[k]}: <b>${Math.round(x.total)}&nbsp;₴</b> ${d > 0 ? `<span class="ok">(+${d})</span>` : d < 0 ? `<span class="warn">(−${-d})</span>` : ""}${x.missing.length ? `<span class="warn" title="немає ціни для ${x.missing.length} товарів">*</span>` : ""}`; }).join(" · ");
   const avg = Math.round(S.plan.reduce((s, d) => s + Core.dayMacro(d, RC)[0], 0) / S.plan.length);
   let h = `<header class="nav"><div class="navrow"><h1>WeekEat</h1><button class="ico" aria-label="Налаштування" onclick="S.settings=true;render()">${I.set}</button></div>
   <div class="chiprow">${[["mix", "Разом"], ...Object.entries(ST)].map(([k,v]) => `<button class="${st===k?"on":""}" onclick="S.prefs.store='${k}';${k==="mix" && S.prefs.mixStores.length < 2 ? "S.prefs.mixStores=['atb','silpo','metro'];" : ""}save();render()">${v}</button>`).join("")}</div>
 </header>
-  ${S.tab === "plan" ? `<div class="sum"><div class="tot ${c.total<=S.prefs.budget?"":"bad"}">${Math.round(c.total)} ₴ <small>з ${S.prefs.budget} ₴</small></div>
-  <div class="stat">${st === "mix" ? "Разом: " + S.prefs.mixStores.map(k => ST[k]).join(" + ") : ST[st]} · ${ids.length} страв · ≈${avg} ккал/день${c.promo >= 5 ? ` · 🏷 −${c.promo} ₴` : ""}${st === "mix" && mixSaving(ids, c).includes("Економія") ? ` · <span class="ok">економія ${Math.round(Math.min(...S.prefs.mixStores.map(k => Core.cost(ids, ctx(), k)).filter(x => !x.missing.length).map(x => x.total)) - c.total)} ₴</span>` : ""}</div>
+  ${S.tab === "plan" ? `<div class="sum"><div class="tot ${c.total<=S.prefs.budget?"":"bad"}">${Math.round(c.total)}&nbsp;₴ <small>з ${S.prefs.budget}&nbsp;₴</small></div>
+  <div class="stat">${[st === "mix" ? "Разом: " + S.prefs.mixStores.map(k => ST[k]).join(" + ") : ST[st], `${ids.length} страв`, `≈${avg} ккал/день`,
+    c.promo >= 5 ? `🏷 −${c.promo}&nbsp;₴` : "", st === "mix" && mixSaving(ids, c).includes("Економія") ? `<span class="ok">економія ${Math.round(Math.min(...S.prefs.mixStores.map(k => Core.cost(ids, ctx(), k)).filter(x => !x.missing.length).map(x => x.total)) - c.total)}&nbsp;₴</span>` : ""]
+    .filter(Boolean).map(x => `<span class="nw">${x}</span>`).join(" · ")}</div>
   <button class="more" onclick="S.more=!S.more;render()">${S.more ? "Сховати ▴" : "Детальніше ▾"}</button>${S.more ? `<div class="details">
-  ${c.total > S.prefs.budget ? `<div class="bad" style="margin:4px 0">Перевищення на ${Math.round(c.total - S.prefs.budget)} ₴ — збільште бюджет, зменште кількість днів або прийомів їжі.</div>` : ""}
-  ${c.stock >= 20 ? `<div style="margin:2px 0 4px">🧊 з них ≈${Math.round(c.stock)} ₴ — залишок напівфабрикатів у морозилці на наступні тижні</div>` : ""}
-  ${S.plan.length} дн. · ${ids.length} страв · супів: ${ids.filter(id => rec(id).soup).length} · напівфабрикатів: ${ids.filter(id => rec(id).semi).length} · ${S.prefs.people} ${people(S.prefs.people)} · ≈${avg} ккал/день на людину${st === "mix" ? `<div style="margin:4px 0">${Object.entries(c.byStore).map(([k, v]) => `${ICON[k]} <b>${Math.round(v)} ₴</b>`).join(" · ")}</div>${mixSaving(ids, c)}` : ""}<br>${st === "mix" ? "Якщо купувати в одній мережі" : "Той самий кошик"}: ${others}
-  ${c.promo >= 5 ? `<div style="margin-top:4px">🏷 На акціях ${c.promoN} товар${c.promoN === 1 ? "" : c.promoN < 5 ? "и" : "ів"}: економія ${c.promo} ₴. Після акцій кошик може подорожчати.</div>` : ""}
+  ${c.total > S.prefs.budget ? `<div class="bad" style="margin:4px 0">Перевищення на ${Math.round(c.total - S.prefs.budget)}&nbsp;₴ — збільште бюджет, зменште кількість днів або прийомів їжі.</div>` : ""}
+  ${c.stock >= 20 ? `<div style="margin:2px 0 4px">🧊 з них ≈${Math.round(c.stock)}&nbsp;₴ — залишок напівфабрикатів у морозилці на наступні тижні</div>` : ""}
+  ${S.plan.length} дн. · ${ids.length} страв · супів: ${ids.filter(id => rec(id).soup).length} · напівфабрикатів: ${ids.filter(id => rec(id).semi).length} · ${S.prefs.people} ${people(S.prefs.people)} · ≈${avg} ккал/день на людину${st === "mix" ? `<div style="margin:4px 0">${Object.entries(c.byStore).map(([k, v]) => `${ICON[k]} <b>${Math.round(v)}&nbsp;₴</b>`).join(" · ")}</div>${mixSaving(ids, c)}` : ""}<br>${st === "mix" ? "Якщо купувати в одній мережі" : "Той самий кошик"}: ${others}
+  ${c.promo >= 5 ? `<div style="margin-top:4px">🏷 На акціях ${c.promoN} товар${c.promoN === 1 ? "" : c.promoN < 5 ? "и" : "ів"}: економія ${c.promo}&nbsp;₴. Після акцій кошик може подорожчати.</div>` : ""}
   ${refreshBox()}
-  ${c.missing.length ? `<div class="warn" style="margin-top:4px">Немає в цій мережі: ${c.missing.map(p => esc(PR[p].name)).join(", ")} — не враховано в сумі.</div>` : ""}</div>` : ""}</div>` : `<h1 style="margin:4px 0 12px">${S.tab === "prep" ? "Заготовки" : "Покупки"}</h1>${S.tab === "list" ? `<div class="sub" style="margin:-6px 0 4px">${Math.round(c.total)} ₴ · ${st === "mix" ? "разом: " + S.prefs.mixStores.map(k => ST[k]).join(" + ") : ST[st]}${c.promo >= 5 ? ` · 🏷 −${c.promo} ₴ на акціях` : ""}</div>` : ""}`}`;
+  ${c.missing.length ? `<div class="warn" style="margin-top:4px">Немає в цій мережі: ${c.missing.map(p => esc(PR[p].name)).join(", ")} — не враховано в сумі.</div>` : ""}</div>` : ""}</div>` : `<h1 style="margin:4px 0 12px">${S.tab === "prep" ? "Заготовки" : "Покупки"}</h1>${S.tab === "list" ? `<div class="sub" style="margin:-6px 0 4px">${Math.round(c.total)}&nbsp;₴ · ${st === "mix" ? "разом: " + S.prefs.mixStores.map(k => ST[k]).join(" + ") : ST[st]}${c.promo >= 5 ? ` · 🏷 −${c.promo}&nbsp;₴ на акціях` : ""}</div>` : ""}`}`;
   if (S.tab === "plan") {
     const d = Math.min(S.day, S.plan.length - 1), day = S.plan[d], m = Core.dayMacro(day, RC);
     h += `<div class="days" id="days">${S.plan.map((_, i) => `<button class="${i===d?"on":""}" onclick="S.day=${i};render()">${DS[i]}<b>${i + 1}</b></button>`).join("")}</div>
     <div class="dayhead">${DAYS[d]} · ${m[0]} ккал · Б ${m[1]} · Ж ${m[2]} · В ${m[3]} г</div>`;
-    h += `<div class="list">` + Core.SLOTS.filter(s => day[s] != null).map(s => { const r = rec(day[s]), key = d + "-" + s;
+    h += `<div class="list ${SLIDE}">` + Core.SLOTS.filter(s => day[s] != null).map(s => { const r = rec(day[s]), key = d + "-" + s;
       return `<div class="meal ${S.done[key]?"done":""}" role="button" tabindex="0" onclick="S.open={d:${d},s:'${s}'};render()"><div class="em${[...r.emoji].filter(c => c.codePointAt(0) > 0x2000 && c !== "\uFE0F").length > 1 ? " em2" : ""}">${r.emoji}</div><div><div class="d">${SL[s][0]} ${SL[s][1]}</div><div class="n">${esc(r.name)}</div><div class="k">${r.macro[0]} ккал · Б ${r.macro[1]} г · ${r.time} хв</div></div><span class="chev">›</span></div>`; }).join("") + `</div>`;
   } else if (S.tab === "prep") {
     const pp = Core.prepPlan(S.plan, ctx());
@@ -548,13 +557,13 @@ function render() {
     const all = Core.shoppingList(ids, ctx(), st).flatMap(g => g.items), got = all.filter(it => S.ck[it.id]).length;
     h += `<div class="stat">Куплено ${got} з ${all.length}</div><div class="progress"><i style="width:${all.length ? got / all.length * 100 : 0}%"></i></div>`;
     let lastSt = "";
-    h += Core.shoppingList(ids, ctx(), st).map(g => { const head = g.store !== undefined && g.store !== lastSt ? (lastSt = g.store, `<h2 style="margin-top:22px">${g.store ? ICON[g.store] + ` <span style="font-size:14px;font-weight:400;color:var(--m)">${Math.round(c.byStore[g.store] || 0)} ₴</span>` : "Немає в обраних мережах"}</h2>`) : "";
+    h += Core.shoppingList(ids, ctx(), st).map(g => { const head = g.store !== undefined && g.store !== lastSt ? (lastSt = g.store, `<h2 style="margin-top:22px">${g.store ? ICON[g.store] + ` <span style="font-size:14px;font-weight:400;color:var(--m)">${Math.round(c.byStore[g.store] || 0)}&nbsp;₴</span>` : "Немає в обраних мережах"}</h2>`) : "";
       return head + `<div class="cat">${esc(g.cat)}</div><div class="group">` + g.items.map(it =>
-      `<label class="item ${S.ck[it.id]?"ck":""}"><input type="checkbox" ${S.ck[it.id]?"checked":""} onchange="S.ck['${it.id}']=this.checked;save();render()"><span>${esc(it.title || it.name)} <small style="color:var(--m)">${qtyText(it)}${it.promoPct ? ` <span class="promo">🏷 −${it.promoPct}%${it.until ? " до " + new Date(it.until).toLocaleDateString("uk-UA", { day: "numeric", month: "numeric" }) : ""}</span>` : ""}${it.left ? ` · 🧊 залишок ≈${it.left >= 1000 ? (it.left/1000).toLocaleString("uk-UA") + " кг" : it.left + " г"}` : ""}</small>${it.url ? ` <a href="${esc(it.url)}" target="_blank" rel="noopener" style="color:var(--tint);font-size:12px" onclick="event.stopPropagation()">↗</a>` : ""}</span><span class="p">${it.sum===null?"немає":Math.round(it.sum)+" ₴"}${it.oldSum ? `<br><s style="color:var(--m);font-weight:400;font-size:12px">${Math.round(it.oldSum)} ₴</s>` : ""}</span></label>`).join("") + `</div>`; }).join("");
+      `<label class="item ${S.ck[it.id]?"ck":""}"><input type="checkbox" ${S.ck[it.id]?"checked":""} onchange="S.ck['${it.id}']=this.checked;save();render()"><span>${esc(it.title || it.name)} <small style="color:var(--m)">${qtyText(it)}${it.promoPct ? ` <span class="promo">🏷 −${it.promoPct}%${it.until ? " до " + new Date(it.until).toLocaleDateString("uk-UA", { day: "numeric", month: "numeric" }) : ""}</span>` : ""}${it.left ? ` · 🧊 залишок ≈${it.left >= 1000 ? (it.left/1000).toLocaleString("uk-UA") + " кг" : it.left + " г"}` : ""}</small>${it.url ? ` <a href="${esc(it.url)}" target="_blank" rel="noopener" style="color:var(--tint);font-size:12px" onclick="event.stopPropagation()">↗</a>` : ""}</span><span class="p">${it.sum===null?"немає":Math.round(it.sum)+" ₴"}${it.oldSum ? `<br><s style="color:var(--m);font-weight:400;font-size:12px">${Math.round(it.oldSum)}&nbsp;₴</s>` : ""}</span></label>`).join("") + `</div>`; }).join("");
     h += `<div class="row"><button class="btn sec" onclick="copyList()">📋 Копіювати список</button></div><div id="cp" class="note" aria-live="polite"></div>`;
   }
   h += `<p class="note">${priceNote()}</p>` + tabbar();
-  paint(h, "r-" + S.tab);
+  paint(h, "r-" + S.tab); SLIDE = "";
 }
 
 // ---- Лінійні іконки (стиль Instagram / YouTube) ----
@@ -566,7 +575,7 @@ const I = {
   set: '<svg viewBox="0 0 24 24"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg>',
 };
 // ---- Малювання з плавною появою нового екрана ----
-let LASTKEY = "";
+let LASTKEY = "", SLIDE = "";
 function paint(html, key) {
   const a = $("app"); a.innerHTML = html;
   if (key !== LASTKEY) { a.classList.remove("enter"); void a.offsetWidth; a.classList.add("enter"); if (!key.startsWith("q") || LASTKEY.startsWith("q")) window.scrollTo({ top: 0, behavior: "instant" }); LASTKEY = key; }
@@ -580,7 +589,7 @@ function settings() {
   <div class="setlist"><div class="set"><span>Оформлення</span>${themeBox()}</div></div>
   <div class="cat" style="margin-top:0">Поточне меню</div>
   <div class="setlist"><div class="set"><span>Люди</span><span class="v">${S.prefs.people}</span></div>
-  <div class="set"><span>Бюджет на тиждень</span><span class="v">${S.prefs.budget} ₴</span></div>
+  <div class="set"><span>Бюджет на тиждень</span><span class="v">${S.prefs.budget}&nbsp;₴</span></div>
   <div class="set"><span>Мережа</span><span class="v">${S.prefs.store === "mix" ? "Разом" : ST[S.prefs.store]}</span></div>
   <div class="set"><span>Прийоми їжі</span><span class="v">${Core.slotsOf(S.prefs).length} на день</span></div></div>
   <div class="row"><button class="btn sec" onclick="S.settings=false;S.plan=Core.generate(ctx());S.done={};S.ck={};S.day=0;save();render()">Перемішати страви</button></div>
@@ -615,7 +624,7 @@ function mixSaving(ids, c) {
   const singles = S.prefs.mixStores.map(k => ({ k, x: Core.cost(ids, ctx(), k) })).filter(o => !o.x.missing.length);
   if (!singles.length) return "";
   const best = singles.sort((a, b) => a.x.total - b.x.total)[0], d = Math.round(best.x.total - c.total);
-  return d > 0 ? `<div class="ok">💰 Економія ${d} ₴ порівняно з найдешевшою однією мережею (${ST[best.k]})</div>` : `<div style="color:var(--m)">Вигідніше купити все в ${ST[best.k]} — поріг економії не досягнуто</div>`;
+  return d > 0 ? `<div class="ok">💰 Економія ${d}&nbsp;₴ порівняно з найдешевшою однією мережею (${ST[best.k]})</div>` : `<div style="color:var(--m)">Вигідніше купити все в ${ST[best.k]} — поріг економії не досягнуто</div>`;
 }
 function qtyText(it) {
   if (it.sum === null) return "";
@@ -638,10 +647,15 @@ function copyList() {
   catch (e) { $("cp").textContent = "Не вдалося скопіювати"; }
 }
 applyTheme();
-(() => { let x0 = null, y0 = 0;  // свайп вліво/вправо — інший день меню
-  document.addEventListener("touchstart", e => { if (S.step === 9 && S.tab === "plan" && !S.open && !S.book && !S.settings) { x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; } else x0 = null; }, { passive: true });
+(() => { let x0 = null, y0 = 0, sw = false, block = 0;  // свайп вліво/вправо — інший день меню
+  const on = () => S.step === 9 && S.tab === "plan" && !S.open && !S.book && !S.settings;
+  document.addEventListener("touchstart", e => { sw = false; if (on()) { x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; } else x0 = null; }, { passive: true });
+  document.addEventListener("touchmove", e => { if (x0 === null || sw) return; const dx = e.touches[0].clientX - x0, dy = e.touches[0].clientY - y0;
+    if (Math.abs(dx) > 12 && Math.abs(dx) > Math.abs(dy)) { sw = true; document.body.classList.add("swiping"); } }, { passive: true });
   document.addEventListener("touchend", e => { if (x0 === null) return; const dx = e.changedTouches[0].clientX - x0, dy = e.changedTouches[0].clientY - y0; x0 = null;
-    if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.5) { const n = S.plan.length; S.day = (Math.min(S.day, n - 1) + (dx < 0 ? 1 : n - 1)) % n; render(); } }, { passive: true });
+    if (sw && Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.3) { block = Date.now() + 450; const n = S.plan.length; S.day = (Math.min(S.day, n - 1) + (dx < 0 ? 1 : n - 1)) % n;
+      SLIDE = dx < 0 ? "slide-l" : "slide-r"; render(); } else document.body.classList.remove("swiping"); }, { passive: true });
+  document.addEventListener("click", e => { if (Date.now() < block) { e.stopPropagation(); e.preventDefault(); } }, true);  // не відкривати страву після свайпу
 })();
 render();
 </script></body></html>
