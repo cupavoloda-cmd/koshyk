@@ -16,6 +16,7 @@ jobs:
       - name: Встановити браузер для Сільпо
         run: cd tools && npm install --no-audit --no-fund && npx playwright install --with-deps chromium
       - name: Оновити ціни
+        timeout-minutes: 18
         run: node tools/update_site.js
       - name: Зберегти, якщо змінилось
         run: |

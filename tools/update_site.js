@@ -4,6 +4,8 @@ const fs = require("fs"), path = require("path");
 const ROOT = path.join(__dirname, "..", "site"), CAT = JSON.parse(fs.readFileSync(path.join(__dirname, "catalog.json"), "utf8"));
 const OUT = path.join(ROOT, "prices.json");
 const UA = { "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/130 Safari/537.36", "Accept-Language": "uk-UA,uk" };
+// кожен запит — не довше 15 с, щоб недоступний сайт не вішав оновлення
+const _f = globalThis.fetch; const fetch = (u, o = {}) => _f(u, { ...o, signal: AbortSignal.timeout(15000) });
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 const num = v => { const n = parseFloat(String(v).replace(/\s/g, "").replace(",", ".")); return n > 0 ? Math.round(n * 100) / 100 : null; };
 const query = t => t.replace(/\d+([.,]\d+)?\s*(кг|г|л|мл|шт)(?=[^а-яіїєґa-z]|$)/gi, "").replace(/[«»"()~*]/g, " ").replace(/\s+/g, " ").trim().split(" ").slice(0, 4).join(" ");
@@ -45,15 +47,16 @@ async function silpo(id, it) {
   const label = await page.$$eval("a.product-card__link[aria-label]", (as, s) => { const a = as.find(x => (x.getAttribute("href") || "").endsWith(s)); return a ? a.getAttribute("aria-label") : null; }, slug);
   return label ? silpoLabel(label) : null;
 }
+const DEADLINE = Date.now() + 15 * 60000; // загалом не довше 15 хв
 (async () => {
   const old = fs.existsSync(OUT) ? JSON.parse(fs.readFileSync(OUT, "utf8")) : { p: {} };
   const out = { updated: null, p: {} }, rep = {};
-  const H = { atb, silpo, metro };
+  const H = { atb, silpo, metro }, fails = {}; // 5 невдач поспіль — мережа недоступна, пропускаємо
   for (const st of ["atb", "metro", "silpo"]) {
     out.p[st] = {}; rep[st] = { ok: 0, kept: 0 };
     for (const [id, it] of Object.entries(CAT.stores[st])) {
       const prev = (old.p[st] || {})[id] ?? it.p; let p = null;
-      try { p = await H[st](id, it); } catch (e) { p = null; }
+      if (Date.now() < DEADLINE && !(fails[st] >= 5)) { try { p = await H[st](id, it); } catch (e) { p = null; } if (p === null) fails[st] = (fails[st] || 0) + 1; else fails[st] = 0; }
       if (sane(prev, p)) { out.p[st][id] = p; rep[st].ok++; } else { out.p[st][id] = prev; rep[st].kept++; }
       await sleep(st === "silpo" ? 600 : 400);
     }
