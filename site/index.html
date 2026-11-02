@@ -505,7 +505,14 @@ async function loadSitePrices(manual) {
 }
 if (IS_SITE) {
   loadSitePrices(false);
-  if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(() => {});
+  if ("serviceWorker" in navigator) {
+    // нова версія: перевіряємо при кожному поверненні в застосунок і одразу перезавантажуємо
+    const had = !!navigator.serviceWorker.controller; let reloaded = false;
+    navigator.serviceWorker.addEventListener("controllerchange", () => { if (had && !reloaded) { reloaded = true; location.reload(); } });
+    navigator.serviceWorker.register("sw.js", { updateViaCache: "none" }).then(reg => {
+      document.addEventListener("visibilitychange", () => { if (!document.hidden) reg.update().catch(() => {}); });
+    }).catch(() => {});
+  }
 }
 async function requestRefresh() {
   if (IS_SITE) { await loadSitePrices(true); return; }
