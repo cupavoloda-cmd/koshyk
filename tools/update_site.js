@@ -52,7 +52,9 @@ const DEADLINE = Date.now() + 15 * 60000; // загалом не довше 15 �
   const old = fs.existsSync(OUT) ? JSON.parse(fs.readFileSync(OUT, "utf8")) : { p: {} };
   const out = { updated: null, p: {} }, rep = {};
   const H = { atb, silpo, metro }, fails = {}; // 5 невдач поспіль — мережа недоступна, пропускаємо
+  const STORES = (process.env.STORES || "atb,metro,silpo").split(",");
   for (const st of ["atb", "metro", "silpo"]) {
+    if (!STORES.includes(st)) { out.p[st] = { ...(old.p[st] || {}) }; continue; }
     out.p[st] = {}; rep[st] = { ok: 0, kept: 0 };
     for (const [id, it] of Object.entries(CAT.stores[st])) {
       const prev = (old.p[st] || {})[id] ?? it.p; let p = null;
