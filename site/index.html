@@ -1,42 +1,47 @@
 <!DOCTYPE html>
 <html lang="uk"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Кошик"><meta name="theme-color" content="#8bd635">
+<meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Кошик"><meta name="theme-color" content="#8bd635" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#171b14" media="(prefers-color-scheme: dark)"><meta name="color-scheme" content="light dark">
 <link rel="manifest" href="manifest.json"><link rel="apple-touch-icon" href="icon-180.png"><link rel="icon" href="icon-192.png">
 <title>Кошик — меню на тиждень з АТБ, Сільпо і METRO</title>
 <style>
-:root{--g:#8bd635;--gd:#2f6b12;--bg:#f6f7f2;--c:#fff;--t:#1d2318;--m:#6b7263;--b:#e3e6dc}
+:root{--g:#8bd635;--gd:#2f6b12;--bg:#f6f7f2;--c:#fff;--t:#1d2318;--m:#6b7263;--b:#e3e6dc;--soft:#f3fbe9;--chip:#eef1e8;--tile:#f3f4ee;--no:#fdeeec;--pr:#ffe9d6;--prt:#a3480b;--bad:#c4402f;--warn:#b86b00;--on:#14200a;--sh:#0002;color-scheme:light}
+:root[data-theme=dark]{--g:#8bd635;--gd:#9fe05a;--bg:#0f120d;--c:#171b14;--t:#e9eee3;--m:#9aa391;--b:#2c3327;--soft:#1f2a16;--chip:#232a1e;--tile:#20261b;--no:#3a1d19;--pr:#3d2615;--prt:#ffb27a;--bad:#ff7b6b;--warn:#f0b04a;--on:#14200a;--sh:#0008;color-scheme:dark}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]):not([data-theme=dark]){--g:#8bd635;--gd:#9fe05a;--bg:#0f120d;--c:#171b14;--t:#e9eee3;--m:#9aa391;--b:#2c3327;--soft:#1f2a16;--chip:#232a1e;--tile:#20261b;--no:#3a1d19;--pr:#3d2615;--prt:#ffb27a;--bad:#ff7b6b;--warn:#f0b04a;--on:#14200a;--sh:#0008;color-scheme:dark}}
 *{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--t)}
 .app{max-width:440px;margin:0 auto;min-height:100vh;background:var(--c);padding:calc(20px + env(safe-area-inset-top)) calc(18px + env(safe-area-inset-right)) calc(90px + env(safe-area-inset-bottom)) calc(18px + env(safe-area-inset-left));position:relative;-webkit-text-size-adjust:100%}
 button,.opt,.chip,.meal,label.item{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
 input,select{font-size:16px}
 .bar{height:5px;background:var(--b);border-radius:9px;margin:4px 0 22px}.bar i{display:block;height:100%;background:var(--g);border-radius:9px;transition:.3s}
 h1{font-size:26px;line-height:1.15;margin:6px 0 6px}h2{font-size:19px;margin:18px 0 8px}.sub{color:var(--m);font-size:14px;margin-bottom:20px}
-.btn{display:block;width:100%;border:0;border-radius:40px;padding:15px;font-size:16px;font-weight:600;background:var(--g);color:#14200a;cursor:pointer}
-.btn.sec{background:#eef1e8}.foot{position:fixed;left:50%;transform:translateX(-50%);bottom:0;width:100%;max-width:440px;padding:12px 18px calc(18px + env(safe-area-inset-bottom));background:linear-gradient(transparent,#fff 30%)}
+.btn{display:block;width:100%;border:0;border-radius:40px;padding:15px;font-size:16px;font-weight:600;background:var(--g);color:var(--on);cursor:pointer}
+.btn.sec{background:var(--chip)}.foot{position:fixed;left:50%;transform:translateX(-50%);bottom:0;width:100%;max-width:440px;padding:12px 18px calc(18px + env(safe-area-inset-bottom));background:linear-gradient(transparent,var(--c) 30%)}
 .back{border:0;background:none;font-size:22px;cursor:pointer;color:var(--m);padding:0}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.opt{border:1.5px solid var(--b);border-radius:16px;padding:14px 10px;text-align:center;cursor:pointer;font-size:14px;background:#fff}
-.opt b{display:block;font-size:26px;margin-bottom:4px}.opt.on{border-color:var(--g);background:#f3fbe9}
-.chips{display:flex;flex-wrap:wrap;gap:8px}.chip{border:1.5px solid var(--b);border-radius:30px;padding:8px 12px;font-size:14px;cursor:pointer;background:#fff}.chip.on{border-color:#e05a4b;background:#fdeeec;text-decoration:line-through}
-.stepper{display:flex;align-items:center;justify-content:center;gap:28px;margin:40px 0}.stepper button{width:48px;height:48px;border-radius:50%;border:1.5px solid var(--b);background:#fff;font-size:24px;cursor:pointer}.stepper span{font-size:56px;font-weight:700;min-width:70px;text-align:center}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.opt{border:1.5px solid var(--b);border-radius:16px;padding:14px 10px;text-align:center;cursor:pointer;font-size:14px;background:var(--c)}
+.opt b{display:block;font-size:26px;margin-bottom:4px}.opt.on{border-color:var(--g);background:var(--soft)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}.chip{border:1.5px solid var(--b);border-radius:30px;padding:8px 12px;font-size:14px;cursor:pointer;background:var(--c)}.chip.on{border-color:var(--bad);background:var(--no);text-decoration:line-through}
+.stepper{display:flex;align-items:center;justify-content:center;gap:28px;margin:40px 0}.stepper button{width:48px;height:48px;border-radius:50%;border:1.5px solid var(--b);background:var(--c);font-size:24px;cursor:pointer}.stepper span{font-size:56px;font-weight:700;min-width:70px;text-align:center}
 .big{font-size:52px;font-weight:700;text-align:center;margin:30px 0 10px}input[type=range]{width:100%;accent-color:var(--gd)}
 .store{display:flex;gap:8px}.store .opt{flex:1;font-weight:600;font-size:15px;padding:14px 4px}
-.tabs{display:flex;gap:6px;background:#eef1e8;border-radius:30px;padding:4px;margin-bottom:12px}.tabs button{flex:1;border:0;background:none;padding:9px;border-radius:30px;font-weight:600;cursor:pointer;color:var(--m)}.tabs button.on{background:#fff;color:var(--t);box-shadow:0 1px 3px #0002}
-.sum{background:#f3fbe9;border-radius:16px;padding:14px;margin-bottom:14px;font-size:14px}.sum .tot{font-size:24px;font-weight:700}.ok{color:var(--gd)}.bad{color:#c4402f}
-.meal{display:flex;gap:12px;align-items:center;border:1px solid var(--b);border-radius:16px;padding:10px;margin-bottom:10px;cursor:pointer}.meal .em{font-size:34px;width:54px;height:54px;border-radius:12px;background:#f3f4ee;display:flex;align-items:center;justify-content:center;flex:none}
+.tabs{display:flex;gap:6px;background:var(--chip);border-radius:30px;padding:4px;margin-bottom:12px}.tabs button{flex:1;border:0;background:none;padding:9px;border-radius:30px;font-weight:600;cursor:pointer;color:var(--m)}.tabs button.on{background:var(--c);color:var(--t);box-shadow:0 1px 3px var(--sh)}
+.sum{background:var(--soft);border-radius:16px;padding:14px;margin-bottom:14px;font-size:14px}.sum .tot{font-size:24px;font-weight:700}.ok{color:var(--gd)}.bad{color:var(--bad)}
+.meal{display:flex;gap:12px;align-items:center;border:1px solid var(--b);border-radius:16px;padding:10px;margin-bottom:10px;cursor:pointer}.meal .em{font-size:34px;width:54px;height:54px;border-radius:12px;background:var(--tile);display:flex;align-items:center;justify-content:center;flex:none}
 .meal .d{font-size:12px;color:var(--m)}.meal .n{font-weight:600}.meal.done{opacity:.5}.meal .k{font-size:12px;color:var(--m)}
 .macro{display:flex;justify-content:space-around;text-align:center;margin:12px 0}.macro b{display:block;font-size:20px}.macro span{font-size:12px;color:var(--m)}
-.hero{font-size:80px;text-align:center;background:#f3f4ee;border-radius:20px;padding:20px 0}
+.hero{font-size:80px;text-align:center;background:var(--tile);border-radius:20px;padding:20px 0}
 ol li{margin-bottom:8px;font-size:15px;line-height:1.4}ul.ing{padding-left:18px}ul.ing li{font-size:14px;margin-bottom:4px}
 .cat{font-size:13px;font-weight:700;color:var(--gd);text-transform:uppercase;margin:14px 0 6px}
 .item{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--b);font-size:14px}.item input{width:20px;height:20px;accent-color:var(--gd)}.item .p{margin-left:auto;font-weight:600;white-space:nowrap}.item.ck span{text-decoration:line-through;color:var(--m)}
 .row{display:flex;gap:8px;margin-top:10px}.row .btn{padding:12px;font-size:14px}
 .load{text-align:center;padding-top:60px}.load .logo{font-size:42px;font-weight:800;color:var(--gd)}.load li{list-style:none;color:var(--m);margin:8px 0}
-.chip.sel{border-color:var(--g);background:#f3fbe9}.warn{color:#b86b00}.btn:disabled{opacity:.4;cursor:not-allowed}.meal:focus{outline:2px solid var(--g)}
-.days{display:flex;gap:4px;margin-bottom:10px}.days button{flex:1;border:1.5px solid var(--b);background:#fff;border-radius:12px;padding:8px 0;font-weight:600;cursor:pointer}.days button.on{border-color:var(--g);background:#f3fbe9}.dayhead{display:flex;justify-content:space-between;align-items:baseline;margin:4px 0 10px;font-size:13px;color:var(--m)}.dayhead b{font-size:17px;color:var(--t)}
+.chip.sel{border-color:var(--g);background:var(--soft)}.warn{color:var(--warn)}.btn:disabled{opacity:.4;cursor:not-allowed}.meal:focus{outline:2px solid var(--g)}
+.days{display:flex;gap:4px;margin-bottom:10px}.days button{flex:1;border:1.5px solid var(--b);background:var(--c);border-radius:12px;padding:8px 0;font-weight:600;cursor:pointer}.days button.on{border-color:var(--g);background:var(--soft)}.dayhead{display:flex;justify-content:space-between;align-items:baseline;margin:4px 0 10px;font-size:13px;color:var(--m)}.dayhead b{font-size:17px;color:var(--t)}
 .prep{border:1px solid var(--b);border-radius:16px;padding:6px 12px;margin-bottom:12px}.ph{display:flex;justify-content:space-between;align-items:center;padding:6px 0}.ph span{font-size:13px;color:var(--m)}
-.rf{display:flex;align-items:center;gap:8px;margin-top:8px;font-size:13px}.rf button{border:1.5px solid var(--g);background:#fff;border-radius:20px;padding:7px 12px;font-weight:600;cursor:pointer;color:var(--gd);white-space:nowrap}.rf button:disabled{opacity:.5}
-.promo{background:#ffe9d6;color:#a3480b;border-radius:8px;padding:1px 6px;font-size:11px;font-weight:600;white-space:nowrap}
+.rf{display:flex;align-items:center;gap:8px;margin-top:8px;font-size:13px}.rf button{border:1.5px solid var(--g);background:var(--c);border-radius:20px;padding:7px 12px;font-weight:600;cursor:pointer;color:var(--gd);white-space:nowrap}.rf button:disabled{opacity:.5}
+.promo{background:var(--pr);color:var(--prt);border-radius:8px;padding:1px 6px;font-size:11px;font-weight:600;white-space:nowrap}
 .note{font-size:12px;color:var(--m);margin-top:14px;line-height:1.4}
+
+body{background:var(--bg);color:var(--t)}input,select{background:var(--c);color:var(--t)}.btn{color:var(--on)}
+.theme{display:flex;gap:4px;background:var(--chip);border-radius:20px;padding:3px}.theme button{border:0;background:none;border-radius:16px;padding:5px 9px;font-size:13px;cursor:pointer;color:var(--m)}.theme button.on{background:var(--c);color:var(--t);box-shadow:0 1px 3px var(--sh)}
 </style></head><body><div class="app" id="app"></div>
 <script>// Чиста логіка планувальника. Працює і в Node (тести), і в браузері (window.Core).
 (function (root) {
@@ -232,6 +237,16 @@ const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&":"&amp;","<":"&lt;",">
 let S = { step: 0, prefs: { people: 1, store: "atb", budget: 2200, days: 7, slots: ["breakfast","lunch","dinner","snack"], moods: ["fast"], semiMax: 3, mixStores: ["atb","silpo","metro"], minSave: 50, dislikes: [], appliances: ["stove","oven"] }, plan: [], done: {}, ck: {}, tab: "plan", open: null, day: 0 };
 const validPlan = p => Array.isArray(p) && p.every(d => d && typeof d === "object" && Core.SLOTS.every(s => d[s] == null || RC.some(r => r.id === d[s])));
 try { const x = JSON.parse(localStorage.getItem("koshyk3") || "null"); if (x && x.prefs) { const plan = validPlan(x.plan) ? x.plan : []; S = Object.assign(S, x, { plan, step: plan.length ? 9 : 0, open: null }); } } catch (e) {}
+// ---- Тема: auto (як у телефоні) / light / dark ----
+function applyTheme() {
+  const t = S.theme || "auto", r = document.documentElement;
+  if (t === "auto") r.removeAttribute("data-theme"); else r.setAttribute("data-theme", t);
+  const dark = t === "dark" || (t === "auto" && window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches);
+  document.querySelectorAll('meta[name="theme-color"]').forEach(m => { m.setAttribute("content", dark ? "#171b14" : "#8bd635"); m.removeAttribute("media"); });
+}
+function setTheme(t) { S.theme = t; save(); applyTheme(); render(); }
+const themeBox = () => `<div class="theme" role="group" aria-label="Тема">${[["auto","🌓","Як у телефоні"],["light","☀️","Світла"],["dark","🌙","Темна"]].map(([k,e,t]) => `<button class="${(S.theme||"auto")===k?"on":""}" title="${t}" aria-label="${t}" onclick="setTheme('${k}')">${e}${k==="auto"?" Авто":""}</button>`).join("")}</div>`;
+try { matchMedia("(prefers-color-scheme: dark)").addEventListener("change", applyTheme); } catch (e) {}
 const save = () => { try { localStorage.setItem("koshyk3", JSON.stringify(S)); } catch (e) {} };
 const ctx = () => ({ products: PR, recipes: RC, prices: PRICES, prep: PREP, prefs: S.prefs });
 const $ = id => document.getElementById(id);
@@ -333,7 +348,7 @@ function priceNote() {
 function render() {
   const a = $("app");
   if (S.step <= LAST) {
-    a.innerHTML = `<div style="display:flex;align-items:center;gap:12px">${S.step ? `<button class="back" aria-label="назад" onclick="S.step--;render()">←</button>` : ""}<div class="bar" style="flex:1;margin:0"><i style="width:${(S.step+1)/steps.length*100}%"></i></div></div><div style="height:22px"></div>${steps[S.step]()}
+    a.innerHTML = `<div style="display:flex;align-items:center;gap:12px">${S.step ? `<button class="back" aria-label="назад" onclick="S.step--;render()">←</button>` : ""}<div class="bar" style="flex:1;margin:0"><i style="width:${(S.step+1)/steps.length*100}%"></i></div></div><div style="display:flex;justify-content:flex-end;margin:10px 0 4px">${S.step === 0 ? themeBox() : ""}</div>${steps[S.step]()}
     <div class="foot"><button class="btn" ${canNext()?"":"disabled"} onclick="next()">${S.step===LAST ? "Скласти меню" : "Далі"}</button></div>`;
     return;
   }
@@ -347,7 +362,8 @@ function render() {
   const others = Object.keys(ST).filter(k => k !== st).map(k => { const x = Core.cost(ids, ctx(), k), d = Math.round(x.total - c.total);
     return `${ST[k]}: <b>${Math.round(x.total)} ₴</b> ${d > 0 ? `<span class="ok">(+${d})</span>` : d < 0 ? `<span class="warn">(−${-d})</span>` : ""}${x.missing.length ? `<span class="warn" title="немає ціни для ${x.missing.length} товарів">*</span>` : ""}`; }).join(" · ");
   const avg = Math.round(S.plan.reduce((s, d) => s + Core.dayMacro(d, RC)[0], 0) / S.plan.length);
-  let h = `<div style="display:flex;justify-content:space-between;align-items:center"><h1 style="margin:0">Ваш тиждень</h1><button class="back" style="font-size:14px" onclick="S.step=0;S.plan=[];save();render()">⚙️ Змінити</button></div>
+  let h = `<div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><h1 style="margin:0">Ваш тиждень</h1><button class="back" style="font-size:14px" onclick="S.step=0;S.plan=[];save();render()">⚙️ Змінити</button></div>
+  <div style="display:flex;justify-content:flex-end;margin-top:8px">${themeBox()}</div>
   <div class="tabs" style="margin-top:14px">${[...Object.entries(ST), ["mix", "🧺 Разом"]].map(([k,v]) => `<button class="${st===k?"on":""}" onclick="S.prefs.store='${k}';${k==="mix" && S.prefs.mixStores.length < 2 ? "S.prefs.mixStores=['atb','silpo','metro'];" : ""}save();render()">${v}</button>`).join("")}</div>
   <div class="sum"><div class="tot ${c.total<=S.prefs.budget?"ok":"bad"}">${Math.round(c.total)} ₴ <span style="font-size:14px;font-weight:400;color:var(--m)">з ${S.prefs.budget} ₴</span></div>
   ${c.total > S.prefs.budget ? `<div class="bad" style="margin:4px 0">Перевищення на ${Math.round(c.total - S.prefs.budget)} ₴ — збільште бюджет, зменште кількість днів або прийомів їжі.</div>` : ""}
@@ -429,5 +445,6 @@ function copyList() {
   try { navigator.clipboard.writeText(t).then(() => $("cp").textContent = "Скопійовано ✓", () => $("cp").textContent = "Не вдалося скопіювати"); }
   catch (e) { $("cp").textContent = "Не вдалося скопіювати"; }
 }
+applyTheme();
 render();
 </script></body></html>
