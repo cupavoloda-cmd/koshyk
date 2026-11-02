@@ -308,7 +308,8 @@ async function requestRefresh() {
 function refreshBox() {
   const pend = REFRESH && REFRESH.status === "pending";
   const st = pend ? `⏳ запит від ${fmtD(REFRESH.requestedAt)}` : REFRESH && REFRESH.status === "error" ? `⚠ останнє оновлення не вдалося` : "";
-  return `<div class="rf"><button onclick="requestRefresh()" ${pend ? "disabled" : ""}>🔄 Оновити ціни</button><span style="color:var(--m)">Ціни від ${PRICES.updated ? fmtD(PRICES.updated) : "—"}${st ? "<br>" + st : ""}</span></div>${RF_MSG ? `<div class="note" style="margin-top:6px">${esc(RF_MSG)}</div>` : ""}`;
+  const gh = IS_SITE ? `<div class="rf" style="margin-top:6px"><a href="https://github.com/cupavoloda-cmd/koshyk/actions/workflows/prices.yml" target="_blank" rel="noopener"><button>⚙️ Зібрати нові ціни</button></a><span style="color:var(--m)">На GitHub натисніть «Run workflow» → «Run workflow». Через ~10 хв натисніть «🔄 Оновити ціни».</span></div>` : "";
+  return gh + `<div class="rf"><button onclick="requestRefresh()" ${pend ? "disabled" : ""}>🔄 Оновити ціни</button><span style="color:var(--m)">Ціни від ${PRICES.updated ? fmtD(PRICES.updated) : "—"}${st ? "<br>" + st : ""}</span></div>${RF_MSG ? `<div class="note" style="margin-top:6px">${esc(RF_MSG)}</div>` : ""}`;
 }
 function priceNote() {
   const d = PRICES.updated ? new Date(PRICES.updated).toLocaleDateString("uk-UA") : null;
