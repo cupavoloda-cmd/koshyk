@@ -16,8 +16,9 @@ async function atb(id, it) {
   const html = await (await fetch("https://www.atbmarket.com/sch?query=" + encodeURIComponent(query(it.t)), { headers: UA })).text();
   for (const block of html.split("<article").slice(1)) {
     if (!block.includes("/product/" + slug + '"')) continue;
-    const m = block.match(/class="product-price__top"[^>]*value="([\d.,]+)"/) || block.match(/value="([\d.,]+)"[^>]*class="product-price__top"/);
-    if (m) return num(m[1]);
+    const m = block.match(/value="([\d.,]+)"[^>]*class="product-price__top"/) || block.match(/class="product-price__top"[^>]*value="([\d.,]+)"/);
+    const o = block.match(/value="([\d.,]+)"[^>]*class="product-price__bottom"/);   // стара ціна (акція)
+    if (m) return { p: num(m[1]), old: o ? num(o[1]) : null };
   }
   return null;
 }
@@ -31,12 +32,16 @@ async function metro(id, it) {
     const sc = [...words(x.title)].filter(w => want.has(w)).length;
     if (sc > bs) { bs = sc; best = x; }
   }
-  return best && bs >= 2 ? num(best.price / 100) : null;
+  if (!best || bs < 2) return null;
+  const d = best.discount && best.discount.status && best.discount.old_price > best.price ? best.discount : null;
+  return { p: num(best.price / 100), old: d ? num(d.old_price / 100) : null, until: d && d.due_date || null };
 }
 function silpoLabel(label) {
   let m; const per100 = /(;|,)\s*100г(;|,)/.test(label);
   let p = (m = label.match(/нова ціна ([\d.,]+)/)) ? num(m[1]) : (m = label.match(/ціна у роздріб ([\d.,]+)/)) ? num(m[1]) : (m = label.match(/([\d.,]+)\s*грн\s*$/)) ? num(m[1]) : null;
-  return p && per100 ? Math.round(p * 1000) / 100 : p;
+  let old = (m = label.match(/стара ціна ([\d.,]+)/)) ? num(m[1]) : null;
+  const k = per100 ? 10 : 1; if (!p) return null;
+  return { p: Math.round(p * k * 100) / 100, old: old ? Math.round(old * k * 100) / 100 : null };
 }
 let page = null;
 async function silpo(id, it) {
@@ -50,16 +55,19 @@ async function silpo(id, it) {
 const DEADLINE = Date.now() + 15 * 60000; // загалом не довше 15 хв
 (async () => {
   const old = fs.existsSync(OUT) ? JSON.parse(fs.readFileSync(OUT, "utf8")) : { p: {} };
-  const out = { updated: null, p: {} }, rep = {};
+  const out = { updated: null, p: {}, old: {}, until: {} }, rep = {};
   const H = { atb, silpo, metro }, fails = {}; // 5 невдач поспіль — мережа недоступна, пропускаємо
   const STORES = (process.env.STORES || "atb,metro,silpo").split(",");
   for (const st of ["atb", "metro", "silpo"]) {
-    if (!STORES.includes(st)) { out.p[st] = { ...(old.p[st] || {}) }; continue; }
+    out.old[st] = {}; out.until[st] = {};
+    if (!STORES.includes(st)) { out.p[st] = { ...(old.p[st] || {}) }; out.old[st] = { ...((old.old || {})[st] || {}) }; out.until[st] = { ...((old.until || {})[st] || {}) }; continue; }
     out.p[st] = {}; rep[st] = { ok: 0, kept: 0 };
     for (const [id, it] of Object.entries(CAT.stores[st])) {
       const prev = (old.p[st] || {})[id] ?? it.p; let p = null;
       if (Date.now() < DEADLINE && !(fails[st] >= 5)) { try { p = await H[st](id, it); } catch (e) { p = null; } if (p === null) fails[st] = (fails[st] || 0) + 1; else fails[st] = 0; }
-      if (sane(prev, p)) { out.p[st][id] = p; rep[st].ok++; } else { out.p[st][id] = prev; rep[st].kept++; }
+      const r = p && typeof p === "object" ? p : p ? { p } : null;
+      if (r && sane(prev, r.p)) { out.p[st][id] = r.p; if (r.old > r.p) out.old[st][id] = r.old; if (r.until) out.until[st][id] = r.until; rep[st].ok++; }
+      else { out.p[st][id] = prev; const po = ((old.old || {})[st] || {})[id], pu = ((old.until || {})[st] || {})[id]; if (po) out.old[st][id] = po; if (pu) out.until[st][id] = pu; rep[st].kept++; }
       await sleep(st === "silpo" ? 600 : 400);
     }
   }

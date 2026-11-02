@@ -43,7 +43,8 @@
     "p": 53.9,
     "t": "Яйце куряче 10 шт Своя лінія С1",
     "url": "https://www.atbmarket.com/product/ajce-kurace-10-st-svoa-linia-1-kategoria-fas",
-    "pack": 600
+    "pack": 600,
+    "old": 58.4
    },
    "milk": {
     "p": 57.9,
@@ -67,13 +68,15 @@
     "p": 38.8,
     "t": "Сметана 300 г Молокія 15%",
     "url": "https://www.atbmarket.com/product/smetana-300-g-molokia-15",
-    "pack": 300
+    "pack": 300,
+    "old": 53.2
    },
    "butter": {
     "p": 101.3,
     "t": "Масло 180 г Молокія Селянське 73%",
     "url": "https://www.atbmarket.com/product/maslo-180-g-molokia-solodkoverskove-selanske-73-folga",
-    "pack": 180
+    "pack": 180,
+    "old": 120.8
    },
    "oil": {
     "p": 83.9,
@@ -97,7 +100,8 @@
     "p": 43.9,
     "t": "Спагеті 0,5 кг De Luxe",
     "url": "https://www.atbmarket.com/product/makvir-05kg-de-luxe-foodsgoods-selected-spageti",
-    "pack": 500
+    "pack": 500,
+    "old": 58.9
    },
    "oats": {
     "p": 52.9,
@@ -145,7 +149,8 @@
     "p": 15.95,
     "t": "Цибуля ріпчаста",
     "url": "https://www.atbmarket.com/product/cibula-ripcasta-1-gat",
-    "kg": true
+    "kg": true,
+    "old": 18.89
    },
    "carrot": {
     "p": 14.85,
@@ -157,13 +162,15 @@
     "p": 15.89,
     "t": "Капуста",
     "url": "https://www.atbmarket.com/product/kapusta-1-gat",
-    "kg": true
+    "kg": true,
+    "old": 16.95
    },
    "beet": {
     "p": 12.89,
     "t": "Буряк",
     "url": "https://www.atbmarket.com/product/burak-1-gat",
-    "kg": true
+    "kg": true,
+    "old": 13.89
    },
    "tomato": {
     "p": 89.89,
@@ -193,7 +200,8 @@
     "p": 124.89,
     "t": "Часник",
     "url": "https://www.atbmarket.com/product/casnik-import-1-gat",
-    "kg": true
+    "kg": true,
+    "old": 138.89
    },
    "dill": {
     "p": 28.9,
@@ -205,7 +213,8 @@
     "p": 60.4,
     "t": "Суміш овочева 400 г Своя Лінія WOK",
     "url": "https://www.atbmarket.com/product/sumis-ovoceva-400g-svoa-linia-dla-smazenna-wok-svidkozamorozena",
-    "pack": 400
+    "pack": 400,
+    "old": 75.5
    },
    "banana": {
     "p": 74.9,
@@ -229,7 +238,8 @@
     "p": 141.69,
     "t": "Стегна курячі Своя лінія в маринаді",
     "url": "https://www.atbmarket.com/product/stegno-kurcat-brojleriv-svoa-linia-vognana-salsa-v-marinadi-oholodzene",
-    "kg": true
+    "kg": true,
+    "old": 193.99
    },
    "chmince": {
     "p": 108.5,
@@ -247,7 +257,8 @@
     "p": 66.9,
     "t": "Оселедець філе в олії 240 г Своя Лінія",
     "url": "https://www.atbmarket.com/product/preservi-240g-svoa-linia-oseledec-file-v-olii-mate-termoforma",
-    "pack": 240
+    "pack": 240,
+    "old": 89.9
    },
    "corn": {
     "p": 45.9,
@@ -265,7 +276,8 @@
     "p": 47.0,
     "t": "Пшоно 1 кг Розумний вибір",
     "url": "https://www.atbmarket.com/product/krupa-1-kg-rozumnij-vibir-psono",
-    "pack": 1000
+    "pack": 1000,
+    "old": 50.9
    },
    "bulgur": {
     "p": 56.9,
@@ -277,7 +289,8 @@
     "p": 54.7,
     "t": "Сочевиця червона 0,5 кг Attuale",
     "url": "https://www.atbmarket.com/product/socevica-05-kg-attuale-cervona",
-    "pack": 500
+    "pack": 500,
+    "old": 62.5
    },
    "lavash": {
     "p": 26.5,
@@ -295,7 +308,8 @@
     "p": 58.7,
     "t": "Броколі 400 г Своя Лінія с/м",
     "url": "https://www.atbmarket.com/product/kapusta-brokoli-400g-svoa-linia-svidkozamorozena",
-    "pack": 400
+    "pack": 400,
+    "old": 73.4
    },
    "greenonion": {
     "p": 43.5,
@@ -355,7 +369,8 @@
     "p": 74.9,
     "pack": 280,
     "t": "Сирники 280 г Valesto",
-    "url": "https://www.atbmarket.com/product/sirniki-280-g-valesto-vipeceni-zamorozeni-pllotok"
+    "url": "https://www.atbmarket.com/product/sirniki-280-g-valesto-vipeceni-zamorozeni-pllotok",
+    "old": 115.8
    },
    "kh": {
     "p": 147.9,
@@ -367,13 +382,15 @@
     "p": 97.9,
     "pack": 500,
     "t": "Нагетси курячі Легко! 500 г",
-    "url": "https://www.atbmarket.com/product/nagetsi-500-g-legko"
+    "url": "https://www.atbmarket.com/product/nagetsi-500-g-legko",
+    "old": 151.9
    },
    "cheb": {
     "p": 82.9,
     "pack": 500,
     "t": "Чебуреки 0,5 кг Левада",
-    "url": "https://www.atbmarket.com/product/cebureki-05-kg-levada-pet"
+    "url": "https://www.atbmarket.com/product/cebureki-05-kg-levada-pet",
+    "old": 107.4
    }
   },
   "silpo": {
@@ -387,13 +404,15 @@
     "p": 179.0,
     "t": "Свиняча лопатка без кістки охолоджена",
     "url": "https://silpo.ua/product/svyniacha-lopatka-bez-kistky-okholodzhena-32700",
-    "kg": true
+    "kg": true,
+    "old": 219
    },
    "mince": {
     "p": 179.0,
     "t": "Фарш свинячий",
     "url": "https://silpo.ua/product/farsh-svyniachyi-32789",
-    "kg": true
+    "kg": true,
+    "old": 209
    },
    "hake": {
     "p": 319.0,
@@ -405,7 +424,8 @@
     "p": 79.99,
     "t": "Тунець Iberica 150 г",
     "url": "https://silpo.ua/product/tunets-iberica-tsilyi-u-vlasnomu-soku-921592",
-    "pack": 150
+    "pack": 150,
+    "old": 125
    },
    "sausage": {
     "p": 149.0,
@@ -597,13 +617,15 @@
     "p": 53.99,
     "t": "Кефір «Селянський» 2,5% 950 г",
     "url": "https://silpo.ua/product/kefir-selianskyi-2-5-674753",
-    "pack": 950
+    "pack": 950,
+    "old": 69.49
    },
    "thigh": {
     "p": 179.0,
     "t": "Стегно куряче Епікур",
     "url": "https://silpo.ua/product/stegno-kuriache-epikur-okholodzhene-malyi-lotok-750299",
-    "kg": true
+    "kg": true,
+    "old": 219
    },
    "chmince": {
     "p": 249.0,
@@ -615,25 +637,29 @@
     "p": 428.7,
     "t": "Скумбрія свіжоморожена",
     "url": "https://silpo.ua/product/skumbriia-svizhomorozhena-36488",
-    "kg": true
+    "kg": true,
+    "old": 510.4
    },
    "herring": {
     "p": 161.5,
     "t": "Оселедець філе в олії",
     "url": "https://silpo.ua/product/oseledets-file-v-olii-912337",
-    "kg": true
+    "kg": true,
+    "old": 299
    },
    "corn": {
     "p": 39.99,
     "t": "Кукурудза Kwidzyn 400 г",
     "url": "https://silpo.ua/product/kukurudza-kwidzyn-tsukrova-konservovana-468763",
-    "pack": 400
+    "pack": 400,
+    "old": 66.99
    },
    "peas": {
     "p": 39.99,
     "t": "Горошок Kwidzyn 400 г",
     "url": "https://silpo.ua/product/goroshok-kwidzyn-zelenyi-konservovanyi-468757",
-    "pack": 400
+    "pack": 400,
+    "old": 61.49
    },
    "millet": {
     "p": 22.49,
@@ -657,7 +683,8 @@
     "p": 25.99,
     "t": "Лаваш «Київхліб» Вірменський 220 г",
     "url": "https://silpo.ua/product/lavash-kyivkhlib-virmenskyi-444707",
-    "pack": 220
+    "pack": 220,
+    "old": 44.99
    },
    "rye": {
     "p": 58.49,
@@ -699,7 +726,8 @@
     "p": 85.1,
     "t": "Груша Лукас",
     "url": "https://silpo.ua/product/grusha-lukas-267135",
-    "kg": true
+    "kg": true,
+    "old": 99
    },
    "honey": {
     "p": 199.0,
@@ -717,7 +745,8 @@
     "p": 84.9,
     "pack": 900,
     "t": "Вареники Laska з картоплею та цибулею 900 г",
-    "url": "https://silpo.ua/product/varenyky-laska-z-kartopleiu-ta-smazhenoiu-tsybuleiu-767776"
+    "url": "https://silpo.ua/product/varenyky-laska-z-kartopleiu-ta-smazhenoiu-tsybuleiu-767776",
+    "old": 159
    },
    "vc": {
     "p": 109.0,
@@ -729,7 +758,8 @@
     "p": 129.0,
     "pack": 800,
     "t": "Пельмені Рудь Супер 800 г",
-    "url": "https://silpo.ua/product/pelmeni-rud-super-947623"
+    "url": "https://silpo.ua/product/pelmeni-rud-super-947623",
+    "old": 214
    },
    "syr": {
     "p": 189.0,
