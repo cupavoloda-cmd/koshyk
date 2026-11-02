@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="uk"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Кошик"><meta name="theme-color" content="#8bd635" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#171b14" media="(prefers-color-scheme: dark)"><meta name="color-scheme" content="light dark">
+<meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Week-eat"><meta name="theme-color" content="#8bd635" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#171b14" media="(prefers-color-scheme: dark)"><meta name="color-scheme" content="light dark">
 <link rel="manifest" href="manifest.json"><link rel="apple-touch-icon" href="icon-180.png"><link rel="icon" href="icon-192.png">
-<title>Кошик — меню на тиждень з АТБ, Сільпо і METRO</title>
+<title>Week-eat — меню на тиждень з АТБ, Сільпо і METRO</title>
 <style>
 :root{--g:#8bd635;--gd:#2e8b14;--tint:#2e8b14;--bg:#f2f2f7;--c:#fff;--glass:rgba(249,249,249,.86);--t:#000;--m:#6d6d72;--b:rgba(60,60,67,.18);--soft:#f2f2f7;--chip:rgba(118,118,128,.12);--seg:#fff;--tile:#f2f2f7;--no:#fdeeec;--pr:#fff1e6;--prt:#b2470a;--bad:#e5372b;--warn:#b86b00;--on:#0f1a07;--sh:rgba(0,0,0,.12);color-scheme:light}
 :root[data-theme=dark]{--g:#8bd635;--gd:#8fd94f;--tint:#8fd94f;--bg:#000;--c:#1c1c1e;--glass:rgba(22,22,24,.82);--t:#fff;--m:#98989f;--b:rgba(84,84,88,.55);--soft:#2c2c2e;--chip:rgba(118,118,128,.24);--seg:#636366;--tile:#2c2c2e;--no:#3a1d19;--pr:#3d2615;--prt:#ffb27a;--bad:#ff6961;--warn:#ffb340;--on:#0f1a07;--sh:rgba(0,0,0,.4);color-scheme:dark}
@@ -477,7 +477,7 @@ function render() {
     return;
   }
   if (S.step === 8) {
-    paint(`<div class="load"><div class="logo">🛒 кошик</div><div class="sub" style="margin-top:30px">Складаємо ваш тиждень…</div><ul style="padding:0"><li>✅ Підбираємо сніданки, обіди, вечері й перекуси</li><li>✅ Беремо товари й ціни ${stName(S.prefs.store)}</li><li>⏳ Вкладаємось у бюджет і збираємо список</li></ul></div>`, "load");
+    paint(`<div class="load"><div class="logo">Week-eat</div><div class="sub" style="margin-top:30px">Складаємо ваш тиждень…</div><ul style="padding:0"><li>✅ Підбираємо сніданки, обіди, вечері й перекуси</li><li>✅ Беремо товари й ціни ${stName(S.prefs.store)}</li><li>⏳ Вкладаємось у бюджет і збираємо список</li></ul></div>`, "load");
     return;
   }
   if (S.settings) return settings();
@@ -487,7 +487,7 @@ function render() {
   const others = Object.keys(ST).filter(k => k !== st).map(k => { const x = Core.cost(ids, ctx(), k), d = Math.round(x.total - c.total);
     return `${ST[k]}: <b>${Math.round(x.total)} ₴</b> ${d > 0 ? `<span class="ok">(+${d})</span>` : d < 0 ? `<span class="warn">(−${-d})</span>` : ""}${x.missing.length ? `<span class="warn" title="немає ціни для ${x.missing.length} товарів">*</span>` : ""}`; }).join(" · ");
   const avg = Math.round(S.plan.reduce((s, d) => s + Core.dayMacro(d, RC)[0], 0) / S.plan.length);
-  let h = `<header class="nav"><div class="navrow"><h1>Week</h1><button class="ico" aria-label="Налаштування" onclick="S.settings=true;render()">${I.set}</button></div>
+  let h = `<header class="nav"><div class="navrow"><h1>Week-eat</h1><button class="ico" aria-label="Налаштування" onclick="S.settings=true;render()">${I.set}</button></div>
   <div class="chiprow">${[["mix", "Разом"], ...Object.entries(ST)].map(([k,v]) => `<button class="${st===k?"on":""}" onclick="S.prefs.store='${k}';${k==="mix" && S.prefs.mixStores.length < 2 ? "S.prefs.mixStores=['atb','silpo','metro'];" : ""}save();render()">${v}</button>`).join("")}</div>
 </header>
   ${S.tab === "plan" ? `<div class="sum"><div class="tot ${c.total<=S.prefs.budget?"":"bad"}">${Math.round(c.total)} ₴ <small>з ${S.prefs.budget} ₴</small></div>
