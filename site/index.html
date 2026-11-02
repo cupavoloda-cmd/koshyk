@@ -324,8 +324,13 @@ body.swiping .meal:active,body.swiping .meal{background:transparent!important;tr
     const pool = poolFor(slot, ctx).filter(id => id !== plan[day][slot]);
     if (!pool.length) return plan;
     const used = new Set(flat(plan)), fresh = pool.filter(id => !used.has(id)), cands = fresh.length ? fresh : pool;
-    let best = plan, bestScore = -Infinity;
-    cands.forEach(id => { const p = plan.map(d => ({ ...d })); p[day][slot] = id; const sc = objective(p, ctx); if (sc > bestScore) { bestScore = sc; best = p; } });
+    // заміна не робить меню дорожчим: серед варіантів не дорожчих за поточний — найкращий; якщо таких нема — найдешевший
+    const st = ctx.prefs.store, tot = p => cost(flat(p), ctx, st).total, cur = tot(plan) + 0.5;
+    const opts = cands.map(id => { const p = plan.map(d => ({ ...d })); p[day][slot] = id; return { p, t: tot(p) }; });
+    const ok = opts.filter(o => o.t <= cur);
+    if (!ok.length) return opts.reduce((a, b) => b.t < a.t ? b : a).p;
+    let best = ok[0].p, bestScore = -Infinity;
+    ok.forEach(o => { const sc = objective(o.p, ctx); if (sc > bestScore) { bestScore = sc; best = o.p; } });
     return best;
   }
   function shoppingList(ids, ctx, store) {

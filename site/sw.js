@@ -1,4 +1,4 @@
-const C='weekeat-v8';
+const C='weekeat-v9';
 self.addEventListener('install',e=>{e.waitUntil(caches.open(C).then(c=>c.addAll(['./','index.html','manifest.json','icon-180.png','icon-192.png','prices.json'])));self.skipWaiting()});
 self.addEventListener('activate',e=>e.waitUntil(self.clients.claim()));
 // спершу мережа (щоб бачити нові версії й ціни), без інтернету — збережена копія
