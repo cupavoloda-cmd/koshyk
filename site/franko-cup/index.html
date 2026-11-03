@@ -10,8 +10,8 @@
 *{box-sizing:border-box}body{margin:0;font:15px/1.45 Montserrat,system-ui,sans-serif;color:var(--ink);background:var(--bg) repeating-linear-gradient(135deg,transparent 0 38px,rgba(255,210,0,.035) 38px 40px)}
 h1,h2,.tabs button,.lbl,.brk,.btn{font-family:Oswald,Montserrat,sans-serif;text-transform:uppercase;letter-spacing:.04em}
 header{background:#000;border-bottom:4px solid var(--acc);padding:22px 16px}header h1{margin:0;font-size:26px;color:var(--acc)}header h1 svg{margin:-6px 0 2px -4px}
-.lball{transform-box:fill-box;transform-origin:center;animation:roll 1.9s cubic-bezier(.25,.6,.35,1) both}
-@keyframes roll{0%{transform:translate(-300px,-70px) rotate(-1000deg);opacity:0}8%{opacity:1}35%{transform:translate(-220px,0) rotate(-760deg)}52%{transform:translate(-150px,-26px) rotate(-520deg)}68%{transform:translate(-85px,0) rotate(-300deg)}80%{transform:translate(-45px,-9px) rotate(-150deg)}90%{transform:translate(-14px,0) rotate(-45deg)}100%{transform:translate(0,0) rotate(0)}}
+.lball{transform-box:fill-box;transform-origin:center;animation:roll 2.4s cubic-bezier(.16,.84,.3,1) .2s both}
+@keyframes roll{0%{transform:translateX(-262px) rotate(-940deg);opacity:0}15%{opacity:1}100%{transform:translateX(0) rotate(0);opacity:1}}
 @media(prefers-reduced-motion:reduce){.lball{animation:none}}header p{margin:4px 0 0;color:#ddd;font-size:13px;text-transform:uppercase;letter-spacing:.06em}
 main{max-width:900px;margin:auto;padding:12px}
 .card{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--acc);border-radius:12px;padding:12px;margin-bottom:12px}
