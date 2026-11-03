@@ -68,6 +68,7 @@ table{width:100%;border-collapse:collapse;font-size:14px}th,td{padding:6px 4px;t
 <div><label>Перший матч</label><input type="time" id="start"></div>
 <div><label>Слот на матч, хв (гра + заміна)</label><input type="number" id="slot" min="5"></div>
 <div><label>Збір команд, хв до першого матчу</label><input type="number" id="gath" min="0"></div>
+<div><label>Перерва перед іграми за місця, хв (порожньо — авто)</label><input type="number" id="brk" min="0" placeholder="авто"></div>
 </div>
 <p class="n" id="fmtInfo"></p></div>
 <div class="card"><h2>Команди</h2><p class="n" style="margin:0 0 6px">Впишіть назви і, за потреби, натисніть «Жеребкування» — команди випадково розподіляться по групах.</p>
@@ -181,18 +182,22 @@ function tbl(ids,ms){
 }
 function t2(min){min=((min%1440)+1440)%1440;return String(min/60|0).padStart(2,'0')+':'+String(min%60).padStart(2,'0')}
 const base=()=>{const[H,Mi]=(S.start||'09:00').split(':').map(Number);return H*60+Mi};
-const time=s=>t2(base()+s*(+S.slot||0));
+let SHIFT={from:1e9,min:0};
+function calcShift(){SHIFT={from:1e9,min:0};const P=M.filter(m=>m.st!=='G'),G=M.filter(m=>m.st==='G');if(!P.length||!G.length||S.brk===''||S.brk==null)return;
+ const fp=Math.min(...P.map(m=>m.slot)),lg=Math.max(...G.map(m=>m.slot));SHIFT={from:fp,min:(+S.brk||0)-(fp-lg-1)*(+S.slot||0)}}
+const tmin=s=>base()+s*(+S.slot||0)+(s>=SHIFT.from?SHIFT.min:0);
+const time=s=>t2(tmin(s));
 const refLbl=r=>{const[p,a,b]=r.split(':');if(p==='G')return GL[+a]+(+b+1);const m=M.find(x=>x.key===r.slice(2));return(p==='W'?'Перем. ':'Пр. ')+(m?m.l.replace(/ ·.*/,''):'')};
 function inp(k,f){const v=sc(k)[f];return canEdit()?`<input inputmode="numeric" data-k="${k}" data-f="${f}" value="${v??''}">`:`<input readonly tabindex="-1" value="${v??''}">`}
 function render(){
- INFO='';build();
+ INFO='';build();calcShift();
  document.getElementById('hName').textContent=S.name||'Турнір';
  document.getElementById('hSub').textContent=[S.sub,`${S.teams.length} команд · ${S.G} ${S.G==1?'група':'групи'} · ${S.F} ${S.F==1?'поле':'поля'}`].filter(Boolean).join(' · ');
  GT=GS.map((g,gi)=>tbl([...Array(g.n)].map((_,j)=>g.st+j),M.filter(m=>m.st==='G'&&m.g===gi)));
  const LTT=LT.map(L=>Object.assign(tbl(L.refs.map(R_),M.filter(m=>L.keys.includes(m.key))),{L}));
  let h=`<div class="brk">${t2(base()-(+S.gath||0))} — збір команд</div>`,prevS=-1,shownP=false;
  M.forEach(m=>{
-  if(m.slot-prevS>1){const gap=m.slot-prevS-1;h+=`<div class="brk">${time(prevS+1)} — перерва ${gap*(+S.slot||0)} хв</div>`}
+  if(prevS>=0){const st=tmin(prevS)+(+S.slot||0),dur=tmin(m.slot)-st;if(dur>0)h+=`<div class="brk">${t2(st)} — перерва ${dur} хв</div>`}
   if(m.st!=='G'&&!shownP){shownP=true;h+=`<div class="brk">${LT.length?'Ігри за місця · ліги за місцями в групах':'Ігри за місця'}</div>`}
   prevS=m.slot;
   const hi=R_(m.h),ai=R_(m.a),r=res(m),s=sc(m.key);
@@ -221,10 +226,10 @@ function render(){
  const med=['🥇','🥈','🥉'];
  document.getElementById('pod').innerHTML=S.teams.map((_,j)=>{const p=j+1;return `<div><span>${med[p-1]||p+'.'} місце</span><b>${pl[p]!=null?tw(pl[p],18):'—'}</b></div>`}).join('');
  const gm=M.filter(m=>m.st==='G').length,pm=M.length-gm,per=S.teams.length?(2*M.length/S.teams.length):0;
- document.getElementById('fmtInfo').textContent=`Матчів: ${M.length} (групи ${gm}${pm?', за місця '+pm:''}). Слотів: ${end}. Триватиме ≈ ${Math.floor(end*S.slot/60)} год ${end*S.slot%60} хв, нагородження о ${time(end)}. ${S.po==='semis'&&S.G!=2?'Півфінали доступні лише для 2 груп — застосовано ігри за місця. ':''}${INFO}`;
+ document.getElementById('fmtInfo').textContent=`Матчів: ${M.length} (групи ${gm}${pm?', за місця '+pm:''}). Слотів: ${end}. Триватиме ≈ ${Math.floor((tmin(end)-base())/60)} год ${(tmin(end)-base())%60} хв, нагородження о ${time(end)}. ${S.po==='semis'&&S.G!=2?'Півфінали доступні лише для 2 груп — застосовано ігри за місця. ':''}${INFO}${SHIFT.from<1e9&&+S.brk<(+S.rest||0)*(+S.slot||0)?' Увага: перерва коротша за мінімальний відпочинок ('+(+S.rest||0)*(+S.slot||0)+' хв).':''}`;
 }
 function renderSet(){
- ['name','sub','G','F','po','rest','start','slot','gath'].forEach(k=>document.getElementById(k).value=S[k]??'');
+ ['name','sub','G','F','po','rest','start','slot','gath','brk'].forEach(k=>document.getElementById(k).value=S[k]??'');
  document.getElementById('N').value=S.teams.length;
  GS=sizes();
  document.getElementById('teams').innerHTML=S.teams.map((t,i)=>{const g=GS.findIndex(x=>i>=x.st&&i<x.st+x.n);const lab=S.G>1?`Група ${GL[g]} · ${GL[g]}${i-GS[g].st+1}`:`Команда ${i+1}`;return `<div class="trow"><span id="cp${i}">${crest(i,30)}</span><div><label>${lab}</label><input data-ti="${i}" value="${esc(t)}"></div><label class="up">логотип<input type="file" accept="image/*" data-li="${i}"></label></div>`}).join('');
@@ -232,7 +237,7 @@ function renderSet(){
 document.getElementById('list').addEventListener('change',e=>{const t=e.target;if(!t.dataset.k)return;const k=t.dataset.k;S.sc[k]=S.sc[k]||{};S.sc[k][t.dataset.f]=t.value.trim();save();render()});
 document.getElementById('teams').addEventListener('input',e=>{const i=e.target.dataset.ti;if(i==null)return;S.teams[i]=e.target.value;document.getElementById('cp'+i).innerHTML=crest(+i,30);save();render()});
 document.getElementById('teams').addEventListener('change',e=>{const i=e.target.dataset.li;if(i==null||!e.target.files[0])return;const fr=new FileReader();fr.onload=()=>{const im=new Image();im.onload=()=>{const c=document.createElement('canvas'),k=Math.min(1,128/Math.max(im.width,im.height));c.width=im.width*k;c.height=im.height*k;c.getContext('2d').drawImage(im,0,0,c.width,c.height);S.logos=S.logos||{};S.logos[S.teams[i]]=c.toDataURL('image/png');save();renderSet();render()};im.src=fr.result};fr.readAsDataURL(e.target.files[0])});
-['name','sub','po','start','gath'].forEach(k=>document.getElementById(k).addEventListener('change',e=>{S[k]=e.target.value;save();render()}));
+['name','sub','po','start','gath','brk'].forEach(k=>document.getElementById(k).addEventListener('change',e=>{S[k]=e.target.value;save();render()}));
 ['G','F','rest','slot'].forEach(k=>document.getElementById(k).addEventListener('change',e=>{S[k]=Math.max(0,+e.target.value||0);if(k!=='rest')S[k]=Math.max(k==='slot'?5:1,S[k]);if(k==='G')S.G=Math.min(S.G,Math.floor(S.teams.length/2)||1);save();renderSet();render()}));
 document.getElementById('N').addEventListener('change',e=>{let n=Math.min(24,Math.max(3,+e.target.value||8));while(S.teams.length<n)S.teams.push('Команда '+(S.teams.length+1));S.teams.length=n;S.G=Math.min(S.G,Math.floor(n/2));save();renderSet();render()});
 document.querySelectorAll('[data-pre]').forEach(b=>b.onclick=()=>{const p=JSON.parse(JSON.stringify(PRE[b.dataset.pre]));S=Object.assign(S,p,{sc:{}});save();renderSet();render()});
