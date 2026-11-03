@@ -87,7 +87,7 @@ const PRE={
  '9':{name:'Franko Cup',sub:'2015 р.н.',N:9,G:3,F:2,po:'places',rest:1,start:'09:00',slot:25,gath:20,teams:['Рух 2015','ДЮСШ 3','Рух Черніїв','Вікторія','Ніка Каскад','Бельгія','Рух 2016','Прикарпаття','Вікторія Угорники']}};
 let S=Object.assign(JSON.parse(JSON.stringify(PRE['8'])),{sc:{},logos:{}});
 try{const s=JSON.parse(localStorage.getItem(KEY));if(s&&s.teams)S=Object.assign(S,s)}catch(e){}
-const API=/^https?:$/.test(location.protocol)&&!/claude|anthropic/.test(location.host)?'/api/t/franko':null;
+const API=/\.pages\.dev$/.test(location.hostname)?'https://wild-sea-a0f8.cupavoloda.workers.dev/api/t/franko':/^https?:$/.test(location.protocol)&&!/claude|anthropic/.test(location.host)?'/api/t/franko':null;
 let EKEY='',EDIT=false,dirtyAt=0,pushT=null;try{EKEY=localStorage.getItem('fc-key')||''}catch(e){}
 const canEdit=()=>!API||EDIT;
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}if(API&&EDIT){dirtyAt=Date.now();clearTimeout(pushT);pushT=setTimeout(push,700)}};
