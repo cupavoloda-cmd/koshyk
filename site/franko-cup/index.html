@@ -10,10 +10,10 @@
 *{box-sizing:border-box}body{margin:0;font:15px/1.45 Montserrat,system-ui,sans-serif;color:var(--ink);background:var(--bg) repeating-linear-gradient(135deg,transparent 0 38px,rgba(255,210,0,.035) 38px 40px)}
 h1,h2,.tabs button,.lbl,.brk,.btn{font-family:Oswald,Montserrat,sans-serif;text-transform:uppercase;letter-spacing:.04em}
 header{background:#000;border-bottom:4px solid var(--acc);padding:22px 16px}header h1{margin:0;font-size:26px;color:var(--acc)}header h1 svg{margin:-6px 0 2px -4px}
-.lmove{animation:mv 3s .2s both}.lspin{transform-box:fill-box;transform-origin:center;animation:sp 3s .2s both}.lline{animation:draw 3s .2s both}
-@keyframes mv{0%{transform:translate(-250px,-34px);opacity:0;animation-timing-function:cubic-bezier(.5,0,.9,.6)}5%{opacity:1}16%{transform:translate(-252px,0);animation-timing-function:cubic-bezier(.25,.6,.4,1)}84%{transform:translate(9px,0);animation-timing-function:cubic-bezier(.45,0,.4,1)}100%{transform:translate(0,0);opacity:1}}
-@keyframes sp{0%{transform:rotate(-990deg);animation-timing-function:cubic-bezier(.5,0,.9,.6)}16%{transform:rotate(-903deg);animation-timing-function:cubic-bezier(.25,.6,.4,1)}84%{transform:rotate(32deg);animation-timing-function:cubic-bezier(.45,0,.4,1)}100%{transform:rotate(0)}}
-@keyframes draw{0%,16%{stroke-dashoffset:262;animation-timing-function:cubic-bezier(.25,.6,.4,1)}84%,100%{stroke-dashoffset:0}}
+.lmove{animation:mv 3.6s .2s both}.lspin{transform-box:fill-box;transform-origin:center;animation:sp 3.6s .2s both}.lline{animation:draw 3.6s .2s both}
+@keyframes mv{0%{transform:translate(-250px,-34px);opacity:0;animation-timing-function:cubic-bezier(.5,0,.9,.6)}5%{opacity:1}16%{transform:translate(-252px,0);animation-timing-function:cubic-bezier(.25,.6,.4,1)}72%{transform:translate(9px,0);animation-timing-function:cubic-bezier(.4,0,.2,1)}100%{transform:translate(0,0);opacity:1}}
+@keyframes sp{0%{transform:rotate(-990deg);animation-timing-function:cubic-bezier(.5,0,.9,.6)}16%{transform:rotate(-903deg);animation-timing-function:cubic-bezier(.25,.6,.4,1)}72%{transform:rotate(32deg);animation-timing-function:cubic-bezier(.4,0,.2,1)}100%{transform:rotate(0)}}
+@keyframes draw{0%,16%{stroke-dashoffset:262;animation-timing-function:cubic-bezier(.25,.6,.4,1)}72%,100%{stroke-dashoffset:0}}
 @media(prefers-reduced-motion:reduce){.lmove,.lspin,.lline{animation:none}}header p{margin:4px 0 0;color:#ddd;font-size:13px;text-transform:uppercase;letter-spacing:.06em}
 main{max-width:900px;margin:auto;padding:12px}
 .card{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--acc);border-radius:12px;padding:12px;margin-bottom:12px}
