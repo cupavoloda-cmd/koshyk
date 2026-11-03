@@ -6,34 +6,32 @@
 <title>Турнір — сітка і розклад</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0b0b0b;--card:#161616;--ink:#fff;--mut:#9a9a9a;--acc:#ffd200;--on:#0b0b0b;--line:#2a2a2a;--g0:#3a3200;--g1:#2a2a2a;--g2:#40300a}
+:root{--bg:#0b0b0b;--card:#161616;--ink:#fff;--mut:#9a9a9a;--acc:#ffd200;--on:#0b0b0b;--line:#2a2a2a;--g0:#3a3200;--g1:#2a2a2a;--g2:#40300a;--g3:#1d2a3a}
 *{box-sizing:border-box}body{margin:0;font:15px/1.45 Montserrat,system-ui,sans-serif;color:var(--ink);background:var(--bg) repeating-linear-gradient(135deg,transparent 0 38px,rgba(255,210,0,.035) 38px 40px)}
 h1,h2,.tabs button,.lbl,.brk,.btn{font-family:Oswald,Montserrat,sans-serif;text-transform:uppercase;letter-spacing:.04em}
 header{background:#000;border-bottom:4px solid var(--acc);padding:22px 16px}header h1{margin:0;font-size:26px;color:var(--acc)}header p{margin:4px 0 0;color:#ddd;font-size:13px;text-transform:uppercase;letter-spacing:.06em}
-.card{border-left:3px solid var(--acc)!important}
-.tabs button.on,.btn.pri{color:var(--on)!important}
-input:focus,select:focus{outline:2px solid var(--acc);border-color:var(--acc)}
 main{max-width:900px;margin:auto;padding:12px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px;margin-bottom:12px}
+.card{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--acc);border-radius:12px;padding:12px;margin-bottom:12px}
 h2{font-size:16px;margin:0 0 10px}
-.tabs{display:flex;gap:6px;margin-bottom:12px}.tabs button{flex:1;padding:10px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:10px;font-weight:600;font:inherit;font-weight:600}
-.tabs button.on{background:var(--acc);color:#fff;border-color:var(--acc)}
+.tabs{display:flex;gap:6px;margin-bottom:12px}.tabs button{flex:1;padding:10px 4px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:10px;font-weight:600;font-size:14px}
+.tabs button.on{background:var(--acc);color:var(--on);border-color:var(--acc)}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}@media(max-width:600px){.grid2{grid-template-columns:1fr}}
-.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}@media(max-width:700px){.grid3{grid-template-columns:1fr}}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
 label{font-size:12px;color:var(--mut);display:block;margin:6px 0 2px}
 input,select{width:100%;padding:8px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font:inherit}
+input:focus,select:focus{outline:2px solid var(--acc);border-color:var(--acc)}
 table{width:100%;border-collapse:collapse;font-size:14px}th,td{padding:6px 4px;text-align:center;border-bottom:1px solid var(--line)}th{color:var(--mut);font-weight:600;font-size:12px}td.l,th.l{text-align:left}
 .m{display:grid;grid-template-columns:52px 1fr auto 1fr;align-items:center;gap:6px;padding:8px 0;border-bottom:1px solid var(--line)}
-.t{font-size:12px;font-variant-numeric:tabular-nums;line-height:1.2}.t small{display:block;color:var(--mut)}
+.t{font-size:12px;font-variant-numeric:tabular-nums;line-height:1.25}.t small{display:block;color:var(--mut)}
 .h{text-align:right}.sc{display:flex;gap:3px;align-items:center}.sc input{width:40px;text-align:center;padding:6px 2px}
-.tag{display:inline-block;font-size:11px;padding:1px 6px;border-radius:6px;margin-right:4px;font-weight:700;color:var(--ink)}.g0{background:var(--g0)}.g1{background:var(--g1)}.g2{background:var(--g2)}
+.tag{display:inline-block;font-size:11px;padding:1px 6px;border-radius:6px;font-weight:700;color:var(--ink)}.g0{background:var(--g0)}.g1{background:var(--g1)}.g2{background:var(--g2)}.g3{background:var(--g3)}
 .lbl{grid-column:2/5;font-size:11px;color:var(--acc);font-weight:700;margin-bottom:-6px;text-align:center}
 .pen{grid-column:3;display:flex;gap:3px;align-items:center;justify-content:center;font-size:11px;color:var(--mut)}.pen input{width:34px;padding:3px;text-align:center}
 .brk{text-align:center;color:var(--mut);font-size:13px;padding:8px;background:var(--bg);border-radius:8px;margin:6px 0}
 .win{font-weight:700;color:var(--acc)}.n{color:var(--mut);font-size:12px}
 .pod{display:grid;gap:6px}.pod div{display:flex;justify-content:space-between;gap:8px;padding:8px 10px;background:var(--bg);border-radius:8px}
 .btn{padding:8px 12px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font:inherit;cursor:pointer}
-.btn.pri{background:var(--acc);color:#fff;border-color:var(--acc);font-weight:700}
+.btn.pri{background:var(--acc);color:var(--on);border-color:var(--acc);font-weight:700}
 .hide{display:none}
 .cr{display:inline-block;vertical-align:middle;flex:none}.cr img{width:100%;height:100%;object-fit:contain;display:block}
 .nmw{display:inline-flex;align-items:center;gap:6px}.h .nmw{flex-direction:row-reverse}
@@ -42,6 +40,7 @@ table{width:100%;border-collapse:collapse;font-size:14px}th,td{padding:6px 4px;t
 .tc .row{display:flex;justify-content:center;align-items:flex-end;gap:8px;margin-bottom:6px}
 .tc b{font-family:Oswald,sans-serif;text-transform:uppercase;font-size:13px;letter-spacing:.04em}
 .trow{display:flex;gap:8px;align-items:flex-end}.trow>div{flex:1}.up{font-size:11px;color:var(--acc);cursor:pointer;white-space:nowrap}.up input{display:none}
+.warn{color:var(--acc);font-size:12px;margin-top:6px}
 </style>
 </head>
 <body>
@@ -49,19 +48,28 @@ table{width:100%;border-collapse:collapse;font-size:14px}th,td{padding:6px 4px;t
 <main>
 <div class="tabs"><button data-t="sch" class="on">Розклад</button><button data-t="tab">Таблиці</button><button data-t="set">Налаштування</button></div>
 
-<section id="sch"><div class="card"><div id="list"></div></div><div class="card"><h2>Підсумкові місця</h2><div class="pod" id="pod"></div></div></section>
+<section id="sch"><div class="card"><div id="list"></div></div><div class="card" id="podCard"><h2>Підсумкові місця</h2><div class="pod" id="pod"></div></div></section>
 
 <section id="tab" class="hide"><div id="tables"></div><p class="n">Ранжування: очки → особиста зустріч (при рівності двох) → різниця м'ячів → забиті. Перемога 3, нічия 1.</p></section>
 
 <section id="set" class="hide">
-<div class="card"><h2>Турнір</h2><div class="grid2">
-<div><label>Формат</label><select id="fmt"><option value="8">8 команд · 2 групи по 4 · 1 поле</option><option value="9">9 команд · 3 групи по 3 · 2 поля · ліги</option></select></div>
+<div class="card"><h2>Турнір</h2>
+<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:6px"><button class="btn" data-pre="8">Шаблон: 8 команд, 1 поле</button><button class="btn" data-pre="9">Шаблон: 9 команд, 2 поля</button></div>
+<div class="grid2">
 <div><label>Назва</label><input id="name"></div>
 <div><label>Підзаголовок (дата, рік народження)</label><input id="sub"></div>
-<div><label>Перший матч</label><input type="time" id="start"></div>
-<div><label>Слот на матч, хв</label><input type="number" id="slot" min="5"></div>
-<div><label>Збір команд, хв до першого матчу</label><input type="number" id="gath" min="0"></div>
 </div></div>
+<div class="card"><h2>Формат</h2><div class="grid2">
+<div><label>Кількість команд</label><input type="number" id="N" min="3" max="24"></div>
+<div><label>Кількість груп</label><select id="G"><option>1</option><option>2</option><option>3</option><option>4</option></select></div>
+<div><label>Кількість полів</label><select id="F"><option>1</option><option>2</option><option>3</option><option>4</option></select></div>
+<div><label>Після груп</label><select id="po"><option value="places">Ігри за місця (1-ші з 1-ми, 2-гі з 2-ми…)</option><option value="semis">Півфінали 1–2 місць + ігри за місця</option><option value="none">Без плей-оф</option></select></div>
+<div><label>Мін. відпочинок команди між матчами, слотів</label><input type="number" id="rest" min="0" max="6"></div>
+<div><label>Перший матч</label><input type="time" id="start"></div>
+<div><label>Слот на матч, хв (гра + заміна)</label><input type="number" id="slot" min="5"></div>
+<div><label>Збір команд, хв до першого матчу</label><input type="number" id="gath" min="0"></div>
+</div>
+<p class="n" id="fmtInfo"></p></div>
 <div class="card"><h2>Команди</h2><p class="n" style="margin:0 0 6px">Впишіть назви і, за потреби, натисніть «Жеребкування» — команди випадково розподіляться по групах.</p>
 <div class="grid2" id="teams"></div>
 <div style="margin-top:10px"><button class="btn pri" id="draw">🎲 Жеребкування</button> <span class="n" id="drawMsg"></span></div></div>
@@ -69,100 +77,154 @@ table{width:100%;border-collapse:collapse;font-size:14px}th,td{padding:6px 4px;t
 </section>
 </main>
 <script>
-const KEY='tourn-v2';
-const DEF={fmt:'8',d:{
- '8':{name:'Franko Cup',sub:'Середа · 2016/17 р.н.',start:'10:20',slot:20,gath:20,sc:{},teams:['Рух 2017','Угринів ІІ','Ревера сині','Снятин','Рух Бельгія','ОДЮСШ','Ревера червоні','Угринів']},
- '9':{name:'Franko Cup',sub:'',start:'09:00',slot:25,gath:20,sc:{},teams:['Рух 2015','ДЮСШ 3','Рух Черніїв','Вікторія','Ніка Каскад','Бельгія','Рух 2016','Прикарпаття','Вікторія Угорники']}}};
-let S=JSON.parse(JSON.stringify(DEF));
-try{const s=JSON.parse(localStorage.getItem(KEY));if(s&&s.d){S.fmt=s.fmt||'8';['8','9'].forEach(k=>Object.assign(S.d[k],s.d[k]||{}))}}catch(e){}
+const KEY='tourn-v3';
+const PRE={
+ '8':{name:'Franko Cup',sub:'Середа · 2016/17 р.н.',N:8,G:2,F:1,po:'places',rest:2,start:'10:20',slot:20,gath:20,teams:['Рух 2017','Угринів ІІ','Ревера сині','Снятин','Рух Бельгія','ОДЮСШ','Ревера червоні','Угринів']},
+ '9':{name:'Franko Cup',sub:'2015 р.н.',N:9,G:3,F:2,po:'places',rest:1,start:'09:00',slot:25,gath:20,teams:['Рух 2015','ДЮСШ 3','Рух Черніїв','Вікторія','Ніка Каскад','Бельгія','Рух 2016','Прикарпаття','Вікторія Угорники']}};
+let S=Object.assign(JSON.parse(JSON.stringify(PRE['8'])),{sc:{},logos:{}});
+try{const s=JSON.parse(localStorage.getItem(KEY));if(s&&s.teams)S=Object.assign(S,s)}catch(e){}
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
-const LG=['Ліга Чемпіонів','Ліга Європи','Ліга Конференцій'],LS=['ЛЧ','ЛЄ','ЛК'];
-const F={
- '8':{groups:['А','Б'],size:4,fields:1,rounds:1,gap:2,pairs:[[0,1],[2,3],[0,2],[1,3],[0,3],[1,2]],
-  extra:[[3,'За 7-ме місце',[7,8]],[2,'За 5-те місце',[5,6]],[1,'Матч за 3-тє місце',[3,4]],[0,'ФІНАЛ',[1,2]]].map(([k,l,p])=>({st:'P',h:['G',0,k],a:['G',1,k],l,p,ko:1}))},
- '9':{groups:['А','В','С'],size:3,fields:2,pairs:[[0,1],[0,2],[1,2]],
-  extra:[[0,1],[2,1],[0,2]].flatMap(gp=>[2,1,0].map(k=>({st:'L',k,h:['G',gp[0],k],a:['G',gp[1],k],l:LG[k]+' ('+LS[k]+')'})))}};
-let f,D,M,GT,LT;
-function build(){f=F[S.fmt];D=S.d[S.fmt];M=[];let id=1;
- const gm=(g,p)=>M.push({id:id++,st:'G',g,h:['T',g*f.size+p[0]],a:['T',g*f.size+p[1]]});
- if(f.rounds){for(let r=0;r<f.pairs.length;r+=2)f.groups.forEach((_,g)=>{gm(g,f.pairs[r]);gm(g,f.pairs[r+1])})}
- else f.pairs.forEach(p=>f.groups.forEach((_,g)=>gm(g,p)));
- f.extra.forEach(x=>M.push(Object.assign({id:id++},x)));
- M.forEach((m,i)=>{m.slot=Math.floor(i/f.fields)+(m.st!=='G'&&f.gap?f.gap:0);m.field=i%f.fields})}
+const GL=['А','Б','В','Г'],LG=['Ліга Чемпіонів','Ліга Європи','Ліга Конференцій'];
 const num=v=>v===''||v==null?null:+v;
-const sc=id=>D.sc[id]||{};
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const tm=i=>esc(D.teams[i]||'—');
+const tm=i=>esc(S.teams[i]||'—');
+/* ---------- герби ---------- */
 const PAL=[['#ffd200','#0b0b0b'],['#0b0b0b','#ffd200'],['#ffd200','#1e40af'],['#b91c1c','#ffd200'],['#f5f5f5','#0b0b0b'],['#166534','#ffd200'],['#ffd200','#b91c1c'],['#1e3a8a','#f5f5f5'],['#0b0b0b','#f5f5f5'],['#6b21a8','#ffd200']];
 function hsh(s){let h=7;for(const c of String(s))h=(h*31+c.charCodeAt(0))>>>0;return h}
-function ini(n){const w=String(n).trim().split(/\s+/).filter(Boolean);let r=w.map(x=>/^\d+$/.test(x)?x.slice(-2):(x.length>1&&x===x.toUpperCase()&&/[A-ZА-ЯІЇЄҐ]/.test(x)?x:x[0])).join('').toUpperCase();return r.slice(0,4)||'?'}
 function pat(k,a,b,W,H){const q={0:`<rect x="${W*.2}" width="${W*.2}" height="${H}" fill="${b}"/><rect x="${W*.6}" width="${W*.2}" height="${H}" fill="${b}"/>`,1:`<rect x="${W/2}" width="${W/2}" height="${H}" fill="${b}"/>`,2:`<rect y="${H*.62}" width="${W}" height="${H*.38}" fill="${b}"/>`,3:`<polygon points="0,${H} ${W},0 ${W},${H}" fill="${b}"/>`,4:`<polygon points="0,${H*.55} ${W/2},${H*.3} ${W},${H*.55} ${W},${H*.8} ${W/2},${H*.55} 0,${H*.8}" fill="${b}"/>`,5:`<rect width="${W/2}" height="${H/2}" fill="${b}"/><rect x="${W/2}" y="${H/2}" width="${W/2}" height="${H/2}" fill="${b}"/>`};return `<rect width="${W}" height="${H}" fill="${a}"/>`+q[k]}
+function look(n){const h=hsh(n),l=String(n).toLowerCase();let c=PAL[h%PAL.length];if(/син|блак/.test(l))c=['#1e40af','#ffd200'];else if(/червон/.test(l))c=['#b91c1c','#0b0b0b'];else if(/зелен/.test(l))c=['#166534','#ffd200'];else if(/біл/.test(l))c=['#f5f5f5','#0b0b0b'];return{c,k:(h>>4)%6}}
 let UID=0;
-function look(n){const h=hsh(n),l=String(n).toLowerCase();let c=PAL[h%PAL.length];if(/син|блак/.test(l))c=['#1e40af','#ffd200'];else if(/червон/.test(l))c=['#b91c1c','#0b0b0b'];else if(/зелен/.test(l))c=['#166534','#ffd200'];else if(/біл/.test(l))c=['#f5f5f5','#0b0b0b'];return{c,k:(h>>4)%6,t:ini(n)}}
-function crestSvg(n,sz){const L=look(n),id='c'+(UID++),fs=L.t.length<=2?26:L.t.length===3?21:15;
- return `<svg class="cr" width="${sz}" height="${sz*1.2}" viewBox="0 0 100 120"><defs><clipPath id="${id}"><path d="M50 4L94 16V60C94 92 72 108 50 116C28 108 6 92 6 60V16Z"/></clipPath></defs><g clip-path="url(#${id})">${pat(L.k,L.c[0],L.c[1],100,120)}<rect y="47" width="100" height="28" fill="#0b0b0b"/></g><path d="M50 4L94 16V60C94 92 72 108 50 116C28 108 6 92 6 60V16Z" fill="none" stroke="#ffd200" stroke-width="5"/><path d="M50 22l3 7h7l-6 4 2 7-6-4-6 4 2-7-6-4h7z" fill="#ffd200" stroke="#0b0b0b" stroke-width="1.5"/><text x="50" y="${61+fs*.36}" text-anchor="middle" font-family="Oswald,Arial Narrow,sans-serif" font-weight="700" font-size="${fs}" fill="#ffd200">${esc(L.t)}</text></svg>`}
-function crest(i,sz){const n=D.teams[i]||'',lg=(D.logos||{})[n];return lg?`<span class="cr" style="width:${sz}px;height:${sz*1.2}px"><img src="${lg}" alt=""></span>`:crestSvg(n,sz)}
-function flagSvg(n,w){const L=look(n),id='f'+(UID++);return `<svg class="cr" width="${w}" height="${w*.8}" viewBox="0 0 120 96"><rect x="2" y="0" width="4" height="96" fill="#9a9a9a"/><defs><clipPath id="${id}"><path d="M6 4H116L100 34L116 64H6Z"/></clipPath></defs><g clip-path="url(#${id})"><g transform="translate(6 4)">${pat(L.k,L.c[0],L.c[1],110,60)}</g></g><path d="M6 4H116L100 34L116 64H6Z" fill="none" stroke="#ffd200" stroke-width="3"/><circle cx="46" cy="34" r="17" fill="#0b0b0b" stroke="#ffd200" stroke-width="2.5"/><text x="46" y="40" text-anchor="middle" font-family="Oswald,Arial Narrow,sans-serif" font-weight="700" font-size="${L.t.length<=2?16:L.t.length===3?12:9}" fill="#ffd200">${esc(L.t)}</text></svg>`}
+const BALL=(x,y,r)=>{const P=(k,i)=>{const a=-Math.PI/2+i*2*Math.PI/5;return[(x+Math.cos(a)*r*k).toFixed(1),(y+Math.sin(a)*r*k).toFixed(1)]};const v=[0,1,2,3,4];return `<circle cx="${x}" cy="${y}" r="${r}" fill="#fff"/>${v.map(i=>{const[a1,b1]=P(.38,i),[a2,b2]=P(1,i);return `<line x1="${a1}" y1="${b1}" x2="${a2}" y2="${b2}" stroke="#0b0b0b" stroke-width="${r*.09}"/>`}).join('')}<polygon points="${v.map(i=>P(.38,i).join(',')).join(' ')}" fill="#0b0b0b"/>${v.map(i=>{const q=P(1.02,i+.5);return `<circle cx="${q[0]}" cy="${q[1]}" r="${r*.3}" fill="#0b0b0b"/>`}).join('')}<circle cx="${x}" cy="${y}" r="${r}" fill="none" stroke="#0b0b0b" stroke-width="${r*.14}"/>`};
+const SH='M50 4L94 16V60C94 92 72 108 50 116C28 108 6 92 6 60V16Z';
+function crestSvg(n,sz){const L=look(n),id='c'+(UID++);
+ return `<svg class="cr" width="${sz}" height="${sz*1.2}" viewBox="0 0 100 120"><defs><clipPath id="${id}"><path d="${SH}"/></clipPath></defs><g clip-path="url(#${id})">${pat(L.k,L.c[0],L.c[1],100,120)}</g><path d="${SH}" fill="none" stroke="#ffd200" stroke-width="5"/><circle cx="50" cy="64" r="22" fill="#0b0b0b" stroke="#ffd200" stroke-width="3"/>${BALL(50,64,15)}<path d="M50 18l3 7h7l-6 4 2 7-6-4-6 4 2-7-6-4h7z" fill="#ffd200" stroke="#0b0b0b" stroke-width="1.5"/></svg>`}
+function crest(i,sz){const n=S.teams[i]||'',lg=(S.logos||{})[n];return lg?`<span class="cr" style="width:${sz}px;height:${sz*1.2}px"><img src="${lg}" alt=""></span>`:crestSvg(n,sz)}
+function flagSvg(n,w){const L=look(n),id='f'+(UID++);return `<svg class="cr" width="${w}" height="${w*.8}" viewBox="0 0 120 96"><rect x="2" y="0" width="4" height="96" fill="#9a9a9a"/><defs><clipPath id="${id}"><path d="M6 4H116L100 34L116 64H6Z"/></clipPath></defs><g clip-path="url(#${id})"><g transform="translate(6 4)">${pat(L.k,L.c[0],L.c[1],110,60)}</g></g><path d="M6 4H116L100 34L116 64H6Z" fill="none" stroke="#ffd200" stroke-width="3"/><circle cx="46" cy="34" r="16" fill="#0b0b0b" stroke="#ffd200" stroke-width="2.5"/><path d="M46 23l3 7h7l-6 4 2 7-6-4-6 4 2-7-6-4h7z" fill="#ffd200"/></svg>`}
 const tw=(i,sz)=>`<span class="nmw">${crest(i,sz||18)}<span>${tm(i)}</span></span>`;
-function R(ref){if(ref[0]==='T')return ref[1];const T=GT[ref[1]];return T.full?T.r[ref[2]].i:null}
+/* ---------- структура турніру ---------- */
+let GS,M,GT,LT,PL,INFO;
+function sizes(){const N=S.teams.length,G=+S.G,b=Math.floor(N/G),r=N%G;const a=[];let st=0;for(let g=0;g<G;g++){const n=b+(g<r?1:0);a.push({st,n});st+=n}return a}
+function rr(n){const t=[...Array(n).keys()];if(n%2)t.push(-1);const m=t.length,R=[];for(let r=0;r<m-1;r++){const p=[];for(let i=0;i<m/2;i++){const a=t[i],b=t[m-1-i];if(a>=0&&b>=0)p.push(r%2&&i===0?[b,a]:[a,b])}R.push(p);t.splice(1,0,t.pop())}return R}
+function build(){
+ GS=sizes();M=[];LT=[];
+ GS.forEach((g,gi)=>rr(g.n).forEach((rd,ri)=>rd.forEach(([a,b])=>M.push({key:`g${gi}:${g.st+a}-${g.st+b}`,st:'G',g:gi,h:'T:'+(g.st+a),a:'T:'+(g.st+b),round:ri}))));
+ PL={};const lv=[];
+ const po=S.G<2?'none':S.po==='semis'&&S.G!=2?'places':S.po;
+ const maxN=Math.max(...GS.map(g=>g.n));let off=0,k0=0,ph=0;
+ if(po==='semis'&&GS.every(g=>g.n>=2)){
+  M.push({key:'sf1',st:'P',h:'G:0:0',a:'G:1:1',l:'1/2 фіналу',ko:1,pr:-50});
+  M.push({key:'sf2',st:'P',h:'G:1:0',a:'G:0:1',l:'1/2 фіналу',ko:1,pr:-50});
+  M.push({key:'f3',st:'P',h:'L:sf1',a:'L:sf2',l:'Матч за 3-тє місце',ko:1,pr:-2,pl:[3,4]});
+  M.push({key:'f1',st:'P',h:'W:sf1',a:'W:sf2',l:'ФІНАЛ',ko:1,pr:0,pl:[1,2]});
+  off=4;k0=2;}
+ if(po!=='none'){let li=0;
+  for(let k=k0;k<maxN;k++){const refs=GS.map((g,gi)=>g.n>k?`G:${gi}:${k}`:null).filter(Boolean),c=refs.length;
+   if(c===1)PL[off+1]=refs[0];
+   else if(c===2){const l=off===0?'ФІНАЛ':off===2?'Матч за 3-тє місце':`За ${off+1}-те місце`;M.push({key:`p${k}`,st:'P',h:refs[0],a:refs[1],l,ko:1,pr:-off,pl:[off+1,off+2]})}
+   else if(c===3){const nm=(LG[li]||`Ліга ${li+1}`)+` · місця ${off+1}–${off+3}`;const ms=[[0,1],[2,1],[0,2]].map(([x,y],j)=>({key:`l${k}:${j}`,st:'L',lk:k,h:refs[x],a:refs[y],l:nm,pr:j-off/100}));M.push(...ms);LT.push({k,refs,off,nm,keys:ms.map(m=>m.key)});li++}
+   else{const s1=`p${k}s1`,s2=`p${k}s2`;M.push({key:s1,st:'P',h:refs[0],a:refs[3],l:`1/2 за місця ${off+1}–${off+4}`,ko:1,pr:-50-off},{key:s2,st:'P',h:refs[1],a:refs[2],l:`1/2 за місця ${off+1}–${off+4}`,ko:1,pr:-50-off},{key:`p${k}t`,st:'P',h:'L:'+s1,a:'L:'+s2,l:`За ${off+3}-тє місце`,ko:1,pr:-off-2,pl:[off+3,off+4]},{key:`p${k}f`,st:'P',h:'W:'+s1,a:'W:'+s2,l:off===0?'ФІНАЛ':`За ${off+1}-ше місце`,ko:1,pr:-off,pl:[off+1,off+2]});
+    if(c>4)INFO='Для рівня з більше ніж 4 командами плей-оф спрощено.'}
+   off+=c}}
+ schedule(po);
+}
+function deps(ref){const[p,a]=ref.split(':');if(p==='G')return{g:+a};if(p==='W'||p==='L')return{m:ref.slice(2)};return null}
+function schedule(){
+ const R=+S.rest||0,F=+S.F||1,last={},gEnd={},byKey={};M.forEach(m=>byKey[m.key]=m);
+ const gCount={};M.forEach(m=>{if(m.st==='G')gCount[m.g]=(gCount[m.g]||0)+1});
+ const gDone={};let left=M.length,s=0;
+ M.forEach((m,i)=>{m.slot=null;m.ord=i});
+ while(left&&s<600){
+  const used=new Set();let f=0;
+  const cand=M.filter(m=>m.slot==null).map(m=>{
+   const rk=[m.h,m.a];let ok=true,wait=0;
+   for(const r of rk){const d=deps(r);if(d&&d.g!=null){if(gDone[d.g]!==gCount[d.g]||s<=gEnd[d.g]+R){ok=false}}
+    if(d&&d.m!=null){const x=byKey[d.m];if(x.slot==null||s<=x.slot+R)ok=false}
+    if(last[r]!=null){if(s<=last[r]+R)ok=false;wait+=s-last[r]}else wait+=99}
+   return{m,ok,wait}}).filter(c=>c.ok);
+  const phase=m=>m.st==='G'?0:1;
+  cand.sort((x,y)=>phase(x.m)-phase(y.m)||(x.m.st==='G'?x.m.round-y.m.round:x.m.pr-y.m.pr)||y.wait-x.wait||x.m.ord-y.m.ord);
+  for(const c of cand){if(f>=F)break;const m=c.m;if(used.has(m.h)||used.has(m.a))continue;
+   m.slot=s;m.field=f++;used.add(m.h);used.add(m.a);last[m.h]=s;last[m.a]=s;left--;
+   if(m.st==='G'){gDone[m.g]=(gDone[m.g]||0)+1;gEnd[m.g]=Math.max(gEnd[m.g]??-1,s)}}
+  s++}
+ M.sort((a,b)=>a.slot-b.slot||a.field-b.field);
+}
+const sc=k=>S.sc[k]||{};
+function res(m){const s=sc(m.key),h=num(s.h),a=num(s.a);if(h==null||a==null)return null;if(h!==a)return h>a?1:-1;if(!m.ko)return 0;const ph=num(s.ph),pa=num(s.pa);if(ph==null||pa==null||ph===pa)return null;return ph>pa?1:-1}
+function R_(ref){const[p,a,b]=ref.split(':');if(p==='T')return +a;if(p==='G'){const T=GT[+a];return T&&T.full?T.r[+b].i:null}
+ const m=M.find(x=>x.key===ref.slice(2));const h=R_(m.h),aa=R_(m.a),r=res(m);if(h==null||aa==null||r==null)return null;return(p==='W')===(r===1)?h:aa}
 function tbl(ids,ms){
  const r=ids.map(i=>({i,p:0,w:0,d:0,l:0,f:0,a:0,gp:0}));let done=0;
- const by=i=>r.find(x=>x.i===i);
  if(ids.some(i=>i==null))return{r,full:false};
- ms.forEach(m=>{const s=sc(m.id),h=num(s.h),a=num(s.a);if(h==null||a==null)return;done++;
-  const H=by(R(m.h)),A=by(R(m.a));H.gp++;A.gp++;H.f+=h;H.a+=a;A.f+=a;A.a+=h;
+ const by=i=>r.find(x=>x.i===i);
+ ms.forEach(m=>{const s=sc(m.key),h=num(s.h),a=num(s.a);if(h==null||a==null)return;done++;
+  const H=by(R_(m.h)),A=by(R_(m.a));H.gp++;A.gp++;H.f+=h;H.a+=a;A.f+=a;A.a+=h;
   if(h>a){H.w++;H.p+=3;A.l++}else if(h<a){A.w++;A.p+=3;H.l++}else{H.d++;A.d++;H.p++;A.p++}});
- const h2h=(x,y)=>{const m=ms.find(m=>{const a=R(m.h),b=R(m.a);return(a===x.i&&b===y.i)||(a===y.i&&b===x.i)});if(!m)return 0;const s=sc(m.id),h=num(s.h),a=num(s.a);if(h==null||a==null)return 0;return -Math.sign(R(m.h)===x.i?h-a:a-h)};
+ const h2h=(x,y)=>{const m=ms.find(m=>{const a=R_(m.h),b=R_(m.a);return(a===x.i&&b===y.i)||(a===y.i&&b===x.i)});if(!m)return 0;const s=sc(m.key),h=num(s.h),a=num(s.a);if(h==null||a==null)return 0;return -Math.sign(R_(m.h)===x.i?h-a:a-h)};
  r.sort((x,y)=>{if(y.p!==x.p)return y.p-x.p;if(r.filter(z=>z.p===x.p).length===2){const t=h2h(x,y);if(t)return t}return(y.f-y.a)-(x.f-x.a)||y.f-x.f||x.i-y.i});
  return{r,full:done===ms.length};
 }
-function res(m){const s=sc(m.id),h=num(s.h),a=num(s.a);if(h==null||a==null)return null;if(h!==a)return h>a?1:-1;if(!m.ko)return 0;const ph=num(s.ph),pa=num(s.pa);if(ph==null||pa==null||ph===pa)return null;return ph>pa?1:-1}
 function t2(min){min=((min%1440)+1440)%1440;return String(min/60|0).padStart(2,'0')+':'+String(min%60).padStart(2,'0')}
-function base(){const[H,Mi]=(D.start||'09:00').split(':').map(Number);return H*60+Mi}
-const time=s=>t2(base()+s*(+D.slot||0));
-const refLbl=r=>r[0]==='G'?f.groups[r[1]]+(r[2]+1):'';
-function inp(id,k){const v=sc(id)[k];return `<input inputmode="numeric" data-id="${id}" data-f="${k}" value="${v??''}">`}
+const base=()=>{const[H,Mi]=(S.start||'09:00').split(':').map(Number);return H*60+Mi};
+const time=s=>t2(base()+s*(+S.slot||0));
+const refLbl=r=>{const[p,a,b]=r.split(':');if(p==='G')return GL[+a]+(+b+1);const m=M.find(x=>x.key===r.slice(2));return(p==='W'?'Перем. ':'Пр. ')+(m?m.l.replace(/ ·.*/,''):'')};
+function inp(k,f){const v=sc(k)[f];return `<input inputmode="numeric" data-k="${k}" data-f="${f}" value="${v??''}">`}
 function render(){
- build();
- document.getElementById('hName').textContent=D.name||'Турнір';
- document.getElementById('hSub').textContent=[D.sub,S.fmt==='8'?'8 команд · 2 групи · 1 поле':'9 команд · 3 групи · 2 поля'].filter(Boolean).join(' · ');
- GT=f.groups.map((_,g)=>tbl([...Array(f.size)].map((_,j)=>g*f.size+j),M.filter(m=>m.st==='G'&&m.g===g)));
- LT=S.fmt==='9'?[0,1,2].map(k=>tbl(f.groups.map((_,g)=>R(['G',g,k])),M.filter(m=>m.st==='L'&&m.k===k))):[];
- let h=`<div class="brk">${t2(base()-(+D.gath||0))} — збір команд</div>`,stage='G';
+ INFO='';build();
+ document.getElementById('hName').textContent=S.name||'Турнір';
+ document.getElementById('hSub').textContent=[S.sub,`${S.teams.length} команд · ${S.G} ${S.G==1?'група':'групи'} · ${S.F} ${S.F==1?'поле':'поля'}`].filter(Boolean).join(' · ');
+ GT=GS.map((g,gi)=>tbl([...Array(g.n)].map((_,j)=>g.st+j),M.filter(m=>m.st==='G'&&m.g===gi)));
+ const LTT=LT.map(L=>Object.assign(tbl(L.refs.map(R_),M.filter(m=>L.keys.includes(m.key))),{L}));
+ let h=`<div class="brk">${t2(base()-(+S.gath||0))} — збір команд</div>`,prevS=-1,shownP=false;
  M.forEach(m=>{
-  if(m.st!==stage){stage=m.st;if(f.gap)h+=`<div class="brk">${time(m.slot-f.gap)} — перерва ${f.gap*(+D.slot||0)} хв</div>`;h+=`<div class="brk">${m.st==='P'?'Ігри за місця':'Розподіл по лігах: ЛЧ (1-ші місця), ЛЄ (2-гі), ЛК (3-ті)'}</div>`}
-  const hi=R(m.h),ai=R(m.a),r=res(m),s=sc(m.id);
+  if(m.slot-prevS>1){const gap=m.slot-prevS-1;h+=`<div class="brk">${time(prevS+1)} — перерва ${gap*(+S.slot||0)} хв</div>`}
+  if(m.st!=='G'&&!shownP){shownP=true;h+=`<div class="brk">${LT.length?'Ігри за місця · ліги за місцями в групах':'Ігри за місця'}</div>`}
+  prevS=m.slot;
+  const hi=R_(m.h),ai=R_(m.a),r=res(m),s=sc(m.key);
   const nm=(ref,i)=>i!=null?tw(i):`<span class="n">${refLbl(ref)}</span>`;
   const top=m.st==='G'?'':`<span class="lbl">${m.l}</span>`;
-  const gt=m.st==='G'?`<span class="tag g${m.g}">${f.groups[m.g]}</span>`:'';
-  const fld=f.fields>1?`<small>П${m.field+1}</small>`:'';
+  const gt=m.st==='G'&&S.G>1?`<small><span class="tag g${m.g}">${GL[m.g]}</span></small>`:'';
+  const fld=S.F>1?`<small>П${m.field+1}</small>`:'';
   const draw=m.ko&&num(s.h)!=null&&num(s.h)===num(s.a);
-  h+=`<div class="m">${top}<span class="t">${time(m.slot)}${fld}${gt?'<small>'+gt+'</small>':''}</span><span class="h ${r===1?'win':''}">${nm(m.h,hi)}</span><span class="sc">${inp(m.id,'h')}:${inp(m.id,'a')}</span><span class="${r===-1?'win':''}">${nm(m.a,ai)}</span>${draw?`<span class="pen">пен. ${inp(m.id,'ph')}:${inp(m.id,'pa')}</span>`:''}</div>`});
- h+=`<div class="brk">🏆 ${time(M[M.length-1].slot+1)} — урочиста церемонія нагородження</div>`;
+  h+=`<div class="m">${top}<span class="t">${time(m.slot)}${fld}${gt}</span><span class="h ${r===1?'win':''}">${nm(m.h,hi)}</span><span class="sc">${inp(m.key,'h')}:${inp(m.key,'a')}</span><span class="${r===-1?'win':''}">${nm(m.a,ai)}</span>${draw?`<span class="pen">пен. ${inp(m.key,'ph')}:${inp(m.key,'pa')}</span>`:''}</div>`});
+ const end=M.length?M[M.length-1].slot+1:0;
+ h+=`<div class="brk">🏆 ${time(end)} — урочиста церемонія нагородження</div>`;
  document.getElementById('list').innerHTML=h;
- const tb=(T,title,cls,lab)=>`<div class="card"><h2>${title}</h2><table><tr><th>#</th><th class="l">Команда</th><th>І</th><th>В</th><th>Н</th><th>П</th><th>М</th><th>О</th></tr>${T.r.map((x,j)=>`<tr><td>${j+1}</td><td class="l">${x.i!=null?tw(x.i,16):'<span class=n>'+lab[j]+'</span>'}</td><td>${x.gp}</td><td>${x.w}</td><td>${x.d}</td><td>${x.l}</td><td>${x.f}–${x.a}</td><td>${x.p}</td></tr>`).join('')}</table></div>`;
- let th=GT.map((T,g)=>tb(T,`<span class="tag g${g}">${f.groups[g]}</span>Група ${f.groups[g]}`,'',[])).join('');
- LT.forEach((T,k)=>th+=tb(T,`${['🥇','🥈','🥉'][k]} ${LG[k]}`,'',f.groups.map(g=>g+(k+1))));
- document.getElementById('tables').innerHTML=`<div class="card"><h2>Команди</h2><div class="gal">${D.teams.map((t,i)=>`<div class="tc"><div class="row">${crest(i,56)}${flagSvg(t,80)}</div><b>${tm(i)}</b><div class="n">Група ${f.groups[i/f.size|0]}</div></div>`).join('')}</div></div>`+th;
+ const tb=(T,title,lab)=>`<div class="card"><h2>${title}</h2><table><tr><th>#</th><th class="l">Команда</th><th>І</th><th>В</th><th>Н</th><th>П</th><th>М</th><th>О</th></tr>${T.r.map((x,j)=>`<tr><td>${j+1}</td><td class="l">${x.i!=null?tw(x.i,16):'<span class=n>'+(lab[j]||'')+'</span>'}</td><td>${x.gp}</td><td>${x.w}</td><td>${x.d}</td><td>${x.l}</td><td>${x.f}–${x.a}</td><td>${x.p}</td></tr>`).join('')}</table></div>`;
+ let th=`<div class="card"><h2>Команди</h2><div class="gal">${S.teams.map((t,i)=>{const g=GS.findIndex(x=>i>=x.st&&i<x.st+x.n);return `<div class="tc"><div class="row">${crest(i,56)}${flagSvg(t,80)}</div><b>${tm(i)}</b>${S.G>1?`<div class="n">Група ${GL[g]}</div>`:''}</div>`}).join('')}</div></div>`;
+ th+=GT.map((T,g)=>tb(T,S.G>1?`<span class="tag g${g}">${GL[g]}</span> Група ${GL[g]}`:'Турнірна таблиця',[])).join('');
+ LTT.forEach(T=>th+=tb(T,T.L.nm,T.L.refs.map(refLbl)));
+ document.getElementById('tables').innerHTML=th;
+ // підсумкові місця
  const pl={};
- if(S.fmt==='8')M.filter(m=>m.p).forEach(m=>{const hi=R(m.h),ai=R(m.a),r=res(m);if(hi==null||ai==null||r==null)return;pl[m.p[0]]=r===1?hi:ai;pl[m.p[1]]=r===1?ai:hi});
- else LT.forEach((T,k)=>{if(T.full)T.r.forEach((x,j)=>pl[k*3+j+1]=x.i)});
- const med=['🥇','🥈','🥉'],n=D.teams.length;
- document.getElementById('pod').innerHTML=[...Array(n)].map((_,j)=>{const p=j+1;const lg=S.fmt==='9'?` <span class="n">${LS[(p-1)/3|0]}</span>`:'';return `<div><span>${med[p-1]||p+'.'} місце${lg}</span><b>${pl[p]!=null?tw(pl[p],18):'—'}</b></div>`}).join('');
+ Object.entries(PL).forEach(([p,ref])=>{const i=R_(ref);if(i!=null)pl[p]=i});
+ M.filter(m=>m.pl).forEach(m=>{const hi=R_(m.h),ai=R_(m.a),r=res(m);if(hi==null||ai==null||r==null)return;pl[m.pl[0]]=r===1?hi:ai;pl[m.pl[1]]=r===1?ai:hi});
+ LTT.forEach(T=>{if(T.full)T.r.forEach((x,j)=>pl[T.L.off+j+1]=x.i)});
+ if(S.G==1&&GT[0].full)GT[0].r.forEach((x,j)=>pl[j+1]=x.i);
+ const anyPl=S.G==1||M.some(m=>m.st!=='G');
+ document.getElementById('podCard').classList.toggle('hide',!anyPl);
+ const med=['🥇','🥈','🥉'];
+ document.getElementById('pod').innerHTML=S.teams.map((_,j)=>{const p=j+1;return `<div><span>${med[p-1]||p+'.'} місце</span><b>${pl[p]!=null?tw(pl[p],18):'—'}</b></div>`}).join('');
+ const gm=M.filter(m=>m.st==='G').length,pm=M.length-gm,per=S.teams.length?(2*M.length/S.teams.length):0;
+ document.getElementById('fmtInfo').textContent=`Матчів: ${M.length} (групи ${gm}${pm?', за місця '+pm:''}). Слотів: ${end}. Триватиме ≈ ${Math.floor(end*S.slot/60)} год ${end*S.slot%60} хв, нагородження о ${time(end)}. ${S.po==='semis'&&S.G!=2?'Півфінали доступні лише для 2 груп — застосовано ігри за місця. ':''}${INFO}`;
 }
-function renderSet(){build();
- ['fmt','name','sub','start','slot','gath'].forEach(k=>document.getElementById(k).value=k==='fmt'?S.fmt:(D[k]??''));
- document.getElementById('teams').innerHTML=D.teams.map((t,i)=>{const g=i/f.size|0;return `<div class="trow"><span id="cp${i}">${crest(i,30)}</span><div><label>Група ${f.groups[g]} · ${f.groups[g]}${i%f.size+1}</label><input data-ti="${i}" value="${esc(t)}"></div><label class="up">логотип<input type="file" accept="image/*" data-li="${i}"></label></div>`}).join('');
- document.getElementById('drawMsg').textContent='';}
-document.getElementById('list').addEventListener('change',e=>{const t=e.target;if(!t.dataset.id)return;const id=t.dataset.id;D.sc[id]=D.sc[id]||{};D.sc[id][t.dataset.f]=t.value.trim();save();render()});
-document.getElementById('teams').addEventListener('input',e=>{const i=e.target.dataset.ti;if(i==null)return;D.teams[i]=e.target.value;document.getElementById('cp'+i).innerHTML=crest(+i,30);save();render()});
-document.getElementById('teams').addEventListener('change',e=>{const i=e.target.dataset.li;if(i==null||!e.target.files[0])return;const fr=new FileReader();fr.onload=()=>{const im=new Image();im.onload=()=>{const c=document.createElement('canvas'),k=Math.min(1,128/Math.max(im.width,im.height));c.width=im.width*k;c.height=im.height*k;c.getContext('2d').drawImage(im,0,0,c.width,c.height);D.logos=D.logos||{};D.logos[D.teams[i]]=c.toDataURL('image/png');save();renderSet();render()};im.src=fr.result};fr.readAsDataURL(e.target.files[0])});
-document.getElementById('fmt').addEventListener('change',e=>{S.fmt=e.target.value;save();renderSet();render()});
-['name','sub','start','slot','gath'].forEach(k=>document.getElementById(k).addEventListener('change',e=>{D[k]=e.target.value;save();render()}));
+function renderSet(){
+ ['name','sub','G','F','po','rest','start','slot','gath'].forEach(k=>document.getElementById(k).value=S[k]??'');
+ document.getElementById('N').value=S.teams.length;
+ GS=sizes();
+ document.getElementById('teams').innerHTML=S.teams.map((t,i)=>{const g=GS.findIndex(x=>i>=x.st&&i<x.st+x.n);const lab=S.G>1?`Група ${GL[g]} · ${GL[g]}${i-GS[g].st+1}`:`Команда ${i+1}`;return `<div class="trow"><span id="cp${i}">${crest(i,30)}</span><div><label>${lab}</label><input data-ti="${i}" value="${esc(t)}"></div><label class="up">логотип<input type="file" accept="image/*" data-li="${i}"></label></div>`}).join('');
+}
+document.getElementById('list').addEventListener('change',e=>{const t=e.target;if(!t.dataset.k)return;const k=t.dataset.k;S.sc[k]=S.sc[k]||{};S.sc[k][t.dataset.f]=t.value.trim();save();render()});
+document.getElementById('teams').addEventListener('input',e=>{const i=e.target.dataset.ti;if(i==null)return;S.teams[i]=e.target.value;document.getElementById('cp'+i).innerHTML=crest(+i,30);save();render()});
+document.getElementById('teams').addEventListener('change',e=>{const i=e.target.dataset.li;if(i==null||!e.target.files[0])return;const fr=new FileReader();fr.onload=()=>{const im=new Image();im.onload=()=>{const c=document.createElement('canvas'),k=Math.min(1,128/Math.max(im.width,im.height));c.width=im.width*k;c.height=im.height*k;c.getContext('2d').drawImage(im,0,0,c.width,c.height);S.logos=S.logos||{};S.logos[S.teams[i]]=c.toDataURL('image/png');save();renderSet();render()};im.src=fr.result};fr.readAsDataURL(e.target.files[0])});
+['name','sub','po','start','gath'].forEach(k=>document.getElementById(k).addEventListener('change',e=>{S[k]=e.target.value;save();render()}));
+['G','F','rest','slot'].forEach(k=>document.getElementById(k).addEventListener('change',e=>{S[k]=Math.max(0,+e.target.value||0);if(k!=='rest')S[k]=Math.max(k==='slot'?5:1,S[k]);if(k==='G')S.G=Math.min(S.G,Math.floor(S.teams.length/2)||1);save();renderSet();render()}));
+document.getElementById('N').addEventListener('change',e=>{let n=Math.min(24,Math.max(3,+e.target.value||8));while(S.teams.length<n)S.teams.push('Команда '+(S.teams.length+1));S.teams.length=n;S.G=Math.min(S.G,Math.floor(n/2));save();renderSet();render()});
+document.querySelectorAll('[data-pre]').forEach(b=>b.onclick=()=>{const p=JSON.parse(JSON.stringify(PRE[b.dataset.pre]));S=Object.assign(S,p,{sc:{}});save();renderSet();render()});
 function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){let j;try{const u=new Uint32Array(1);crypto.getRandomValues(u);j=u[0]%(i+1)}catch(e){j=Math.floor(Math.random()*(i+1))}[a[i],a[j]]=[a[j],a[i]]}return a}
-const hasSc=()=>Object.values(D.sc).some(s=>Object.values(s).some(v=>v!==''));
-document.getElementById('draw').onclick=e=>{const b=e.target,msg=document.getElementById('drawMsg');if(hasSc()&&!b.dataset.c){b.dataset.c=1;msg.textContent='Вже є рахунки — вони будуть очищені. Натисніть ще раз.';return}delete b.dataset.c;D.teams=shuffle(D.teams);D.sc={};save();renderSet();render();msg.textContent='Групи сформовано о '+new Date().toLocaleTimeString('uk-UA',{hour:'2-digit',minute:'2-digit'})};
-document.getElementById('reset').onclick=e=>{const b=e.target;if(b.dataset.c){D.sc={};save();render();b.textContent='Очистити рахунки';delete b.dataset.c}else{b.dataset.c=1;b.textContent='Натисніть ще раз для підтвердження'}};
+const hasSc=()=>Object.values(S.sc).some(s=>Object.values(s).some(v=>v!==''));
+document.getElementById('draw').onclick=e=>{const b=e.target,msg=document.getElementById('drawMsg');if(hasSc()&&!b.dataset.c){b.dataset.c=1;msg.textContent='Вже є рахунки — вони будуть очищені. Натисніть ще раз.';return}delete b.dataset.c;S.teams=shuffle(S.teams);S.sc={};save();renderSet();render();msg.textContent='Групи сформовано о '+new Date().toLocaleTimeString('uk-UA',{hour:'2-digit',minute:'2-digit'})};
+document.getElementById('reset').onclick=e=>{const b=e.target;if(b.dataset.c){S.sc={};save();render();b.textContent='Очистити рахунки';delete b.dataset.c}else{b.dataset.c=1;b.textContent='Натисніть ще раз для підтвердження'}};
 document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tabs button').forEach(x=>x.classList.toggle('on',x===b));['sch','tab','set'].forEach(s=>document.getElementById(s).classList.toggle('hide',s!==b.dataset.t))});
 renderSet();render();
 </script>
