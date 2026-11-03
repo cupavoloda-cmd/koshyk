@@ -75,6 +75,9 @@ table{width:100%;border-collapse:collapse;font-size:14px}th,td{padding:6px 4px;t
 <div style="margin-top:10px"><button class="btn pri" id="draw">🎲 Жеребкування</button> <span class="n" id="drawMsg"></span></div></div>
 <div class="card"><button class="btn" id="reset">Очистити рахунки</button> <span class="n">Дані зберігаються лише в цьому браузері.</span></div>
 </section>
+<div class="card hide" id="auth"><p class="n" id="live" style="margin:0 0 8px"></p>
+<div id="authIn"><label>Вхід для організаторів (редагування)</label><div style="display:flex;gap:6px"><input type="password" id="pw" placeholder="Пароль"><button class="btn pri" id="pwBtn">Увійти</button></div><span class="n" id="pwMsg"></span></div>
+<div id="authOut" class="hide"><span class="n">Ви редагуєте — зміни бачать усі.</span> <button class="btn" id="logout">Вийти</button></div></div>
 </main>
 <script>
 const KEY='tourn-v3';
@@ -83,7 +86,19 @@ const PRE={
  '9':{name:'Franko Cup',sub:'2015 р.н.',N:9,G:3,F:2,po:'places',rest:1,start:'09:00',slot:25,gath:20,teams:['Рух 2015','ДЮСШ 3','Рух Черніїв','Вікторія','Ніка Каскад','Бельгія','Рух 2016','Прикарпаття','Вікторія Угорники']}};
 let S=Object.assign(JSON.parse(JSON.stringify(PRE['8'])),{sc:{},logos:{}});
 try{const s=JSON.parse(localStorage.getItem(KEY));if(s&&s.teams)S=Object.assign(S,s)}catch(e){}
-const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+const API=/^https?:$/.test(location.protocol)&&!/claude|anthropic/.test(location.host)?'/api/t/franko':null;
+let EKEY='',EDIT=false,dirtyAt=0,pushT=null;try{EKEY=localStorage.getItem('fc-key')||''}catch(e){}
+const canEdit=()=>!API||EDIT;
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}if(API&&EDIT){dirtyAt=Date.now();clearTimeout(pushT);pushT=setTimeout(push,700)}};
+async function push(){try{const r=await fetch(API,{method:'PUT',headers:{'x-key':EKEY,'content-type':'application/json'},body:JSON.stringify(S)});stat(r.ok?'✓ Збережено для всіх о '+new Date().toLocaleTimeString('uk-UA',{hour:'2-digit',minute:'2-digit'}):'⚠ Не збережено ('+r.status+')')}catch(e){stat('⚠ Немає зв\'язку — зміни не збережено')}}
+function stat(t){const el=document.getElementById('live');if(el)el.textContent=t}
+async function pull(first){if(!API||document.hidden)return;if(!first&&Date.now()-dirtyAt<5000)return;
+ if(document.activeElement&&document.activeElement.tagName==='INPUT'&&EDIT)return;
+ try{const r=await fetch(API,{cache:'no-store'});if(!r.ok)throw 0;const d=await r.json();if(!d&&EDIT&&first){push()}if(d&&d.teams){const was=JSON.stringify(S);S=Object.assign(S,d);if(JSON.stringify(S)!==was||first){renderSet();render()}}
+  if(!EDIT)stat('🟢 Наживо · оновлено о '+new Date().toLocaleTimeString('uk-UA',{hour:'2-digit',minute:'2-digit',second:'2-digit'}))}catch(e){if(!EDIT)stat('⚠ Немає зв\'язку з сервером')}}
+async function login(k){try{const r=await fetch(API+'/check',{method:'POST',headers:{'x-key':k}});if(r.ok){EKEY=k;EDIT=true;try{localStorage.setItem('fc-key',k)}catch(e){}}else{EDIT=false}}catch(e){EDIT=false}applyMode();return EDIT}
+function applyMode(){const ro=!canEdit();document.querySelector('[data-t=set]').classList.toggle('hide',ro);if(ro&&!document.getElementById('set').classList.contains('hide'))document.querySelector('[data-t=sch]').click();
+ const a=document.getElementById('auth');a.classList.toggle('hide',!API);document.getElementById('authIn').classList.toggle('hide',EDIT);document.getElementById('authOut').classList.toggle('hide',!EDIT);render()}
 const GL=['А','Б','В','Г'],LG=['Ліга Чемпіонів','Ліга Європи','Ліга Конференцій'];
 const num=v=>v===''||v==null?null:+v;
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -168,7 +183,7 @@ function t2(min){min=((min%1440)+1440)%1440;return String(min/60|0).padStart(2,'
 const base=()=>{const[H,Mi]=(S.start||'09:00').split(':').map(Number);return H*60+Mi};
 const time=s=>t2(base()+s*(+S.slot||0));
 const refLbl=r=>{const[p,a,b]=r.split(':');if(p==='G')return GL[+a]+(+b+1);const m=M.find(x=>x.key===r.slice(2));return(p==='W'?'Перем. ':'Пр. ')+(m?m.l.replace(/ ·.*/,''):'')};
-function inp(k,f){const v=sc(k)[f];return `<input inputmode="numeric" data-k="${k}" data-f="${f}" value="${v??''}">`}
+function inp(k,f){const v=sc(k)[f];return canEdit()?`<input inputmode="numeric" data-k="${k}" data-f="${f}" value="${v??''}">`:`<input readonly tabindex="-1" value="${v??''}">`}
 function render(){
  INFO='';build();
  document.getElementById('hName').textContent=S.name||'Турнір';
@@ -226,7 +241,10 @@ const hasSc=()=>Object.values(S.sc).some(s=>Object.values(s).some(v=>v!==''));
 document.getElementById('draw').onclick=e=>{const b=e.target,msg=document.getElementById('drawMsg');if(hasSc()&&!b.dataset.c){b.dataset.c=1;msg.textContent='Вже є рахунки — вони будуть очищені. Натисніть ще раз.';return}delete b.dataset.c;S.teams=shuffle(S.teams);S.sc={};save();renderSet();render();msg.textContent='Групи сформовано о '+new Date().toLocaleTimeString('uk-UA',{hour:'2-digit',minute:'2-digit'})};
 document.getElementById('reset').onclick=e=>{const b=e.target;if(b.dataset.c){S.sc={};save();render();b.textContent='Очистити рахунки';delete b.dataset.c}else{b.dataset.c=1;b.textContent='Натисніть ще раз для підтвердження'}};
 document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tabs button').forEach(x=>x.classList.toggle('on',x===b));['sch','tab','set'].forEach(s=>document.getElementById(s).classList.toggle('hide',s!==b.dataset.t))});
+document.getElementById('pwBtn').onclick=async()=>{const ok=await login(document.getElementById('pw').value.trim());document.getElementById('pwMsg').textContent=ok?'':'Невірний пароль або немає зв\'язку'};
+document.getElementById('logout').onclick=()=>{EDIT=false;EKEY='';try{localStorage.removeItem('fc-key')}catch(e){}applyMode()};
 renderSet();render();
+if(API){applyMode();(EKEY?login(EKEY):Promise.resolve()).then(()=>pull(true));setInterval(()=>pull(false),8000);document.addEventListener('visibilitychange',()=>pull(false))}
 </script>
 </body>
 </html>

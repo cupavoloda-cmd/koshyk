@@ -1,6 +1,10 @@
 {
-  // Cloudflare публікує лише папку site (статичний застосунок «Кошик»)
+  // Cloudflare публікує папку site (застосунок «Кошик»/WeekEat і сайт турніру /franko-cup/)
+  // worker.js додає лише /api/t/... для живих рахунків турніру; решта — статичні файли як раніше
   "name": "wild-sea-a0f8",
   "compatibility_date": "2026-11-01",
-  "assets": { "directory": "./site" }
+  "main": "worker.js",
+  "assets": { "directory": "./site", "binding": "ASSETS" },
+  "durable_objects": { "bindings": [ { "name": "STORE", "class_name": "Store" } ] },
+  "migrations": [ { "tag": "v1", "new_sqlite_classes": ["Store"] } ]
 }
