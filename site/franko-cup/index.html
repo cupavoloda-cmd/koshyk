@@ -67,6 +67,9 @@ table{width:100%;border-collapse:collapse;font-size:14px}th,td{padding:6px 4px;t
 <div><label>Назва</label><input id="name"></div>
 <div><label>Підзаголовок (дата, рік народження)</label><input id="sub"></div>
 </div></div>
+<div class="card"><h2>Мої шаблони</h2><p class="n" style="margin:0 0 6px">Збережіть поточні налаштування (назва, формат, час, перерви, команди, логотипи) і потім завантажуйте їх одним натиском. Рахунки в шаблон не входять.</p>
+<div style="display:flex;gap:6px"><input id="tplName" placeholder="Назва шаблону, напр. Franko Cup 2016"><button class="btn pri" id="tplSave">Зберегти</button></div>
+<div id="tplList" style="margin-top:8px"></div><span class="n" id="tplMsg"></span></div>
 <div class="card"><h2>Формат</h2><div class="grid2">
 <div><label>Кількість команд</label><input type="number" id="N" min="3" max="24"></div>
 <div><label>Кількість груп</label><select id="G"><option>1</option><option>2</option><option>3</option><option>4</option></select></div>
@@ -258,6 +261,15 @@ document.getElementById('teams').addEventListener('change',e=>{const i=e.target.
 ['name','sub','po','start','gath','brk'].forEach(k=>document.getElementById(k).addEventListener('change',e=>{S[k]=e.target.value;save();render()}));
 ['G','F','rest','slot'].forEach(k=>document.getElementById(k).addEventListener('change',e=>{S[k]=Math.max(0,+e.target.value||0);if(k!=='rest')S[k]=Math.max(k==='slot'?5:1,S[k]);if(k==='G')S.G=Math.min(S.G,Math.floor(S.teams.length/2)||1);save();renderSet();render()}));
 document.getElementById('N').addEventListener('change',e=>{let n=Math.min(24,Math.max(3,+e.target.value||8));while(S.teams.length<n)S.teams.push('Команда '+(S.teams.length+1));S.teams.length=n;S.G=Math.min(S.G,Math.floor(n/2));save();renderSet();render()});
+/* ---------- шаблони ---------- */
+const TPL_API=API?API+'-tpl':null;let TPL=[];
+const tplFields=['name','sub','G','F','po','rest','start','slot','gath','brk','brks','teams','logos'];
+async function tplLoad(){try{if(TPL_API){const r=await fetch(TPL_API,{cache:'no-store'});const d=await r.json();TPL=(d&&d.list)||[]}else TPL=JSON.parse(localStorage.getItem('tourn-tpl')||'[]')}catch(e){}tplRender()}
+async function tplStore(){try{if(TPL_API){const r=await fetch(TPL_API,{method:'PUT',headers:{'x-key':EKEY,'content-type':'application/json'},body:JSON.stringify({list:TPL})});if(!r.ok)throw r.status}else localStorage.setItem('tourn-tpl',JSON.stringify(TPL));return true}catch(e){document.getElementById('tplMsg').textContent='⚠ Не вдалося зберегти шаблон';return false}}
+function tplRender(){const el=document.getElementById('tplList');if(!el)return;el.innerHTML=TPL.length?TPL.map((t,i)=>`<div style="display:flex;gap:6px;align-items:center;padding:6px 0;border-bottom:1px solid var(--line)"><div style="flex:1"><b>${esc(t.title)}</b><div class="n">${t.data.teams.length} команд · ${t.data.G} гр. · ${t.data.F} пол. · ${new Date(t.at).toLocaleDateString('uk-UA')}</div></div><button class="btn" data-tl="${i}">Завантажити</button><button class="btn" data-td="${i}" title="Видалити">✕</button></div>`).join(''):'<span class="n">Шаблонів ще немає.</span>'}
+document.getElementById('tplSave').onclick=async()=>{const nm=document.getElementById('tplName').value.trim()||(S.name+' '+new Date().toLocaleDateString('uk-UA'));const data={};tplFields.forEach(k=>data[k]=JSON.parse(JSON.stringify(S[k]??null)));const ex=TPL.findIndex(t=>t.title===nm);const it={title:nm,at:Date.now(),data};if(ex>=0)TPL[ex]=it;else TPL.unshift(it);if(await tplStore()){document.getElementById('tplMsg').textContent=(ex>=0?'Шаблон оновлено: ':'Збережено шаблон: ')+nm;document.getElementById('tplName').value=''}tplRender()};
+document.getElementById('tplList').addEventListener('click',async e=>{const b=e.target;if(b.dataset.tl!=null){const t=TPL[+b.dataset.tl];if(hasSc()&&!b.dataset.c){b.dataset.c=1;b.textContent='Рахунки очистяться — ще раз';return}const d=JSON.parse(JSON.stringify(t.data));tplFields.forEach(k=>{if(d[k]!=null)S[k]=d[k]});S.sc={};save();renderSet();render();document.getElementById('tplMsg').textContent='Завантажено: '+t.title}
+ if(b.dataset.td!=null){if(!b.dataset.c){b.dataset.c=1;b.textContent='Точно?';return}TPL.splice(+b.dataset.td,1);await tplStore();tplRender()}});
 document.querySelectorAll('[data-pre]').forEach(b=>b.onclick=()=>{const p=JSON.parse(JSON.stringify(PRE[b.dataset.pre]));S=Object.assign(S,p,{sc:{}});save();renderSet();render()});
 function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){let j;try{const u=new Uint32Array(1);crypto.getRandomValues(u);j=u[0]%(i+1)}catch(e){j=Math.floor(Math.random()*(i+1))}[a[i],a[j]]=[a[j],a[i]]}return a}
 const hasSc=()=>Object.values(S.sc).some(s=>Object.values(s).some(v=>v!==''));
@@ -267,7 +279,7 @@ document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{document.que
 document.getElementById('pwBtn').onclick=async()=>{const ok=await login(document.getElementById('pw').value.trim());document.getElementById('pwMsg').textContent=ok?'':'Невірний пароль або немає зв\'язку'};
 document.getElementById('logout').onclick=()=>{EDIT=false;EKEY='';try{localStorage.removeItem('fc-key')}catch(e){}applyMode()};
 renderSet();render();
-if(API){applyMode();(EKEY?login(EKEY):Promise.resolve()).then(()=>pull(true));setInterval(()=>pull(false),8000);document.addEventListener('visibilitychange',()=>pull(false))}
+tplLoad();if(API){applyMode();(EKEY?login(EKEY):Promise.resolve()).then(()=>pull(true));setInterval(()=>pull(false),8000);document.addEventListener('visibilitychange',()=>pull(false))}
 </script>
 </body>
 </html>
