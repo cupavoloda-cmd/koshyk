@@ -9,7 +9,7 @@
 :root{--bg:#0b0b0b;--card:#161616;--ink:#fff;--mut:#9a9a9a;--acc:#ffd200;--on:#0b0b0b;--line:#2a2a2a;--g0:#3a3200;--g1:#2a2a2a;--g2:#40300a;--g3:#1d2a3a}
 *{box-sizing:border-box}body{margin:0;font:15px/1.45 Montserrat,system-ui,sans-serif;color:var(--ink);background:var(--bg) repeating-linear-gradient(135deg,transparent 0 38px,rgba(255,210,0,.035) 38px 40px)}
 h1,h2,.tabs button,.lbl,.brk,.btn{font-family:Oswald,Montserrat,sans-serif;text-transform:uppercase;letter-spacing:.04em}
-header{background:#000;border-bottom:4px solid var(--acc);padding:22px 16px}header h1{margin:0;font-size:26px;color:var(--acc)}header p{margin:4px 0 0;color:#ddd;font-size:13px;text-transform:uppercase;letter-spacing:.06em}
+header{background:#000;border-bottom:4px solid var(--acc);padding:22px 16px}header h1{margin:0;font-size:26px;color:var(--acc)}header h1 svg{margin:-6px 0 2px -4px}header p{margin:4px 0 0;color:#ddd;font-size:13px;text-transform:uppercase;letter-spacing:.06em}
 main{max-width:900px;margin:auto;padding:12px}
 .card{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--acc);border-radius:12px;padding:12px;margin-bottom:12px}
 h2{font-size:16px;margin:0 0 10px}
@@ -117,6 +117,8 @@ function crestSvg(n,sz){const L=look(n),id='c'+(UID++);
  return `<svg class="cr" width="${sz}" height="${sz*1.2}" viewBox="0 0 100 120"><defs><clipPath id="${id}"><path d="${SH}"/></clipPath></defs><g clip-path="url(#${id})">${pat(L.k,L.c[0],L.c[1],100,120)}</g><path d="${SH}" fill="none" stroke="#ffd200" stroke-width="5"/><circle cx="50" cy="64" r="22" fill="#0b0b0b" stroke="#ffd200" stroke-width="3"/>${BALL(50,64,15)}<path d="M50 18l3 7h7l-6 4 2 7-6-4-6 4 2-7-6-4h7z" fill="#ffd200" stroke="#0b0b0b" stroke-width="1.5"/></svg>`}
 function crest(i,sz){const n=S.teams[i]||'',lg=(S.logos||{})[n];return lg?`<span class="cr" style="width:${sz}px;height:${sz*1.2}px"><img src="${lg}" alt=""></span>`:crestSvg(n,sz)}
 function flagSvg(n,w){const L=look(n),id='f'+(UID++);return `<svg class="cr" width="${w}" height="${w*.8}" viewBox="0 0 120 96"><rect x="2" y="0" width="4" height="96" fill="#9a9a9a"/><defs><clipPath id="${id}"><path d="M6 4H116L100 34L116 64H6Z"/></clipPath></defs><g clip-path="url(#${id})"><g transform="translate(6 4)">${pat(L.k,L.c[0],L.c[1],110,60)}</g></g><path d="M6 4H116L100 34L116 64H6Z" fill="none" stroke="#ffd200" stroke-width="3"/><circle cx="46" cy="34" r="16" fill="#0b0b0b" stroke="#ffd200" stroke-width="2.5"/><path d="M46 23l3 7h7l-6 4 2 7-6-4-6 4 2-7-6-4h7z" fill="#ffd200"/></svg>`}
+function LOGO(){const R='41,6 43,20 46,24 46,36 49,40 49,56 52,60 52,74 56,78 56,94',L=R.split(' ').reverse().map(p=>{const[x,y]=p.split(',');return (82-x)+','+y}).join(' ');
+ return `<svg viewBox="0 0 360 124" style="width:100%;max-width:440px;display:block" role="img"><polygon points="${R} ${L}" fill="#0b0b0b" stroke="#ffd200" stroke-width="3.5" stroke-linejoin="round"/><rect x="38" y="44" width="6" height="9" rx="3" fill="#ffd200"/><polyline points="26,94 18,94 18,101 11,101 11,108 4,108 4,115" fill="none" stroke="#ffd200" stroke-width="3.5" stroke-linejoin="round"/><text x="66" y="92" font-family="Oswald,Arial Narrow,sans-serif" font-weight="700" font-style="italic" font-size="44" textLength="266" lengthAdjust="spacingAndGlyphs" fill="#ffd200">FRANKO CUP</text><line x1="58" y1="102" x2="336" y2="102" stroke="#fff" stroke-width="3.5"/><g>${BALL(326,108,16)}</g></svg>`}
 const tw=(i,sz)=>`<span class="nmw">${crest(i,sz||18)}<span>${tm(i)}</span></span>`;
 /* ---------- структура турніру ---------- */
 let GS,M,GT,LT,PL,INFO;
@@ -194,7 +196,7 @@ const refLbl=r=>{const[p,a,b]=r.split(':');if(p==='G')return GL[+a]+(+b+1);const
 function inp(k,f){const v=sc(k)[f];return canEdit()?`<input inputmode="numeric" data-k="${k}" data-f="${f}" value="${v??''}">`:`<input readonly tabindex="-1" value="${v??''}">`}
 function render(){
  INFO='';build();calcShift();
- document.getElementById('hName').textContent=S.name||'Турнір';
+ {const hn=document.getElementById('hName');if(/franko|франко/i.test(S.name||'')){if(!hn.dataset.logo){hn.innerHTML=LOGO();hn.dataset.logo=1}hn.setAttribute('aria-label',S.name)}else{delete hn.dataset.logo;hn.textContent=S.name||'Турнір'}}
  document.getElementById('hSub').textContent=[S.sub,`${S.teams.length} команд · ${S.G} ${S.G==1?'група':'групи'} · ${S.F} ${S.F==1?'поле':'поля'}`].filter(Boolean).join(' · ');
  GT=GS.map((g,gi)=>tbl([...Array(g.n)].map((_,j)=>g.st+j),M.filter(m=>m.st==='G'&&m.g===gi)));
  const LTT=LT.map(L=>Object.assign(tbl(L.refs.map(R_),M.filter(m=>L.keys.includes(m.key))),{L}));
