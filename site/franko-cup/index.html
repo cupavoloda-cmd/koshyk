@@ -40,6 +40,7 @@ table{width:100%;border-collapse:collapse;font-size:14px}th,td{padding:6px 4px;t
 .tc .row{display:flex;justify-content:center;align-items:flex-end;gap:8px;margin-bottom:6px}
 .tc b{font-family:Oswald,sans-serif;text-transform:uppercase;font-size:13px;letter-spacing:.04em}
 .trow{display:flex;gap:8px;align-items:flex-end}.trow>div{flex:1}.up{font-size:11px;color:var(--acc);cursor:pointer;white-space:nowrap}.up input{display:none}
+.bi{width:56px;display:inline-block;padding:3px 4px;text-align:center;font:inherit}.bx{cursor:pointer;color:var(--acc);margin-left:4px}
 .warn{color:var(--acc);font-size:12px;margin-top:6px}
 </style>
 </head>
@@ -182,10 +183,12 @@ function tbl(ids,ms){
 }
 function t2(min){min=((min%1440)+1440)%1440;return String(min/60|0).padStart(2,'0')+':'+String(min%60).padStart(2,'0')}
 const base=()=>{const[H,Mi]=(S.start||'09:00').split(':').map(Number);return H*60+Mi};
-let SHIFT={from:1e9,min:0};
-function calcShift(){SHIFT={from:1e9,min:0};const P=M.filter(m=>m.st!=='G'),G=M.filter(m=>m.st==='G');if(!P.length||!G.length||S.brk===''||S.brk==null)return;
- const fp=Math.min(...P.map(m=>m.slot)),lg=Math.max(...G.map(m=>m.slot));SHIFT={from:fp,min:(+S.brk||0)-(fp-lg-1)*(+S.slot||0)}}
-const tmin=s=>base()+s*(+S.slot||0)+(s>=SHIFT.from?SHIFT.min:0);
+let GAPS=[],FP=1e9;
+function calcShift(){GAPS=[];S.brks=S.brks||{};const sl=+S.slot||0,ss=[...new Set(M.map(m=>m.slot))].sort((a,b)=>a-b);
+ const P=M.filter(m=>m.st!=='G');FP=P.length?Math.min(...P.map(m=>m.slot)):1e9;
+ for(let j=1;j<ss.length;j++){const a=ss[j-1],b=ss[j],auto=(b-a-1)*sl;if(auto>0||(b===FP&&S.brk!==''&&S.brk!=null)||S.brks[b]!=null){
+  let v=S.brks[b]!=null?+S.brks[b]:(b===FP&&S.brk!==''&&S.brk!=null?+S.brk:auto);GAPS.push({prev:a,next:b,auto,v})}}}
+const tmin=s=>base()+s*(+S.slot||0)+GAPS.reduce((t,g)=>t+(g.next<=s?g.v-g.auto:0),0);
 const time=s=>t2(tmin(s));
 const refLbl=r=>{const[p,a,b]=r.split(':');if(p==='G')return GL[+a]+(+b+1);const m=M.find(x=>x.key===r.slice(2));return(p==='W'?'Перем. ':'Пр. ')+(m?m.l.replace(/ ·.*/,''):'')};
 function inp(k,f){const v=sc(k)[f];return canEdit()?`<input inputmode="numeric" data-k="${k}" data-f="${f}" value="${v??''}">`:`<input readonly tabindex="-1" value="${v??''}">`}
@@ -197,7 +200,7 @@ function render(){
  const LTT=LT.map(L=>Object.assign(tbl(L.refs.map(R_),M.filter(m=>L.keys.includes(m.key))),{L}));
  let h=`<div class="brk">${t2(base()-(+S.gath||0))} — збір команд</div>`,prevS=-1,shownP=false;
  M.forEach(m=>{
-  if(prevS>=0){const st=tmin(prevS)+(+S.slot||0),dur=tmin(m.slot)-st;if(dur>0)h+=`<div class="brk">${t2(st)} — перерва ${dur} хв</div>`}
+  if(prevS>=0&&prevS!==m.slot){const g=GAPS.find(x=>x.next===m.slot);if(g&&(g.v>0||canEdit())){const st=tmin(prevS)+(+S.slot||0);h+=`<div class="brk">${t2(st)} — перерва ${canEdit()?`<input class="bi" type="number" min="0" data-g="${g.next}" value="${g.v}" title="Змінити тривалість перерви">`:g.v} хв${canEdit()&&S.brks[g.next]!=null?` <span class="bx" data-gr="${g.next}" title="Повернути авто">↺</span>`:''}</div>`}}
   if(m.st!=='G'&&!shownP){shownP=true;h+=`<div class="brk">${LT.length?'Ігри за місця · ліги за місцями в групах':'Ігри за місця'}</div>`}
   prevS=m.slot;
   const hi=R_(m.h),ai=R_(m.a),r=res(m),s=sc(m.key);
@@ -211,7 +214,7 @@ function render(){
  h+=`<div class="brk">🏆 ${time(end)} — урочиста церемонія нагородження</div>`;
  document.getElementById('list').innerHTML=h;
  const tb=(T,title,lab)=>`<div class="card"><h2>${title}</h2><table><tr><th>#</th><th class="l">Команда</th><th>І</th><th>В</th><th>Н</th><th>П</th><th>М</th><th>О</th></tr>${T.r.map((x,j)=>`<tr><td>${j+1}</td><td class="l">${x.i!=null?tw(x.i,16):'<span class=n>'+(lab[j]||'')+'</span>'}</td><td>${x.gp}</td><td>${x.w}</td><td>${x.d}</td><td>${x.l}</td><td>${x.f}–${x.a}</td><td>${x.p}</td></tr>`).join('')}</table></div>`;
- let th=`<div class="card"><h2>Команди</h2><div class="gal">${S.teams.map((t,i)=>{const g=GS.findIndex(x=>i>=x.st&&i<x.st+x.n);return `<div class="tc"><div class="row">${crest(i,56)}${flagSvg(t,80)}</div><b>${tm(i)}</b>${S.G>1?`<div class="n">Група ${GL[g]}</div>`:''}</div>`}).join('')}</div></div>`;
+ let th=`<div class="card"><h2>Команди</h2><div class="gal">${S.teams.map((t,i)=>{const g=GS.findIndex(x=>i>=x.st&&i<x.st+x.n);return `<div class="tc"><div class="row">${crest(i,64)}</div><b>${tm(i)}</b>${S.G>1?`<div class="n">Група ${GL[g]}</div>`:''}</div>`}).join('')}</div></div>`;
  th+=GT.map((T,g)=>tb(T,S.G>1?`<span class="tag g${g}">${GL[g]}</span> Група ${GL[g]}`:'Турнірна таблиця',[])).join('');
  LTT.forEach(T=>th+=tb(T,T.L.nm,T.L.refs.map(refLbl)));
  document.getElementById('tables').innerHTML=th;
@@ -226,7 +229,7 @@ function render(){
  const med=['🥇','🥈','🥉'];
  document.getElementById('pod').innerHTML=S.teams.map((_,j)=>{const p=j+1;return `<div><span>${med[p-1]||p+'.'} місце</span><b>${pl[p]!=null?tw(pl[p],18):'—'}</b></div>`}).join('');
  const gm=M.filter(m=>m.st==='G').length,pm=M.length-gm,per=S.teams.length?(2*M.length/S.teams.length):0;
- document.getElementById('fmtInfo').textContent=`Матчів: ${M.length} (групи ${gm}${pm?', за місця '+pm:''}). Слотів: ${end}. Триватиме ≈ ${Math.floor((tmin(end)-base())/60)} год ${(tmin(end)-base())%60} хв, нагородження о ${time(end)}. ${S.po==='semis'&&S.G!=2?'Півфінали доступні лише для 2 груп — застосовано ігри за місця. ':''}${INFO}${SHIFT.from<1e9&&+S.brk<(+S.rest||0)*(+S.slot||0)?' Увага: перерва коротша за мінімальний відпочинок ('+(+S.rest||0)*(+S.slot||0)+' хв).':''}`;
+ document.getElementById('fmtInfo').textContent=`Матчів: ${M.length} (групи ${gm}${pm?', за місця '+pm:''}). Слотів: ${end}. Триватиме ≈ ${Math.floor((tmin(end)-base())/60)} год ${(tmin(end)-base())%60} хв, нагородження о ${time(end)}. ${S.po==='semis'&&S.G!=2?'Півфінали доступні лише для 2 груп — застосовано ігри за місця. ':''}${INFO}${GAPS.some(g=>g.v<g.auto&&g.v<(+S.rest||0)*(+S.slot||0))?' Увага: є перерва, коротша за мінімальний відпочинок ('+(+S.rest||0)*(+S.slot||0)+' хв).':''}`;
 }
 function renderSet(){
  ['name','sub','G','F','po','rest','start','slot','gath','brk'].forEach(k=>document.getElementById(k).value=S[k]??'');
@@ -234,7 +237,8 @@ function renderSet(){
  GS=sizes();
  document.getElementById('teams').innerHTML=S.teams.map((t,i)=>{const g=GS.findIndex(x=>i>=x.st&&i<x.st+x.n);const lab=S.G>1?`Група ${GL[g]} · ${GL[g]}${i-GS[g].st+1}`:`Команда ${i+1}`;return `<div class="trow"><span id="cp${i}">${crest(i,30)}</span><div><label>${lab}</label><input data-ti="${i}" value="${esc(t)}"></div><label class="up">логотип<input type="file" accept="image/*" data-li="${i}"></label></div>`}).join('');
 }
-document.getElementById('list').addEventListener('change',e=>{const t=e.target;if(!t.dataset.k)return;const k=t.dataset.k;S.sc[k]=S.sc[k]||{};S.sc[k][t.dataset.f]=t.value.trim();save();render()});
+document.getElementById('list').addEventListener('click',e=>{const g=e.target.dataset&&e.target.dataset.gr;if(g!=null){delete S.brks[g];save();render()}});
+document.getElementById('list').addEventListener('change',e=>{const t=e.target;if(t.dataset.g){S.brks=S.brks||{};if(t.value==='')delete S.brks[t.dataset.g];else S.brks[t.dataset.g]=Math.max(0,+t.value||0);save();render();return}if(!t.dataset.k)return;const k=t.dataset.k;S.sc[k]=S.sc[k]||{};S.sc[k][t.dataset.f]=t.value.trim();save();render()});
 document.getElementById('teams').addEventListener('input',e=>{const i=e.target.dataset.ti;if(i==null)return;S.teams[i]=e.target.value;document.getElementById('cp'+i).innerHTML=crest(+i,30);save();render()});
 document.getElementById('teams').addEventListener('change',e=>{const i=e.target.dataset.li;if(i==null||!e.target.files[0])return;const fr=new FileReader();fr.onload=()=>{const im=new Image();im.onload=()=>{const c=document.createElement('canvas'),k=Math.min(1,128/Math.max(im.width,im.height));c.width=im.width*k;c.height=im.height*k;c.getContext('2d').drawImage(im,0,0,c.width,c.height);S.logos=S.logos||{};S.logos[S.teams[i]]=c.toDataURL('image/png');save();renderSet();render()};im.src=fr.result};fr.readAsDataURL(e.target.files[0])});
 ['name','sub','po','start','gath','brk'].forEach(k=>document.getElementById(k).addEventListener('change',e=>{S[k]=e.target.value;save();render()}));
