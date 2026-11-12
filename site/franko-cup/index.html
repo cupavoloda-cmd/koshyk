@@ -55,12 +55,15 @@ table{width:100%;border-collapse:collapse;font-size:14px}th,td{padding:6px 4px;t
 @media(prefers-reduced-motion:reduce){.mqt{animation:none;flex-wrap:wrap;width:auto}.mqt .pi:nth-child(n+7){display:none}}
 .gear{position:absolute;top:10px;right:10px;width:34px;height:34px;border-radius:50%;border:1px solid rgba(255,255,255,.18);background:rgba(0,0,0,.35);color:rgba(255,255,255,.55);font-size:18px;line-height:1;cursor:pointer;z-index:2}.gear:hover,.gear.on{color:var(--acc);border-color:var(--acc)}
 .auth{max-width:420px;margin:4px auto 16px;text-align:center}.auth #live{font-size:11px;opacity:.7}.auth #authIn{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px;text-align:left;margin-top:6px}
+.tsel{display:flex;gap:6px;overflow-x:auto;margin:-2px 0 10px;padding-bottom:2px;-webkit-overflow-scrolling:touch}.tsel a{flex:none;padding:8px 12px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ink);text-decoration:none;font:600 13px Montserrat,sans-serif;white-space:nowrap}.tsel a.on{background:var(--acc);color:var(--on);border-color:var(--acc)}
+.trow2{display:flex;gap:6px;align-items:center;padding:6px 0;border-bottom:1px solid var(--line)}.trow2 .btn{padding:6px 9px}
 .warn{color:var(--acc);font-size:12px;margin-top:6px}
 </style>
 </head>
 <body>
 <header><h1 id="hName"></h1><p id="hSub"></p><button class="gear hide" id="gear" title="Вхід для організаторів" aria-label="Вхід для організаторів">⚙</button><a class="rg" href="reglament.pdf" target="_blank" rel="noopener">📄 Регламент</a></header>
 <main>
+<div id="tsel" class="tsel hide"></div>
 <div class="tabs"><button data-t="sch" class="on">Розклад</button><button data-t="tab">Таблиці</button><button data-t="set">Налаштування</button></div>
 
 <section id="sch"><div class="card"><div id="list"></div></div><div class="card" id="podCard"><h2>Підсумкові місця</h2><div class="pod" id="pod"></div></div></section>
@@ -68,6 +71,14 @@ table{width:100%;border-collapse:collapse;font-size:14px}th,td{padding:6px 4px;t
 <section id="tab" class="hide"><div id="tables"></div><p class="n">Ранжування: очки → особиста зустріч (при рівності двох) → різниця м'ячів → забиті. Перемога 3, нічия 1.</p></section>
 
 <section id="set" class="hide">
+<div class="card hide" id="trnCard"><h2>Турніри</h2><p class="n" style="margin:0 0 6px">Кожен турнір має своє посилання і окремі дані. Посилання поточного: <b id="curLink"></b></p>
+<div id="trnList"></div>
+<h2 style="margin-top:12px">+ Новий турнір</h2><div class="grid2">
+<div><label>Код для посилання (латиниця/цифри, напр. 2016)</label><input id="nCode" placeholder="2016"></div>
+<div><label>Назва в списку</label><input id="nTitle" placeholder="Franko Cup 2016 · 15.11"></div>
+<div><label>Взяти налаштування з</label><select id="nFrom"></select></div>
+<div style="display:flex;align-items:flex-end"><button class="btn pri" id="nCreate" style="width:100%">Створити турнір</button></div></div>
+<span class="n" id="nMsg"></span></div>
 <div class="card"><h2>Турнір</h2>
 <div id="tplBtns" style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:6px"></div><div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:6px"><button class="btn" data-pre="8">Шаблон: 8 команд, 1 поле</button><button class="btn" data-pre="9">Шаблон: 9 команд, 2 поля</button></div>
 <div class="grid2">
@@ -100,13 +111,16 @@ table{width:100%;border-collapse:collapse;font-size:14px}th,td{padding:6px 4px;t
 <div id="authOut" class="hide"><span class="n">Ви редагуєте — зміни бачать усі.</span> <button class="btn" id="logout">Вийти</button></div></div>
 </main>
 <script>
-const KEY='tourn-v3';
+const TID=((location.hash.slice(1)||'').toLowerCase().match(/^[a-z0-9-]{1,30}$/)||[''])[0];
+const KEY='tourn-v3'+(TID?'-'+TID:'');
+addEventListener('hashchange',()=>location.reload());
 const PRE={
  '8':{name:'Franko Cup',sub:'Середа · 2016/17 р.н.',N:8,G:2,F:1,po:'places',rest:2,start:'10:20',slot:20,gath:20,teams:['Рух 2017','Угринів ІІ','Ревера сині','Снятин','Рух Бельгія','ОДЮСШ','Ревера червоні','Угринів']},
  '9':{name:'Franko Cup',sub:'2015 р.н.',N:9,G:3,F:2,po:'places',rest:1,start:'09:00',slot:25,gath:20,teams:['Рух 2015','ДЮСШ 3','Рух Черніїв','Вікторія','Ніка Каскад','Бельгія','Рух 2016','Прикарпаття','Вікторія Угорники']}};
 let S=Object.assign(JSON.parse(JSON.stringify(PRE['8'])),{sc:{},logos:{}});
 try{const s=JSON.parse(localStorage.getItem(KEY));if(s&&s.teams)S=Object.assign(S,s)}catch(e){}
-const API=/\.pages\.dev$/.test(location.hostname)?'https://wild-sea-a0f8.cupavoloda.workers.dev/api/t/franko':/^https?:$/.test(location.protocol)&&!/claude|anthropic/.test(location.host)?'/api/t/franko':null;
+const API0=/\.pages\.dev$/.test(location.hostname)?'https://wild-sea-a0f8.cupavoloda.workers.dev/api/t/franko':/^https?:$/.test(location.protocol)&&!/claude|anthropic/.test(location.host)?'/api/t/franko':null;
+const API=API0?API0+(TID?'-'+TID:''):null,REG_API=API0?API0+'-reg':null;
 let EKEY='',EDIT=false,dirtyAt=0,pushT=null;try{EKEY=localStorage.getItem('fc-key')||''}catch(e){}
 const canEdit=()=>!API||EDIT;
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}if(API&&EDIT){dirtyAt=Date.now();clearTimeout(pushT);pushT=setTimeout(push,700)}};
@@ -116,9 +130,9 @@ async function pull(first){if(!API||document.hidden)return;if(!first&&Date.now()
  if(document.activeElement&&document.activeElement.tagName==='INPUT'&&EDIT)return;
  try{const r=await fetch(API,{cache:'no-store'});if(!r.ok)throw 0;const d=await r.json();if(!d&&EDIT&&first){push()}if(d&&d.teams){const was=JSON.stringify(S);S=Object.assign(S,d);if(JSON.stringify(S)!==was||first){renderSet();render()}}
   if(!EDIT)stat('🟢 Наживо · оновлено о '+new Date().toLocaleTimeString('uk-UA',{hour:'2-digit',minute:'2-digit',second:'2-digit'}))}catch(e){if(!EDIT)stat('⚠ Немає зв\'язку з сервером')}}
-async function login(k){try{const r=await fetch(API+'/check',{method:'POST',headers:{'x-key':k}});if(r.ok){EKEY=k;EDIT=true;try{localStorage.setItem('fc-key',k)}catch(e){}}else{EDIT=false}}catch(e){EDIT=false}applyMode();return EDIT}
+async function login(k){try{const r=await fetch(API+'/check',{method:'POST',headers:{'x-key':k}});if(r.ok){EKEY=k;EDIT=true;try{localStorage.setItem('fc-key',k)}catch(e){}setTimeout(regEnsureCur,1500)}else{EDIT=false}}catch(e){EDIT=false}applyMode();return EDIT}
 function applyMode(){const ro=!canEdit();document.querySelector('[data-t=set]').classList.toggle('hide',ro);if(ro&&!document.getElementById('set').classList.contains('hide'))document.querySelector('[data-t=sch]').click();
- const a=document.getElementById('auth');a.classList.toggle('hide',!API);document.getElementById('gear').classList.toggle('hide',!API);document.getElementById('gear').classList.toggle('on',EDIT);if(EDIT)document.getElementById('authIn').classList.add('hide');document.getElementById('authOut').classList.toggle('hide',!EDIT);render()}
+ const a=document.getElementById('auth');a.classList.toggle('hide',!API);document.getElementById('gear').classList.toggle('hide',!API);document.getElementById('gear').classList.toggle('on',EDIT);if(EDIT)document.getElementById('authIn').classList.add('hide');document.getElementById('authOut').classList.toggle('hide',!EDIT);render();try{regRender()}catch(e){}}
 const GL=['А','Б','В','Г'],LG=['Ліга Чемпіонів','Ліга Європи','Ліга Конференцій'];
 const num=v=>v===''||v==null?null:+v;
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -270,7 +284,7 @@ document.getElementById('teams').addEventListener('change',e=>{const i=e.target.
 ['G','F','rest','slot'].forEach(k=>document.getElementById(k).addEventListener('change',e=>{S[k]=Math.max(0,+e.target.value||0);if(k!=='rest')S[k]=Math.max(k==='slot'?5:1,S[k]);if(k==='G')S.G=Math.min(S.G,Math.floor(S.teams.length/2)||1);save();renderSet();render()}));
 document.getElementById('N').addEventListener('change',e=>{let n=Math.min(24,Math.max(3,+e.target.value||8));while(S.teams.length<n)S.teams.push('Команда '+(S.teams.length+1));S.teams.length=n;S.G=Math.min(S.G,Math.floor(n/2));save();renderSet();render()});
 /* ---------- шаблони ---------- */
-const TPL_API=API?API+'-tpl':null;let TPL=[];
+const TPL_API=API0?API0+'-tpl':null;let TPL=[];
 const tplFields=['name','sub','G','F','po','rest','start','slot','gath','brk','brks','teams','logos'];
 async function tplFetch(){if(TPL_API){const r=await fetch(TPL_API,{cache:'no-store'});if(!r.ok)throw r.status;const d=await r.json();return (d&&d.list)||[]}return JSON.parse(localStorage.getItem('tourn-tpl')||'[]')}
 async function tplLoad(){try{TPL=await tplFetch()}catch(e){}TPL.forEach((t,i)=>{if(!t.id)t.id='t'+(t.at||0)+'_'+i});tplRender()}
@@ -297,6 +311,30 @@ document.getElementById('pw').addEventListener('keydown',e=>{if(e.key==='Enter')
 document.getElementById('pwBtn').onclick=async()=>{const ok=await login(document.getElementById('pw').value.trim());document.getElementById('pwMsg').textContent=ok?'':'Невірний пароль або немає зв\'язку'};
 document.getElementById('logout').onclick=()=>{EDIT=false;EKEY='';try{localStorage.removeItem('fc-key')}catch(e){}applyMode()};
 renderSet();render();
+/* ---------- кілька турнірів ---------- */
+let REG=[];const tlink=id=>location.origin+location.pathname+(id?'#'+id:'');
+async function regFetch(){const r=await fetch(REG_API,{cache:'no-store'});if(!r.ok)throw r.status;const d=await r.json();return (d&&d.list)||[]}
+async function regStore(){const r=await fetch(REG_API,{method:'PUT',headers:{'x-key':EKEY,'content-type':'application/json'},body:JSON.stringify({list:REG})});return r.ok}
+async function regLoad(){if(!REG_API)return;try{REG=await regFetch()}catch(e){}regRender()}
+function regRender(){const vis=REG.filter(t=>!t.hidden);const sel=document.getElementById('tsel');
+ sel.classList.toggle('hide',vis.length<2&&!(vis.length===1&&vis[0].id!==TID));
+ sel.innerHTML=vis.map(t=>`<a href="${t.id?'#'+t.id:location.pathname}" class="${t.id===TID?'on':''}">⚽ ${esc(t.title)}</a>`).join('');
+ const c=document.getElementById('trnCard');c.classList.toggle('hide',!(API0&&EDIT));if(!EDIT)return;
+ document.getElementById('curLink').textContent=tlink(TID).replace(/^https?:\/\//,'');
+ document.getElementById('trnList').innerHTML=REG.length?REG.map((t,i)=>`<div class="trow2"><div style="flex:1;${t.hidden?'opacity:.5':''}"><b>${esc(t.title)}</b>${t.id===TID?' <span class="n">(відкритий)</span>':''}<div class="n">${tlink(t.id).replace(/^https?:\/\//,'')}</div></div><button class="btn" data-go="${i}">Відкрити</button><button class="btn" data-cp="${i}" title="Копіювати посилання">🔗</button><button class="btn" data-hd="${i}" title="${t.hidden?'Показати':'Сховати'} у списку">${t.hidden?'🙈':'👁'}</button></div>`).join(''):'<span class="n">Список порожній.</span>';
+ document.getElementById('nFrom').innerHTML='<option value="-1">Поточні налаштування</option>'+TPL.map((t,i)=>`<option value="${i}">Шаблон: ${esc(t.title)}</option>`).join('');}
+async function regEnsureCur(){if(!EDIT||!REG_API)return;try{REG=await regFetch()}catch(e){}if(!REG.some(t=>t.id===TID)){REG.push({id:TID,title:(S.name||'Турнір')+(S.sub?' · '+S.sub:''),at:Date.now()});await regStore()}regRender()}
+document.getElementById('trnList').addEventListener('click',async e=>{const b=e.target.closest('button');if(!b)return;
+ if(b.dataset.go!=null){const t=REG[+b.dataset.go];location.href=tlink(t.id);if(t.id!==TID)setTimeout(()=>location.reload(),50)}
+ if(b.dataset.cp!=null){const u=tlink(REG[+b.dataset.cp].id);try{await navigator.clipboard.writeText(u);b.textContent='✓'}catch(x){document.getElementById('nMsg').textContent=u}}
+ if(b.dataset.hd!=null){const id=REG[+b.dataset.hd].id;try{REG=await regFetch()}catch(x){}const t=REG.find(x=>x.id===id);if(t){t.hidden=!t.hidden;await regStore()}regRender()}});
+document.getElementById('nCreate').onclick=async()=>{const m=document.getElementById('nMsg'),code=document.getElementById('nCode').value.trim().toLowerCase(),title=document.getElementById('nTitle').value.trim();
+ if(!/^[a-z0-9-]{1,30}$/.test(code)||['tpl','reg'].includes(code)){m.textContent='Код: лише латинські літери, цифри або дефіс (напр. 2016, kalush)';return}
+ if(!title){m.textContent='Впишіть назву турніру';return}
+ try{REG=await regFetch()}catch(x){}if(REG.some(t=>t.id===code)){m.textContent='Турнір з таким кодом уже є';return}
+ const fi=+document.getElementById('nFrom').value,st=JSON.parse(JSON.stringify(S));if(fi>=0){const d=TPL[fi].data;tplFields.forEach(k=>{if(d[k]!=null)st[k]=JSON.parse(JSON.stringify(d[k]))})}st.sc={};
+ try{const r=await fetch(API0+'-'+code,{method:'PUT',headers:{'x-key':EKEY,'content-type':'application/json'},body:JSON.stringify(st)});if(!r.ok)throw r.status;REG.push({id:code,title,at:Date.now()});if(!await regStore())throw 'reg';m.textContent='Створено! Відкриваю…';setTimeout(()=>{location.href=tlink(code)},600)}catch(x){m.textContent='⚠ Не вдалося створити ('+x+')'}};
+regLoad();
 tplLoad();if(API){applyMode();(EKEY?login(EKEY):Promise.resolve()).then(()=>pull(true));setInterval(()=>pull(false),8000);document.addEventListener('visibilitychange',()=>pull(false))}
 </script>
 </body>
