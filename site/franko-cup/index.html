@@ -327,7 +327,7 @@ async function regFetch(){const r=await fetch(REG_API,{cache:'no-store'});if(!r.
 async function regStore(){const r=await fetch(REG_API,{method:'PUT',headers:{'x-key':EKEY,'content-type':'application/json'},body:JSON.stringify({list:REG})});return r.ok}
 async function regLoad(){if(!REG_API)return;try{REG=await regFetch()}catch(e){}regRender()}
 function regRender(){const vis=FIELDS.map(f=>({id:f.id,title:f.title,f:1})).concat(REG.filter(t=>!t.hidden&&!FIELDS.some(f=>f.id===t.id)));const sel=document.getElementById('tsel');
- sel.classList.toggle('hide',!API0);
+ sel.classList.toggle('hide',!(API0&&EDIT));
  sel.innerHTML=vis.map(t=>`<a href="${tlink(t.id)}" class="${t.id===TID?'on':''}">${t.f?'📍':'⚽'} ${esc(t.title)}</a>`).join('');
  sel.querySelectorAll('a').forEach(a=>a.onclick=e=>{e.preventDefault();location.href=a.href;setTimeout(()=>location.reload(),60)});
  const c=document.getElementById('trnCard');c.classList.toggle('hide',!(API0&&EDIT));if(!EDIT)return;
