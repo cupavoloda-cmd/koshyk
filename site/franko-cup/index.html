@@ -327,9 +327,9 @@ async function regFetch(){const r=await fetch(REG_API,{cache:'no-store'});if(!r.
 async function regStore(){const r=await fetch(REG_API,{method:'PUT',headers:{'x-key':EKEY,'content-type':'application/json'},body:JSON.stringify({list:REG})});return r.ok}
 async function regLoad(){if(!REG_API)return;try{REG=await regFetch()}catch(e){}regRender()}
 function regRender(){const vis=FIELDS.map(f=>({id:f.id,title:f.title,f:1})).concat(REG.filter(t=>!t.hidden&&!FIELDS.some(f=>f.id===t.id)));const sel=document.getElementById('tsel');
- sel.classList.toggle('hide',!(API0&&EDIT));
- sel.innerHTML=vis.map(t=>`<a href="${tlink(t.id)}" class="${t.id===TID?'on':''}">${t.f?'📍':'⚽'} ${esc(t.title)}</a>`).join('');
- sel.querySelectorAll('a').forEach(a=>a.onclick=e=>{e.preventDefault();location.href=a.href;setTimeout(()=>location.reload(),60)});
+ const shown=EDIT?vis:vis.filter(t=>t.id===TID&&t.id);sel.classList.toggle('hide',!(API0&&shown.length));
+ sel.innerHTML=shown.map(t=>`<a href="${tlink(t.id)}" class="${t.id===TID?'on':''}">${t.f?'📍':'⚽'} ${esc(t.title)}</a>`).join('');
+ sel.querySelectorAll('a').forEach(a=>a.onclick=e=>{e.preventDefault();if(!EDIT)return;location.href=a.href;setTimeout(()=>location.reload(),60)});
  const c=document.getElementById('trnCard');c.classList.toggle('hide',!(API0&&EDIT));if(!EDIT)return;
  document.getElementById('curLink').textContent=tlink(TID).replace(/^https?:\/\//,'');
  document.getElementById('trnList').innerHTML=REG.length?REG.map((t,i)=>`<div class="trow2"><div style="flex:1;${t.hidden?'opacity:.5':''}"><b>${esc(t.title)}</b>${t.id===TID?' <span class="n">(відкритий)</span>':''}<div class="n">${tlink(t.id).replace(/^https?:\/\//,'')}</div></div><button class="btn" data-go="${i}">Відкрити</button><button class="btn" data-cp="${i}" title="Копіювати посилання">🔗</button><button class="btn" data-hd="${i}" title="${t.hidden?'Показати':'Сховати'} у списку">${t.hidden?'🙈':'👁'}</button></div>`).join(''):'<span class="n">Список порожній.</span>';
